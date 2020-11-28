@@ -5,3 +5,6 @@ from django.shortcuts import render
 
 def view_login(request):
     return render(request,'CMSapp/login.html');
+
+def view_register(request):
+    return render(request,'CMSapp/register.html');

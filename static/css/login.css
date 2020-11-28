@@ -15,7 +15,7 @@ body{
 }
 #login{
     position: relative;
-    margin: -150px auto;
+    margin: -200px auto;
     top: 50%;
     width: 350px;
     height: 300px;
@@ -69,4 +69,14 @@ input{
 	-moz-box-shadow: -1px 4px 28px 0px rgba(0,0,0,0.75);
 	box-shadow: -1px 4px 28px 0px rgba(0,0,0,0.75);
 
+}
+
+.div_register{
+    text-align: right;
+}
+.a_register {
+    font-size: 15px;
+    /*padding-left: 12px;*/
+    color: #b7bcbf;
+    text-decoration: underline;
 }

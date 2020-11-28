@@ -2,22 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>登录</title>
+    <title>注册</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}"/>
 </head>
 <body>
     <div id="login">
-        <h1>用户登录</h1>
+        <h1>用户注册</h1>
         <div class="header-main">
             <form method="post">
                 <input type="text" required="required" placeholder="用户名" name="username"></input>
                 <input type="password" required="required" placeholder="密   码" name="password"></input>
-                <button class="btn" type="submit">登录</button>
-                <div class="div_register">
-                    <br>
-                    <a class="a_register" href="/register">注册</a>
-                </div>
+                <input type="password" required="required" placeholder="重复密码" name="confirm_password"></input>
+                <button class="btn" type="submit">提交</button>
             </form>
         </div>
     </div>
