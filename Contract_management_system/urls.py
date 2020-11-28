@@ -13,9 +13,14 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls import url,include
 from django.contrib import admin
 from django.urls import path
 
+from CMSapp import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('',views.view_login),                   #输入网站默认路径到登录界面
+    url(r'',include('CMSapp.urls')),
 ]

@@ -1,0 +1,72 @@
+html{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    /*font-style: sans-serif;   */
+    /*font-family: "Microsoft YaHei";*/
+}
+body{
+    width: 100%;
+    height: 100%;
+    /*font-family: 'Open Sans',sans-serif;*/
+    font-family: "Microsoft YaHei";
+    margin: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+#login{
+    position: relative;
+    margin: -150px auto;
+    top: 50%;
+    width: 350px;
+    height: 300px;
+}
+#login h1{
+    color: #f6f1f1;
+    letter-spacing: 1px;
+    text-align: center;
+}
+h1{
+    font-size: 2em;
+    margin: 0.67em 0;
+}
+input{
+    width: 265px;
+    height: 18px;
+    margin-bottom: 10px;
+    outline: none;
+    padding: 10px;
+    font-size: 15px;
+    color: #40423d;
+    border-top: 1px solid #312E3D;  /*宽度、实线、颜色*/
+    border-left: 1px solid #312E3D;
+    border-right: 1px solid #312E3D;
+    border-bottom: 1px solid #56536A;
+    border-radius: 4px;
+    background-color: #f2f2f6;
+}
+.btn{
+    width: 287px;
+    min-height: 20px;
+    display: block;
+    background-color: #4a77d4;
+    border: 1px solid #3762bc;
+    color: #fff;
+    padding: 9px 14px;
+    font-size: 15px;
+    line-height: normal;
+    border-radius: 5px;
+    margin: 0;
+}
+
+.header-main {
+	max-width: 400px;
+	margin: 0 auto;
+	position: relative;
+	z-index: 999;           /*堆叠顺序*/
+	padding: 2em;
+	background: rgba(255, 255, 255, 0.04);
+	-webkit-box-shadow: -1px 4px 28px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: -1px 4px 28px 0px rgba(0,0,0,0.75);
+	box-shadow: -1px 4px 28px 0px rgba(0,0,0,0.75);
+
+}
