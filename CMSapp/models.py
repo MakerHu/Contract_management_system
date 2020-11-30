@@ -70,7 +70,7 @@ class contract_process(models.Model):
     modifytime = models.DateTimeField(auto_now=True)
 
     class Meta:
-        unique_together = ("conid", "username")  #类似双字段主键
+        unique_together = ("conid", "username","type")  #类似多字段主键
 
 # 合同操作状态信息
 class contract_state(models.Model):
