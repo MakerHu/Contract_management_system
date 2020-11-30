@@ -31,8 +31,8 @@ h1{
 }
 input{
     width: 265px;
-    height: 18px;
-    margin-bottom: 10px;
+    height: 20px;
+    margin-bottom: 18px;
     outline: none;
     padding: 10px;
     font-size: 15px;
@@ -46,7 +46,7 @@ input{
 }
 .btn{
     width: 287px;
-    min-height: 20px;
+    min-height: 22px;
     display: block;
     background-color: #4a77d4;
     border: 1px solid #3762bc;
@@ -80,35 +80,43 @@ input{
     color: #b7bcbf;
     text-decoration: underline;
 }
-
+/*该用户名未注册，请重新输入！*/
 #hide1{
     color: red;
-    font-weight: bold;
-    margin-top: -15px;
+    margin-top: -18px;
+    margin-left: 10px;
+    font-size: 14px;
     display: none;
 }
-
+/*密码错误，请重新输入！*/
 #hide2{
     color: red;
-    font-weight: bold;
-    margin-top: -15px;
+    margin-top: -18px;
+    margin-left: 10px;
+    font-size: 14px;
     display: none;
 }
+/*该用户名已存在，请重新输入！*/
 #hide3{
     color: red;
-    font-weight: bold;
-    margin-top: -15px;
+    margin-top: -18px;
+    margin-left: 10px;
+    font-size: 14px;
     display: none;
 }
+/*请重新输入含有8~16位大小写字母的密码*/
 #hide4{
     color: red;
-    font-weight: bold;
-    margin-top: -15px;
+    margin-top: -18px;
+    margin-left: 10px;
+    font-size: 14px;
     display: none;
 }
+/*两次密码不一致，请重新输入！*/
 #hide5{
     color: red;
-    font-weight: bold;
-    margin-top: -15px;
+    margin-top: -18px;
+    margin-left: 10px;
+    font-size: 14px;
     display: none;
 }

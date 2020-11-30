@@ -5,19 +5,22 @@
     <title>注册</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}"/>
+    <script src="{% static 'js/login_register.js' %}"></script>
 </head>
 <body>
     <div id="login">
         <h1>用户注册</h1>
         <div class="header-main">
             <form method="post" onsubmit="return false;">
-                <input type="text" required="required" placeholder="用户名" name="username"></input>
-                <div id="hide3">该用户名已存在，请重新输入！</div>
-                <input type="password" required="required" placeholder="密   码" name="password"></input>
-                <div id="hide4">请重新输入含有8~16位大小写字母的密码</div>
-                <input type="password" required="required" placeholder="重复密码" name="confirm_password"></input>
-                <div id="hide5">两次密码不一致，请重新输入！</div>
-                <button class="btn" type="submit">提交</button>
+                <input id="register-username" type="text" required="required" placeholder="用户名" name="username" oninput="CheckRegisterEmpty()" onblur="CheckUsernameAjax()"></input>
+                <div id="hide3">*该用户名已存在，请重新输入！</div>
+                <input id="register-password" type="password" required="required" placeholder="密   码" name="password" oninput="CheckRegisterEmpty()"></input>
+                <div id="hide4">*请重新输入含有8~16位大小写字母的密码</div>
+                <input id="confirm_password" type="password" required="required" placeholder="重复密码" name="confirm_password" oninput="CheckSame()" ></input>
+                <div id="hide5">*两次密码不一致，请重新输入！</div>
+                <div onclick="onregister()">
+                    <button id="onsubmit" class="btn" type="submit">提交</button>
+                </div>
             </form>
         </div>
     </div>
