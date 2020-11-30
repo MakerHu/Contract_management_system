@@ -1,7 +1,10 @@
-from django.conf.urls import url
+from django.urls import path
 from CMSapp import views
+from CMSapp import contract_management
 
 urlpatterns = [
-    url(r'^login/',views.view_login),
-    url(r'^register/',views.view_register),
+    path('login/', views.view_login),
+    path('register/', views.view_register),
+    path('ajax_login/', views.ajax_login),
+    path('index/',contract_management.index)
 ]

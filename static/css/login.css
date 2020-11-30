@@ -80,3 +80,35 @@ input{
     color: #b7bcbf;
     text-decoration: underline;
 }
+
+#hide1{
+    color: red;
+    font-weight: bold;
+    margin-top: -15px;
+    display: none;
+}
+
+#hide2{
+    color: red;
+    font-weight: bold;
+    margin-top: -15px;
+    display: none;
+}
+#hide3{
+    color: red;
+    font-weight: bold;
+    margin-top: -15px;
+    display: none;
+}
+#hide4{
+    color: red;
+    font-weight: bold;
+    margin-top: -15px;
+    display: none;
+}
+#hide5{
+    color: red;
+    font-weight: bold;
+    margin-top: -15px;
+    display: none;
+}

@@ -21,6 +21,6 @@ from CMSapp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.view_login),                   #输入网站默认路径到登录界面
-    url(r'',include('CMSapp.urls')),
+    path('', views.view_login),                   #输入网站默认路径到登录界面
+    path('', include('CMSapp.urls')),
 ]
