@@ -1,12 +1,10 @@
-function CheckLoginEmpty(){
-    var username = document.getElementById("login-username").value;
-    var password = document.getElementById("login-password").value;
-    if (username == '') {
-        document.getElementById("hide1").style.display = "none";
-    }
-    if (password == '') {
-        document.getElementById("hide2").style.display = "none";
-    }
+function CheckLoginUsernameInput(){
+    document.getElementById("hide1").style.display = "none";
+    document.getElementById("hide2").style.display = "none";
+}
+
+function CheckLoginPasswordInput() {
+    document.getElementById("hide2").style.display = "none";
 }
 
 function onlogin() {
@@ -50,19 +48,8 @@ function onlogin() {
     }
 }
 
-function CheckRegisterEmpty() {
-    var username = document.getElementById("register-username").value;
-    var password = document.getElementById("register-password").value;
-    var confirm_password = document.getElementById("confirm_password").value;
-    if (username == '') {
-        document.getElementById("hide3").style.display = "none";
-    }
-    if (password == '') {
-        document.getElementById("hide4").style.display = "none";
-    }
-    if (confirm_password == '') {
-        document.getElementById("hide5").style.display = "none";
-    }
+function CheckRegisterUsernameInput(){
+    document.getElementById("hide3").style.display = "none";
 }
 
 function CheckUsernameAjax() {
