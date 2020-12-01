@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from CMSapp.models import user
 from django.http import JsonResponse
+from django.shortcuts import redirect
 
 
 # Create your views here.
@@ -15,6 +16,9 @@ def view_register(request):
 
 
 def ajax_login(request):
+    if request.session.get('is_login', None):
+        return redirect('/index/')
+
     username = request.POST.get('username')
     password = request.POST.get('password')
     print(request)
@@ -23,12 +27,14 @@ def ajax_login(request):
 
     exists_username = user.objects.filter(username = username)
     print(exists_username)
-    right_password = user.objects.filter(password = password)
+    right_password = user.objects.filter(username = username, password = password)
 
     if exists_username:
         response['exists_username'] = 'success'
         if right_password:
             response['right_password'] = 'success'
+            request.session['is_login'] = True
+            request.session['username'] = username
         else:
             response['right_password'] = 'fail'
     else:
@@ -70,4 +76,10 @@ def ajax_register(request):
 
     return JsonResponse(response)
 
+def logout(request):
+    if not request.session.get('is_login', None):
+        return render(request, 'CMSapp/login.html')
+    request.session['is_login'] = False
+    request.session.flush()
+    return render(request, 'CMSapp/login.html')
 

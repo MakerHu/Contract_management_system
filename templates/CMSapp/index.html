@@ -3,8 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>首页</title>
+    {% load static %}
+    <script src="{% static 'js/login_register.js' %}"></script>
+
 </head>
 <body>
 首页
+<div onclick="OnLogout()">
+    <button>登出</button>
+</div>
 </body>
+
 </html>

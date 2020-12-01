@@ -1,4 +1,4 @@
-function CheckLoginUsernameInput(){
+function CheckLoginUsernameInput() {
     document.getElementById("hide1").style.display = "none";
     document.getElementById("hide2").style.display = "none";
 }
@@ -17,38 +17,38 @@ function onlogin() {
         // alert("用户名或密码不能为空！");
     } else {
         var data = new FormData();
-    data.append("username", username);
-    data.append("password", password);
-    console.log(data);
+        data.append("username", username);
+        data.append("password", password);
+        console.log(data);
 
-    var xhr = new XMLHttpRequest();
-    xhr.withCredentials = true;
+        var xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
 
-    xhr.addEventListener("readystatechange", function () {
-        if (this.readyState === 4) {
-            var json = JSON.parse(this.responseText);
-            console.log(this.responseText);
-            if (json.exists_username == 'fail') {
-                document.getElementById("hide1").style.display = "block";
-            } else {
-                document.getElementById("hide1").style.display = "none";
+        xhr.addEventListener("readystatechange", function () {
+            if (this.readyState === 4) {
+                var json = JSON.parse(this.responseText);
+                console.log(this.responseText);
+                if (json.exists_username == 'fail') {
+                    document.getElementById("hide1").style.display = "block";
+                } else {
+                    document.getElementById("hide1").style.display = "none";
+                }
+                if (json.right_password == 'fail') {
+                    document.getElementById("hide2").style.display = "block";
+                } else {
+                    document.getElementById("hide2").style.display = "none";
+                }
+                if (json.exists_username == 'success' && json.right_password == 'success') {
+                    window.location.href = "/index/";
+                }
             }
-            if (json.right_password == 'fail') {
-                document.getElementById("hide2").style.display = "block";
-            } else {
-                document.getElementById("hide2").style.display = "none";
-            }
-            if (json.exists_username == 'success' && json.right_password == 'success') {
-                window.location.href = "/index/";
-            }
-        }
-    });
-    xhr.open("POST", "/ajax_login/");
-    xhr.send(data);
+        });
+        xhr.open("POST", "/ajax_login/");
+        xhr.send(data);
     }
 }
 
-function CheckRegisterUsernameInput(){
+function CheckRegisterUsernameInput() {
     document.getElementById("hide3").style.display = "none";
 }
 
@@ -130,3 +130,8 @@ function onregister() {
         }
     }
 }
+
+function OnLogout() {
+    window.location.href = "/logout/";
+}
+
