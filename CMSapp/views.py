@@ -8,17 +8,18 @@ from django.shortcuts import redirect
 # Create your views here.
 
 def view_login(request):
+    if request.session.get('is_login', None):
+        return redirect('/index/')
     return render(request,'CMSapp/login.html')
 
 
 def view_register(request):
+    if request.session.get('is_login', None):
+        return redirect('/index/')
     return render(request,'CMSapp/register.html')
 
 
 def ajax_login(request):
-    if request.session.get('is_login', None):
-        return redirect('/index/')
-
     username = request.POST.get('username')
     password = request.POST.get('password')
     print(request)
