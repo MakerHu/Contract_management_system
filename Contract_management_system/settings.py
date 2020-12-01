@@ -136,4 +136,4 @@ STATICFILES_DIRS = [
 MEDIA_ROOT=os.path.join(BASE_DIR,'uploadfile')
 MEDIA_URL='/uploadfile/'
 
-# LOGIN_URL = '/login/'
+SESSION_COOKIE_AGE = 1
