@@ -1,0 +1,140 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    overflow-x: hidden;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+a {
+    text-decoration-line: none;
+    color: #fff;
+}
+
+header {
+    height: 50px;
+    width: 100%;
+    background-color: #01194b;
+}
+header ul li {
+    width: 100%;
+    list-style-type: none;
+}
+
+aside {
+    height: 100%;
+    width: 250px;
+    position: relative;
+    left: 0;
+    top: 0;
+    /*background: #243747;*/
+    background: rgba(0, 0, 0, 0.7);
+    transition: width .5s;
+}
+
+aside .first {
+    height: 20px;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 35px;
+}
+
+aside .first .catalog {
+    color: #ffffff;
+    font-size: 25px;
+}
+
+aside .first .logo:hover {
+    color: crimson;
+}
+
+aside ul li {
+    width: 100%;
+    list-style-type: none;
+    padding-top: 5px;
+}
+
+aside ul li a {
+    line-height:40px;
+    display: block;
+    padding-left: 20px;
+    text-align: left;
+    color: #fff;
+}
+
+aside .listtext {
+    font-size: 25px;
+    display: inline-block;
+}
+
+aside ul li a:hover {
+    color: #0385cb;
+    background: lightblue;
+}
+
+.icon-package {
+    width: 30px;
+    height: 30px;
+}
+
+.logout-a{
+    float: right;
+    width: 50px;
+    line-height: 50px;
+    color: #fff;
+    /*padding: 0px;*/
+    font-size: 15px;
+    /*margin: 0;*/
+    text-align: center;
+}
+.logout-a:hover {
+    color: #023fba;
+    background: #7ad0f8;
+}
+
+.hide-a{
+    float: left;
+    width: 50px;
+    line-height: 50px;
+    color: #fff;
+    /*padding: 0px;*/
+    font-size: 23px;
+    /*margin: 0;*/
+    text-align: center;
+}
+.hide-a:hover {
+    color: #023fba;
+    background: #7ad0f8;
+}
+
+.logo{
+    position: relative;
+    top: 10%;
+    color: #fff;
+    margin-left: 30px;
+    font-size: 30px;
+}
+
+/*mini*/
+
+.minibody .listtext {
+    display: none;
+}
+
+.minibody aside {
+    width: 0px;
+    text-align: center;
+}
+
+.minibody aside ul li a {
+    padding-left: 0;
+}
+
+.minibody aside .first .catalog {
+    /*font-size: 12px;*/
+    display: none;
+}
