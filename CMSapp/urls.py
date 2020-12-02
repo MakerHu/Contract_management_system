@@ -14,7 +14,6 @@ urlpatterns = [
     #起草合同
     path('draftcontract/',views.view_draft),
 
-
     # ajax
     path('ajax_login/', views.ajax_login),
     path('ajax_register/', views.ajax_register),

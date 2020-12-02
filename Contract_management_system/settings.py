@@ -137,4 +137,4 @@ MEDIA_ROOT=os.path.join(BASE_DIR,'uploadfile')
 MEDIA_URL='/uploadfile/'
 
 #设置session有效时间
-SESSION_COOKIE_AGE = 3600
+SESSION_COOKIE_AGE = 10

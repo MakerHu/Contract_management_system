@@ -27,8 +27,8 @@ def index(request):
 def view_draft(request):
     if request.session.get('is_login', None):
         return render(request, 'CMSapp/draft_contract.html')
-    return render(request,'CMSapp/login.html')
-
+    else:
+        return render(request, 'CMSapp/timeout.html')
 
 def ajax_login(request):
     username = request.POST.get('username')

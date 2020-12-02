@@ -7,7 +7,6 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}"/>
     <script src="{% static 'js/login_register.js' %}"></script>
     <script src="{% static 'js/base.js' %}"></script>
-    <script src="{% static 'image' %}"></script>
 
 </head>
 
@@ -15,10 +14,10 @@
 <header>
     <ul>
         <li>
-            <a class="hide-a" onclick="list()">三</a>
+            <a class="hide-a" onclick="list()">&#9776</a>
         </li>
         <li>
-            <a class="home-a" onclick="onhome()" >首页</a>
+            <a class="home-a" onclick="onhome()" ></a>
         </li>
         <li>
             <a class="logout-a" onclick="OnLogout()">登出</a>
@@ -30,7 +29,6 @@
 </header>
 
 <aside>
-    {#    <button class="btn" onclick="list()">三</button>#}
     <ul>
         <li class="first">
             <div class="catalog">
@@ -38,8 +36,22 @@
             </div>
         </li>
         <li>
-            <a onclick="ondraft_contract()"><span class="listtext"> 合同起草</span></a>
+            <a onclick="onOpenContractDraft()"><span class="listtext"> 合同起草</span></a>
         </li>
+        <li>
+            <a onclick="reload_function_view('/draftcontract/','起草合同')"><span class="listtext_2" id="draft_contract"> 起草合同</span></a>
+        </li>
+        <li>
+            <a onclick="reload_function_view('/draftcontract/','待定稿合同')"><span class="listtext_2" id="pending_contract"> 待定稿合同</span></a>
+        </li>
+        <li>
+            <a onclick="reload_function_view('/draftcontract/','已定稿合同')"><span class="listtext_2" id="finalized_contract"> 已定稿合同</span></a>
+        </li>
+        <li>
+            <a onclick="reload_function_view('/draftcontract/','流程查询')"><span class="listtext_2" id="process_query"> 流程查询</span></a>
+        </li>
+
+
         <li>
             <a onclick=""><span class="listtext"> 合同会签</span></a>
         </li>
@@ -54,7 +66,7 @@
         </li>
     </ul>
 </aside>
-<div class="function_view">
+<div class="function_view" id="function_view">
     {% block content %}{% endblock %}
 </div>
 

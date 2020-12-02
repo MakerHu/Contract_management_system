@@ -57,20 +57,30 @@ aside .first .logo:hover {
 aside ul li {
     width: 100%;
     list-style-type: none;
-    padding-top: 5px;
+    /*padding-top: 5px;*/
 }
 
 aside ul li a {
     line-height:40px;
     display: block;
-    padding-left: 20px;
+    /*padding-left: 20px;*/
     text-align: left;
     color: #fff;
+    user-select: none;
 }
 
 aside .listtext {
+    padding-left: 20px;
+    height: 50px;
     font-size: 25px;
     display: inline-block;
+}
+
+aside .listtext_2 {
+    padding-left: 50px;
+    height: 40px;
+    font-size: 20px;
+    display: none;
 }
 
 aside ul li a:hover {
@@ -99,8 +109,10 @@ aside ul li a:hover {
 }
 
 .hide-a{
+    display: block;
     float: left;
     width: 50px;
+    height: 50px;
     line-height: 50px;
     color: #fff;
     /*padding: 0px;*/
@@ -114,22 +126,31 @@ aside ul li a:hover {
 }
 
 .home-a{
+    display: block;
+    height: 50px;
     float: left;
     width: 50px;
     line-height: 50px;
     text-align: center;
+    background: url(../image/home_white.png) no-repeat center;
 }
 .home-a:hover {
     color: #023fba;
-    background: #7ad0f8;
+    background: url(../image/home.png) no-repeat center;
+    background-color: rgb(122, 208, 248);
 }
 
 .logo{
-    position: relative;
-    top: 10%;
     color: #fff;
-    margin-left: 30px;
+    margin-left: 50px;
     font-size: 30px;
+
+    display: block;
+    height: 50px;
+    float: left;
+    width: 180px;
+    line-height: 50px;
+    text-align: center;
 }
 
 /*mini*/
