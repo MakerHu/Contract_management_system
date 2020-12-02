@@ -1,55 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>首页</title>
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}"/>
-    <script src="{% static 'js/login_register.js' %}"></script>
-    <script src="{% static 'js/index.js' %}"></script>
+{% extends 'CMSapp/base.html' %}
 
-</head>
-
-<body>
-<header>
-    <ul>
-        <li>
-            <a class="hide-a" onclick="list()">三</a>
-        </li>
-        <li>
-            <a class="logout-a" onclick="OnLogout()">登出</a>
-        </li>
-        <li>
-            <span class="logo">合同管理系统</span>
-        </li>
-    </ul>
-</header>
-
-<aside>
-    {#    <button class="btn" onclick="list()">三</button>#}
-    <ul>
-        <li class="first">
-            <div class="catalog">
-                导航栏
-            </div>
-        </li>
-        <li>
-            <a onclick=""><span class="listtext"> 合同起草</span></a>
-        </li>
-        <li>
-            <a onclick=""><span class="listtext"> 合同会签</span></a>
-        </li>
-        <li>
-            <a onclick=""><span class="listtext"> 合同审批</span></a>
-        </li>
-        <li>
-            <a onclick=""><span class="listtext"> 合同签订</span></a>
-        </li>
-        <li>
-            <a onclick=""><span class="listtext"> 权限管理</span></a>
-        </li>
-    </ul>
-</aside>
-</body>
-
-</html>
+{% block title %}首页{% endblock %}
+{% block content %}
+<h1>首页</h1>
+{% endblock %}

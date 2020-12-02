@@ -8,11 +8,12 @@ body {
     position: absolute;
     height: 100%;
     width: 100%;
+    background-color: #dde0e0;
 }
 
 a {
     text-decoration-line: none;
-    color: #fff;
+    color: #ffffff;
 }
 
 header {
@@ -32,7 +33,8 @@ aside {
     left: 0;
     top: 0;
     /*background: #243747;*/
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(2, 58, 149, 0.7);
+    float: left;
     transition: width .5s;
 }
 
@@ -111,6 +113,17 @@ aside ul li a:hover {
     background: #7ad0f8;
 }
 
+.home-a{
+    float: left;
+    width: 50px;
+    line-height: 50px;
+    text-align: center;
+}
+.home-a:hover {
+    color: #023fba;
+    background: #7ad0f8;
+}
+
 .logo{
     position: relative;
     top: 10%;
@@ -137,4 +150,25 @@ aside ul li a:hover {
 .minibody aside .first .catalog {
     /*font-size: 12px;*/
     display: none;
+}
+
+.minibody .function_view{
+    left: 0px;
+    /*transition: width .5s;*/
+}
+
+/*功能视图*/
+.function_view{
+    float: left;
+    /*background-color: #eeeee7;*/
+    height: 100%;
+    /*width: 100%;*/
+    transition: .5s;
+}
+
+footer{
+    color: #b7bcbf;
+    text-align: center;
+    clear:both;
+    background-color: #01194b;
 }

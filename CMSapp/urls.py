@@ -4,13 +4,15 @@ from CMSapp import contract_management
 
 urlpatterns = [
     #主页
-    path('index/', contract_management.index),
+    path('index/', views.index),
     #登录
     path('login/', views.view_login),
     # 登出
     path('logout/', views.logout),
     #注册
     path('register/', views.view_register),
+    #起草合同
+    path('draftcontract/',views.view_draft),
 
 
     # ajax

@@ -18,6 +18,17 @@ def view_register(request):
         return redirect('/index/')
     return render(request,'CMSapp/register.html')
 
+def index(request):
+    if request.session.get('is_login', None):
+        return render(request, 'CMSapp/index.html')
+    else:
+        return redirect('/login/')
+
+def view_draft(request):
+    if request.session.get('is_login', None):
+        return render(request, 'CMSapp/draft_contract.html')
+    return render(request,'CMSapp/login.html')
+
 
 def ajax_login(request):
     username = request.POST.get('username')

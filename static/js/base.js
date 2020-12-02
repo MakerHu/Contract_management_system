@@ -8,3 +8,13 @@ function list() {
         body.className = "minibody"
     }
 }
+
+function ondraft_contract() {
+
+    window.location.href = "/draftcontract/";
+}
+
+function onhome() {
+
+    window.location.href = "/index/";
+}
