@@ -92,7 +92,13 @@ def ajax_register(request):
 
     if not same_username:
         user.objects.create(username = username, password = password).save()
-
+        try:
+            newusername = models.user.objects.get(username=username)
+            role = models.role.objects.get(rolename='newuser')
+            models.right.objects.create(username=newusername, rolename=role).save()
+        except:
+            response['role_execption'] = 'true'
+            models.user.objects.filter(username = username).delete()
 
     return JsonResponse(response)
 

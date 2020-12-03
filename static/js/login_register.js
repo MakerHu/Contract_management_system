@@ -114,12 +114,16 @@ function onregister() {
                 if (this.readyState === 4) {
                     var json = JSON.parse(this.responseText);
                     console.log(this.responseText);
-                    if (json.same_username == 'success') {
-                        document.getElementById("hide3").style.display = "block";
+                    if (json.role_execption == 'true') {
+                        alert("系统异常，注册失败，请重新操作！");
                     } else {
-                        document.getElementById("hide3").style.display = "none";
-                        alert("注册成功！");
-                        window.location.href = "/login/";
+                        if (json.same_username == 'success') {
+                            document.getElementById("hide3").style.display = "block";
+                        } else {
+                            document.getElementById("hide3").style.display = "none";
+                            alert("注册成功！");
+                            window.location.href = "/login/";
+                        }
                     }
                 }
             });
