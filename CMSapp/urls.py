@@ -5,6 +5,10 @@ from CMSapp import contract_management
 urlpatterns = [
     #主页
     path('index/', views.index),
+
+    #首页
+    path('home/', views.home),
+
     #登录
     path('login/', views.view_login),
     # 登出

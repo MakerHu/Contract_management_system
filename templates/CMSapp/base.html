@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}{% endblock %}</title>
+{#    <title>{% block title %}{% endblock %}</title>#}
+    <title>合同管理系统</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}"/>
     <script src="{% static 'js/login_register.js' %}"></script>
@@ -17,7 +18,7 @@
             <a class="hide-a" onclick="list()">&#9776</a>
         </li>
         <li>
-            <a class="home-a" onclick="onhome()" ></a>
+            <a class="home-a" onclick="reload_function_view('/home/','首页')" ></a>
         </li>
         <li>
             <a class="logout-a" onclick="OnLogout()">登出</a>
@@ -67,7 +68,8 @@
     </ul>
 </aside>
 <div class="function_view" id="function_view">
-    {% block content %}{% endblock %}
+{#    {% block content %}{% endblock %}#}
+    <h1>首页</h1>
 </div>
 
 <footer>

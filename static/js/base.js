@@ -10,9 +10,9 @@ function list() {
 }
 
 //点击首页按钮
-function onhome() {
-    window.location.href = "/index/";
-}
+// function onhome() {
+//     window.location.href = "/index/";
+// }
 
 //刷新功能界面
 function reload_function_view(url, titlename) {

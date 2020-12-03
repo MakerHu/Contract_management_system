@@ -3,6 +3,7 @@ from django.shortcuts import render
 from CMSapp.models import user
 from django.http import JsonResponse
 from django.shortcuts import redirect
+from CMSapp import models
 
 
 # Create your views here.
@@ -20,9 +21,15 @@ def view_register(request):
 
 def index(request):
     if request.session.get('is_login', None):
-        return render(request, 'CMSapp/index.html')
+        return render(request, 'CMSapp/base.html')
     else:
         return redirect('/login/')
+
+def home(request):
+    if request.session.get('is_login', None):
+        return render(request, 'CMSapp/index.html')
+    else:
+        return render(request, 'CMSapp/timeout.html')
 
 def view_draft(request):
     if request.session.get('is_login', None):
@@ -85,6 +92,7 @@ def ajax_register(request):
 
     if not same_username:
         user.objects.create(username = username, password = password).save()
+
 
     return JsonResponse(response)
 
