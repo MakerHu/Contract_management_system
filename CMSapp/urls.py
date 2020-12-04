@@ -16,7 +16,10 @@ urlpatterns = [
     #注册
     path('register/', views.view_register),
     #起草合同
-    path('draftcontract/',views.view_draft),
+    path('draftcontract/', views.view_draft),
+
+    #权限管理
+    path('right/', contract_management.right),
 
     # ajax
     path('ajax_login/', views.ajax_login),

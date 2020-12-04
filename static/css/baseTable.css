@@ -1,0 +1,113 @@
+
+h1 {
+    margin-left: 50px;
+    margin-top: 20px;
+
+}
+
+
+
+.table_unit{
+    position: relative;
+    margin-top: 20px;
+    left: 30%;
+}
+
+
+.table_unit input {
+    float: left;
+    width: 265px;
+    height: 20px;
+    margin-bottom: 18px;
+    outline: none;
+    padding: 10px;
+    font-size: 15px;
+    color: #40423d;
+    border: 0px solid #312E3D;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    background-color: #f2f2f6;
+    -webkit-box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.2);
+}
+
+.table_unit button {
+    float: left;
+    width: 50px;
+    height: 40px;
+    margin-left: 0;
+    margin-bottom: 18px;
+    outline: none;
+    /*padding: 10px;*/
+    font-size: 15px;
+    color: #ffffff;
+    border: 0px solid #312E3D;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #5e5efa;
+    -webkit-box-shadow: 0px 4px 28px 0px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 4px 28px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 4px 28px 0px rgba(0, 0, 0, 0.2);
+}
+
+.table_unit button:hover {
+    color: #ffffff;
+    background: #0499fc;
+    cursor:pointer
+}
+
+.table_unit table {
+    background: rgb(241, 243, 243);
+    -webkit-box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+
+    border-collapse:collapse;
+    border: 0px solid deepskyblue;
+    width: 700px;
+    /* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */
+    table-layout: fixed;
+}
+
+.table_unit th {
+    /*border: 0px solid black;*/
+    max-width: 100px;
+    height: 50px;
+    text-align: center;
+    /*超出部分隐藏*/
+    overflow: hidden;
+    /* 强制在同一行内显示所有文本，直到文本结束或者遭遇 br 对象。不换行 */
+    word-break: keep-all;
+    /* 内容超出宽度时隐藏超出部分的内容 */
+    white-space: nowrap;
+    /* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+    text-overflow: ellipsis;
+
+    border: 1px none deepskyblue;
+    border-bottom-style: solid;
+}
+
+.table_unit td {
+    /*border: 0px solid black;*/
+    max-width: 100px;
+    height: 50px;
+    text-align: center;
+    /*超出部分隐藏*/
+    overflow: hidden;
+    /* 强制在同一行内显示所有文本，直到文本结束或者遭遇 br 对象。不换行 */
+    word-break: keep-all;
+    /* 内容超出宽度时隐藏超出部分的内容 */
+    white-space: nowrap;
+    /* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+    text-overflow: ellipsis;
+
+    border: 1px none deepskyblue;
+    border-top-style: solid;
+}
+
+.table_unit td a{
+    color: #4a77d4;
+    text-decoration:underline;
+}

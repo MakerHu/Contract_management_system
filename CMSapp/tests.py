@@ -6,4 +6,6 @@ django.setup()
 from CMSapp import models
 # Create your tests here.
 
-models.user.objects.get(username='jjj').delete()
+# models.user.objects.get(username='hhh').delete()
+# models.user.objects.all().delete()
+# print(models.user.objects.all()[0].username)

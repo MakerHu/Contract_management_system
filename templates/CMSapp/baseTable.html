@@ -1,0 +1,58 @@
+
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/baseTable.css' %}"/>
+
+<h1>{{ functionname }} |</h1>
+
+<div class="table_unit">
+    {#    <div class="search">#}
+    {#        <input type="text" placeholder="搜 索">#}
+    {#        <button class="search_btn" type="button">搜索</button>#}
+    {#    </div>#}
+
+    <form class="form-search" onsubmit="return false;">
+        <input id="search_input" class="search_input" type="text" placeholder="搜 索"/>
+        <button class="search_btn" type="submit">查找</button>
+    </form>
+
+
+    <table>
+        <thead>
+        <tr>
+            <th>用户名</th>
+            <th>角色名</th>
+            <th>操作</th>
+            {#            <th>角色名</th>#}
+            {#            <th>操作</th>#}
+        </tr>
+        </thead>
+        <tbody>
+        {% for result in resultlist %}
+            <tr>
+                <td>{{ result.username.username}}</td>
+                <td>{{ result.rolename.rolename}}</td>
+                <td><a>编辑</a></td>
+            </tr>
+        {% endfor %}
+        {#        <tr>#}
+        {#            <td>主体内容 1</td>#}
+        {#            <td>主体内容 2</td>#}
+        {#            <td>主体内容 3</td>#}
+        {#            <td><a>编辑</a></td>#}
+        {#        </tr>#}
+        {#        <tr>#}
+        {#            <td>主体内容 1</td>#}
+        {#            <td>主体内容 2</td>#}
+        {#            <td>主体内容 3</td>#}
+        {#            <td><a>编辑</a></td>#}
+        {#        </tr>#}
+        {#        <tr>#}
+        {#            <td>主体内容 1</td>#}
+        {#            <td>主体内容 2</td>#}
+        {#            <td>主体内容 3</td>#}
+        {#            <td><a>编辑</a></td>#}
+        {#        </tr>#}
+        </tbody>
+    </table>
+</div>

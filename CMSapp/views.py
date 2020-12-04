@@ -37,6 +37,12 @@ def view_draft(request):
     else:
         return render(request, 'CMSapp/timeout.html')
 
+# def view_right(request):
+#     if request.session.get('is_login', None):
+#         return render(request, 'CMSapp/baseTable.html')
+#     else:
+#         return render(request, 'CMSapp/timeout.html')
+
 def ajax_login(request):
     username = request.POST.get('username')
     password = request.POST.get('password')
