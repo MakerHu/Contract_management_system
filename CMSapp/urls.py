@@ -24,6 +24,10 @@ urlpatterns = [
     # 查询权限表
     path('searchright/', contract_management.search_right),
 
+    # 新用户权限分配
+    path('newuser_authorize/',contract_management.newuser_authorize),
+    path('search_newuser_authorize/', contract_management.search_newuser_authorize),
+
     # ajax
     path('ajax_login/', views.ajax_login),
     path('ajax_register/', views.ajax_register),

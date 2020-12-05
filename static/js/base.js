@@ -11,7 +11,7 @@ function list() {
         state_2 =1;
         state_3 =1;
         state_4 =1;
-
+        state_5 =1;
         for (var i = 0; i < stretch.length; i++) {
             stretch[i].innerHTML="&#9654;";
         }
@@ -137,6 +137,22 @@ function onOpenCustomerManage() {
         document.getElementById("customer_manage").innerHTML="&#9654;";
         document.getElementById("customer_info").style.display = "none";
         document.getElementById("add_customer").style.display = "none";
+    }
+}
+
+//打开权限管理栏
+var state_5 = 1;
+function onOpenRightManage() {
+    if (state_5) {
+        state_5 = 0;
+        document.getElementById("right_manage").innerHTML="&#9660;";
+        document.getElementById("newuser_authorize").style.display = "block";
+        document.getElementById("manage_right").style.display = "block";
+    } else {
+        state_5 = 1;
+        document.getElementById("right_manage").innerHTML="&#9654;";
+        document.getElementById("newuser_authorize").style.display = "none";
+        document.getElementById("manage_right").style.display = "none";
     }
 }
 

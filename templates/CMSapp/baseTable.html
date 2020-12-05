@@ -26,9 +26,22 @@
 
         {% for result in resultlist %}
             <tr>
-                <td>{{ result.username.username }}</td>
-                <td>{{ result.rolename.rolename }}</td>
-                <td><a>编辑</a></td>
+                {% if function == 'right' %}
+                    <td>{{ result.username.username }}</td>
+                    <td>{{ result.rolename.rolename }}</td>
+                    <td><a>编辑</a></td>
+                {% endif %}
+                {% if function == 'newuser_authorize' %}
+                    <td>{{ result.username.username }}</td>
+                    <td>{{ result.rolename.rolename }}</td>
+                    <td><a>授权</a></td>
+                {% endif %}
+                {% if function == '' %}
+                {% endif %}
+                {% if function == '' %}
+                {% endif %}
+                {% if function == '' %}
+                {% endif %}
             </tr>
         {% endfor %}
 
