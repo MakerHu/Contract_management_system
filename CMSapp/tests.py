@@ -18,3 +18,8 @@ from CMSapp import models
 # models.user.objects.all().delete()
 # print(models.user.objects.all()[0].username)
 print(models.user.objects.all())
+
+conidentity = models.contract.objects.get(conid=1)
+models.contract_state.objects.create(type=2,conid=conidentity).save()
+models.customer.objects.create(cusname='客户1', address='福建',tel='13156').save()
+models.contract.objects.create(conname='合同1',cusid=2,begintime='2020-05-03',endtime='2020-10-12')

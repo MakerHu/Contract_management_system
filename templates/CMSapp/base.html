@@ -22,10 +22,13 @@
             <a class="home-a" onclick="reload_function_view('/home/','首页')" ></a>
         </li>
         <li>
+            <span class="logo">合同管理系统</span>
+        </li>
+        <li>
             <a class="logout-a" onclick="OnLogout()">登出</a>
         </li>
         <li>
-            <span class="logo">合同管理系统</span>
+            <a class="user-a" >欢迎您！{{ request.session.rolename }} {{ request.session.username }}</a>
         </li>
     </ul>
 </header>
@@ -44,13 +47,13 @@
             <a onclick="reload_function_view('/draftcontract/','起草合同')"><span class="listtext_2" id="draft_contract"> 起草合同</span></a>
         </li>
         <li>
-            <a onclick="reload_function_view('/draftcontract/','待定稿合同')"><span class="listtext_2" id="pending_contract"> 待定稿合同</span></a>
+            <a onclick="reload_function_view('/pending_contract/','待定稿合同')"><span class="listtext_2" id="pending_contract"> 待定稿合同</span></a>
         </li>
         <li>
-            <a onclick="reload_function_view('/draftcontract/','已定稿合同')"><span class="listtext_2" id="finalized_contract"> 已定稿合同</span></a>
+            <a onclick="reload_function_view('/finalized_contract/','已定稿合同')"><span class="listtext_2" id="finalized_contract"> 已定稿合同</span></a>
         </li>
         <li>
-            <a onclick="reload_function_view('/draftcontract/','流程查询')"><span class="listtext_2" id="process_query"> 流程查询</span></a>
+            <a onclick="reload_function_view('/process_query/','流程查询')"><span class="listtext_2" id="process_query"> 流程查询</span></a>
         </li>
 
 
@@ -58,10 +61,10 @@
             <a onclick="onOpenContractCountersign()"><span class="listtext"><span id="contract_countersign" class="stretch">&#9654;</span>合同会签</span></a>
         </li>
         <li>
-            <a onclick="reload_function_view('/draftcontract/','待会签合同')"><span class="listtext_2" id="countersigning_contract"> 待会签合同</span></a>
+            <a onclick="reload_function_view('/countersigning_contract/','待会签合同')"><span class="listtext_2" id="countersigning_contract"> 待会签合同</span></a>
         </li>
         <li>
-            <a onclick="reload_function_view('/draftcontract/','已会签合同')"><span class="listtext_2" id="countersigned_contract"> 已会签合同</span></a>
+            <a onclick="reload_function_view('/countersigned_contract/','已会签合同')"><span class="listtext_2" id="countersigned_contract"> 已会签合同</span></a>
         </li>
 
 
@@ -69,10 +72,10 @@
             <a onclick="onOpenContractApproval()"><span class="listtext"><span id="contract_approval" class="stretch">&#9654;</span>合同审批</span></a>
         </li>
         <li>
-            <a onclick="reload_function_view('/draftcontract/','待审批合同')"><span class="listtext_2" id="contract_approving"> 待审批合同</span></a>
+            <a onclick="reload_function_view('/contract_approving/','待审批合同')"><span class="listtext_2" id="contract_approving"> 待审批合同</span></a>
         </li>
         <li>
-            <a onclick="reload_function_view('/draftcontract/','已审批合同')"><span class="listtext_2" id="contract_approved"> 已审批合同</span></a>
+            <a onclick="reload_function_view('/contract_approved/','已审批合同')"><span class="listtext_2" id="contract_approved"> 已审批合同</span></a>
         </li>
 
 
@@ -80,10 +83,21 @@
             <a onclick="onOpenContractSign()"><span class="listtext"><span id="contract_sign" class="stretch">&#9654;</span>合同签订</span></a>
         </li>
         <li>
-            <a onclick="reload_function_view('/draftcontract/','待签订合同')"><span class="listtext_2" id="contract_signing"> 待签订合同</span></a>
+            <a onclick="reload_function_view('/contract_signing/','待签订合同')"><span class="listtext_2" id="contract_signing"> 待签订合同</span></a>
         </li>
         <li>
-            <a onclick="reload_function_view('/draftcontract/','已签订合同')"><span class="listtext_2" id="contract_signed"> 已签订合同</span></a>
+            <a onclick="reload_function_view('/contract_signed/','已签订合同')"><span class="listtext_2" id="contract_signed"> 已签订合同</span></a>
+        </li>
+
+
+        <li>
+            <a onclick="onOpenContractDistribute()"><span class="listtext"><span id="contract_distribute" class="stretch">&#9654;</span>合同分配</span></a>
+        </li>
+        <li>
+            <a onclick="reload_function_view('/contract_distributing/','待分配合同')"><span class="listtext_2" id="contract_distributing"> 待分配合同</span></a>
+        </li>
+        <li>
+            <a onclick="reload_function_view('/contract_distributed/','已分配合同')"><span class="listtext_2" id="contract_distributed"> 已分配合同</span></a>
         </li>
 
 
@@ -91,10 +105,10 @@
             <a onclick="onOpenCustomerManage()"><span class="listtext"><span id="customer_manage" class="stretch">&#9654;</span>客户管理</span></a>
         </li>
         <li>
-            <a onclick="reload_function_view('/draftcontract/','客户信息')"><span class="listtext_2" id="customer_info"> 客户信息</span></a>
+            <a onclick="reload_function_view('/customer_info/','客户信息')"><span class="listtext_2" id="customer_info"> 客户信息</span></a>
         </li>
         <li>
-            <a onclick="reload_function_view('/draftcontract/','添加客户')"><span class="listtext_2" id="add_customer"> 添加客户</span></a>
+            <a onclick="reload_function_view('/add_customer/','添加客户')"><span class="listtext_2" id="add_customer"> 添加客户</span></a>
         </li>
 
 

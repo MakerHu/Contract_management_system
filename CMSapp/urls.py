@@ -28,6 +28,10 @@ urlpatterns = [
     path('newuser_authorize/',contract_management.newuser_authorize),
     path('search_newuser_authorize/', contract_management.search_newuser_authorize),
 
+    # 待定稿合同
+    path('pending_contract/',contract_management.pending_contract),
+    path('search_pending_contract/', contract_management.search_pending_contract),
+
     # ajax
     path('ajax_login/', views.ajax_login),
     path('ajax_register/', views.ajax_register),
