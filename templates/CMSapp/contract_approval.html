@@ -1,0 +1,20 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}"/>
+
+<h1>审批合同 |</h1>
+<div class="approval_contract">
+    <form class="approval_contract_form" action="http://vip.biancheng.net/login.php" method="post" name="formName">
+        <div class="content">
+            <div id="contract_name">合同名称:XXX合同</div>
+            <div class="approval_select">
+                <input type="radio" name="approve" value="pass" id="pass"><label for="pass">通过</label>
+                <input type="radio" name="approve" value="reject" id="reject" checked><label for="reject">拒绝</label>
+            </div>
+            <div class="single_content"><span>* </span><div>审批意见:</div><textarea id="approval_comments"></textarea></div>
+        </div>
+    </form>
+    <div class="btn">
+        <button>提交</button>
+        <button>重置</button>
+    </div>
+</div>

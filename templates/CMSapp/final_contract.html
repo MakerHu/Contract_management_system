@@ -1,0 +1,28 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}"/>
+
+<h1>定稿合同 |</h1>
+<div class="comment">
+    <div class="final_contract">
+        <form class="final_contract_form" action="http://vip.biancheng.net/login.php" method="post" name="formName">
+            <div class="content">
+                <div class="single_content">合同名称:XXXXXX</div>
+                <div class="single_content">客户:XXX</div>
+                <div class="single_content">开始时间:2020-12-5</div>
+                <div class="single_content">结束时间:2020-12-5</div>
+                <div class="single_content"><span>* </span>合同内容:<textarea id="contract_content">qqqqqqqqq</textarea></div>
+            </div>
+        </form>
+        <div class="btn">
+            <button>提交</button>
+            <button>重置</button>
+        </div>
+    </div>
+    <div class="countersign_comments">
+        <div>会签人意见</div>
+        <textarea id="contract_content" readonly></textarea>
+    </div>
+</div>
+
+
+

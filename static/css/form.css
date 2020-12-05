@@ -21,7 +21,7 @@ h2 {
     border-radius: 10px;
     border-collapse: collapse;
     border: 0px solid #00bfff;
-    width: 700px;
+    width: 600px;
     /* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */
     table-layout: fixed;
 
@@ -43,18 +43,18 @@ h2 {
 }
 
 textarea {
-    margin-left: 100px;
+    /*margin-left: 100px;*/
     border-radius: 10px;
     border: 1px solid #00bfff;
-    resize: none;
+    /*resize: none;*/
 }
 
-.select {
+.authority_assignment .select {
     margin-left: 120px;
     margin-top: -30px;
 }
 
-label {
+.authority_assignment label {
     margin-left: 5px;
 }
 
@@ -106,7 +106,7 @@ button:hover {
     border-radius: 10px;
     border-collapse: collapse;
     border: 0px solid #00bfff;
-    width: 700px;
+    width: 600px;
     /* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */
     table-layout: fixed;
 
@@ -125,7 +125,7 @@ button:hover {
     margin-bottom: 20px;
 }
 
-.draft_contract .content .single_content span{
+.draft_contract .content .single_content span {
     color: red;
     margin-left: -12px;
 }
@@ -190,5 +190,333 @@ button:hover {
 .draft_contract .btn {
     display: flex;
     margin-top: 15px;
+    margin-left: 90px;
+}
+
+
+/*定稿合同*/
+.comment {
+    position: relative;
+    display: flex;
+}
+
+.comment .final_contract {
+    position: relative;
+    margin-top: 20px;
+    margin-bottom: 100px;
+    left: 200px;
+    font-size: 1.5em;
+    font-weight: bolder;
+    background: rgb(241, 243, 243);
+    -webkit-box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    border-collapse: collapse;
+    border: 0px solid #00bfff;
+    width: 600px;
+    /* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */
+    /*table-layout: fixed;*/
+
+    padding-left: 50px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+.comment .countersign_comments {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-top: 20px;
+    margin-bottom: 100px;
+    margin-left: 10px;
+    left: 200px;
+    font-size: 1.5em;
+    font-weight: bolder;
+    background: rgb(241, 243, 243);
+    -webkit-box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    border-collapse: collapse;
+    border: 0px solid #00bfff;
+    width: 250px;
+    /* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */
+    table-layout: fixed;
+
+    /*padding-left: 35px;*/
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.comment .countersign_comments div {
+    margin: 0 auto;
+}
+
+
+.comment .countersign_comments textarea {
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #312E3D;
+    margin: 0 auto;
+    margin-top: 10px;
+    /*margin-bottom: 10px;*/
+    min-width: 200px;
+    max-width: 200px;
+    min-height: 200px;
+    height: 400px;
+    resize: none;
+}
+
+.final_contract .content {
+    display: flex;
+    flex-direction: column;
+}
+
+.final_contract .content .single_content {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.final_contract .content .single_content span {
+    color: red;
+    margin-left: -12px;
+}
+
+.final_contract .content .single_content textarea {
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #312E3D;
+}
+
+.final_contract .content .single_content #contract_name {
+    margin-left: 20px;
+}
+
+.final_contract .content .single_content #customer {
+    margin-left: 68px;
+}
+
+.final_contract .content .single_content #start_time {
+    margin-left: 20px;
+}
+
+.final_contract .content .single_content #end_time {
+    margin-left: 20px;
+}
+
+.final_contract .content .single_content #contract_content {
+    margin-left: 20px;
+    min-width: 400px;
+    max-width: 400px;
+    min-height: 100px;
+}
+
+.final_contract .btn {
+    position: relative;
+    display: flex;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    margin-left: 145px;
+}
+
+
+/*会签合同*/
+.countersign_contract {
+    position: relative;
+    margin-top: 20px;
+    left: 30%;
+    font-size: 1.5em;
+    font-weight: bolder;
+    background: rgb(241, 243, 243);
+    -webkit-box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    border-collapse: collapse;
+    border: 0px solid #00bfff;
+    width: 600px;
+    /* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */
+    table-layout: fixed;
+
+    padding-left: 150px;
+    padding-top: 20px;
+}
+
+
+.countersign_contract .content {
+    display: flex;
+    flex-direction: column;
+}
+
+.countersign_contract .content .single_content {
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.countersign_contract .content .single_content span {
+    color: red;
+    margin-left: -12px;
+}
+
+.countersign_contract .content .single_content textarea {
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #312E3D;
+    min-width: 400px;
+    max-width: 400px;
+    min-height: 150px;
+    margin-left: 10px;
+}
+
+.countersign_contract .btn {
+    display: flex;
+    margin-top: 15px;
     margin-left: 125px;
+}
+
+
+/*审批合同*/
+.approval_contract {
+    position: relative;
+    margin-top: 20px;
+    left: 30%;
+    font-size: 1.5em;
+    font-weight: bolder;
+    background: rgb(241, 243, 243);
+    -webkit-box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    border-collapse: collapse;
+    border: 0px solid #00bfff;
+    width: 600px;
+    /* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */
+    table-layout: fixed;
+
+    padding-left: 100px;
+    padding-top: 20px;
+}
+
+
+.approval_contract .content {
+    display: flex;
+    flex-direction: column;
+}
+
+.approval_contract .content .single_content {
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.approval_contract .content #contract_name {
+    margin-bottom: 20px;
+    margin-left: 165px;
+}
+
+.approval_contract .content .approval_select {
+    margin-top: 10px;
+    margin-left: 190px;
+    margin-bottom: 20px;
+}
+
+.approval_contract .content .approval_select label{
+    margin-left: 5px;
+}
+
+.approval_contract .content .approval_select #pass{
+
+}
+
+.approval_contract .content .approval_select #reject{
+    margin-left: 10px;
+}
+
+.approval_contract .content .single_content span {
+    color: red;
+    margin-left: -12px;
+}
+
+.approval_contract .content .single_content textarea {
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #312E3D;
+    min-width: 400px;
+    max-width: 400px;
+    min-height: 150px;
+    margin-left: 10px;
+}
+
+.approval_contract .btn {
+    display: flex;
+    margin-top: 15px;
+    margin-left: 115px;
+}
+
+
+/*签订合同*/
+.sign_contract {
+    position: relative;
+    margin-top: 20px;
+    left: 30%;
+    font-size: 1.5em;
+    font-weight: bolder;
+    background: rgb(241, 243, 243);
+    -webkit-box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    border-collapse: collapse;
+    border: 0px solid #00bfff;
+    width: 600px;
+    /* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */
+    table-layout: fixed;
+
+    padding-left: 100px;
+    padding-top: 20px;
+}
+
+
+.sign_contract .content {
+    display: flex;
+    flex-direction: column;
+}
+
+.sign_contract .content .single_content {
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.sign_contract .content #contract_name {
+    margin-bottom: 20px;
+    margin-left: 165px;
+}
+
+.sign_contract .content #customer {
+    margin-bottom: 20px;
+    margin-left: 200px;
+}
+
+.sign_contract .content .single_content span {
+    color: red;
+    margin-left: -12px;
+}
+
+.sign_contract .content .single_content textarea {
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #312E3D;
+    min-width: 400px;
+    max-width: 400px;
+    min-height: 150px;
+    margin-left: 10px;
+}
+
+.sign_contract .btn {
+    display: flex;
+    margin-top: 15px;
+    margin-left: 115px;
 }
