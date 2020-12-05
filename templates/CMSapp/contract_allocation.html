@@ -1,0 +1,50 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}"/>
+
+<h1>流程配置:XX合同 |</h1>
+<div class="allocation_contract">
+    <div class="countersign_contract">
+        <select class="countersign" id="will" size="3" style="width: 100px" onChange="onDeleteWillOption(this.value)">
+            <option value="beijing">beijing</option>
+            <option value="zhengzhou">zhengzhou</option>
+            <option value="longyan">longyan</option>
+            <option value="tianjin">tianjin</option>
+            <option value="fengcheng">fengcheng</option>
+            <option value="xiangyang">xiangyang</option>
+            <option value="hailar">hailar</option>
+        </select>
+        <select class="countersign" id="have" size="3" style="width: 100px" onChange="onDeleteHaveOption(this.value)">
+
+        </select>
+    </div>
+
+    <div class="approve_contract">
+        <select class="approve" id="will" size="3" style="width: 100px" onChange="onDeleteWillOption(this.value)">
+            <option value="beijing">beijing</option>
+            <option value="zhengzhou">zhengzhou</option>
+            <option value="longyan">longyan</option>
+            <option value="tianjin">tianjin</option>
+            <option value="fengcheng">fengcheng</option>
+            <option value="xiangyang">xiangyang</option>
+            <option value="hailar">hailar</option>
+        </select>
+        <select class="approve" id="have" size="3" style="width: 100px" onChange="onDeleteHaveOption(this.value)">
+
+        </select>
+    </div>
+
+    <div class="sign_contract">
+        <select class="sign" id="will" size="3" style="width: 100px" onChange="onDeleteWillOption(this.value)">
+            <option value="beijing">beijing</option>
+            <option value="zhengzhou">zhengzhou</option>
+            <option value="longyan">longyan</option>
+            <option value="tianjin">tianjin</option>
+            <option value="fengcheng">fengcheng</option>
+            <option value="xiangyang">xiangyang</option>
+            <option value="hailar">hailar</option>
+        </select>
+        <select class="sign" id="have" size="3" style="width: 100px" onChange="onDeleteHaveOption(this.value)">
+
+        </select>
+    </div>
+</div>
