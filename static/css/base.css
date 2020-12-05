@@ -15,7 +15,9 @@ body {
     /*设置padding-bottom值大于等于footer的height值，以保证main的内容能够全部显示出来而不被footer遮盖；*/
     padding-bottom: 30px;
 
-    overflow-x: hidden;
+    overflow: auto;
+    /*overflow-x: hidden;*/
+
     /*height: 100%;*/
     /*width: 100%;*/
     background-color: #dde0e0;

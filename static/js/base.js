@@ -11,7 +11,7 @@ function list() {
         state_2 =1;
         state_3 =1;
         state_4 =1;
-
+        state_5 =1;
         for (var i = 0; i < stretch.length; i++) {
             stretch[i].innerHTML="&#9654;";
         }
@@ -29,8 +29,14 @@ function list() {
 // }
 
 //刷新功能界面
-function reload_function_view(url, titlename) {
-    var xmlhttp;
+var titlename_g = "";
+let url_g="";
+function reload_function_view(url, titlename ,pageNum=1) {
+    url_g=url;
+    let data = new FormData();
+    data.append("pageNum", pageNum);
+    titlename_g = titlename
+    let xmlhttp;
     if (window.XMLHttpRequest) {
         //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
         xmlhttp = new XMLHttpRequest();
@@ -45,8 +51,8 @@ function reload_function_view(url, titlename) {
         }
     }
 
-    xmlhttp.open("GET", url);
-    xmlhttp.send();
+    xmlhttp.open("POST", url);
+    xmlhttp.send(data);
 }
 
 //打开合同起草栏
@@ -131,6 +137,22 @@ function onOpenCustomerManage() {
         document.getElementById("customer_manage").innerHTML="&#9654;";
         document.getElementById("customer_info").style.display = "none";
         document.getElementById("add_customer").style.display = "none";
+    }
+}
+
+//打开权限管理栏
+var state_5 = 1;
+function onOpenRightManage() {
+    if (state_5) {
+        state_5 = 0;
+        document.getElementById("right_manage").innerHTML="&#9660;";
+        document.getElementById("newuser_authorize").style.display = "block";
+        document.getElementById("manage_right").style.display = "block";
+    } else {
+        state_5 = 1;
+        document.getElementById("right_manage").innerHTML="&#9654;";
+        document.getElementById("newuser_authorize").style.display = "none";
+        document.getElementById("manage_right").style.display = "none";
     }
 }
 

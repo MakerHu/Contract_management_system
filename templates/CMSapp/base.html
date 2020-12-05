@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}"/>
     <script src="{% static 'js/login_register.js' %}"></script>
     <script src="{% static 'js/base.js' %}"></script>
+    <script src="{% static 'js/baseTable.js' %}"></script>
 
 </head>
 
@@ -98,13 +99,13 @@
 
 
         <li>
-            <a onclick="reload_function_view('/right/','权限管理')"><span class="listtext">&nbsp;&nbsp;&nbsp;权限管理</span></a>
+            <a onclick="onOpenRightManage()"><span class="listtext"><span id="right_manage" class="stretch">&#9654;</span>权限管理</span></a>
         </li>
         <li>
-            <a onclick="reload_function_view('/draftcontract/','客户信息')"><span class="listtext_2" id="customer_info"> 客户信息</span></a>
+            <a onclick="reload_function_view('/newuser_authorize/','新用户授权')"><span class="listtext_2" id="newuser_authorize"> 新用户授权</span></a>
         </li>
         <li>
-            <a onclick="reload_function_view('/draftcontract/','添加客户')"><span class="listtext_2" id="add_customer"> 添加客户</span></a>
+            <a onclick="reload_function_view('/right/','管理权限')"><span class="listtext_2" id="manage_right"> 管理权限</span></a>
         </li>
     </ul>
 </aside>
