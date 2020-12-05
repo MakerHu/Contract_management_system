@@ -1,0 +1,194 @@
+h1 {
+    margin-left: 50px;
+    margin-top: 20px;
+}
+
+h2 {
+    margin-top: 50px;
+    margin-left: 300px;
+}
+
+.authority_assignment {
+    position: relative;
+    margin-top: 20px;
+    left: 30%;
+    font-size: 1.5em;
+    font-weight: bolder;
+    background: rgb(241, 243, 243);
+    -webkit-box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    border-collapse: collapse;
+    border: 0px solid #00bfff;
+    width: 700px;
+    /* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */
+    table-layout: fixed;
+
+    padding-left: 150px;
+}
+
+#username {
+    padding-top: 20px;
+    margin-bottom: 20px;
+}
+
+#rolename {
+    padding-top: 20px;
+    margin-bottom: 20px;
+}
+
+.describe {
+    display: flex;
+}
+
+textarea {
+    margin-left: 100px;
+    border-radius: 10px;
+    border: 1px solid #00bfff;
+    resize: none;
+}
+
+.select {
+    margin-left: 120px;
+    margin-top: -30px;
+}
+
+label {
+    margin-left: 5px;
+}
+
+form {
+    padding-bottom: 50px;
+}
+
+.btn {
+    display: flex;
+    margin-top: 250px;
+    margin-left: 125px;
+}
+
+button {
+    float: left;
+    width: 100px;
+    height: 40px;
+    /*margin-left: 100px;*/
+    margin-right: 100px;
+    margin-bottom: 18px;
+    outline: none;
+    font-size: 15px;
+    color: #ffffff;
+    border: 0px solid #312E3D;
+    border-radius: 10px;
+    background-color: #5e5efa;
+    /*-webkit-box-shadow: 0px 4px 28px 0px rgba(0, 0, 0, 0.2);*/
+    /*-moz-box-shadow: 0px 4px 28px 0px rgba(0, 0, 0, 0.2);*/
+    /*box-shadow: 0px 4px 28px 0px rgba(0, 0, 0, 0.2);*/
+}
+
+button:hover {
+    color: #ffffff;
+    background: #0499fc;
+    cursor: pointer
+}
+
+/*起草合同*/
+.draft_contract {
+    position: relative;
+    margin-top: 20px;
+    left: 30%;
+    font-size: 1.5em;
+    font-weight: bolder;
+    background: rgb(241, 243, 243);
+    -webkit-box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    border-collapse: collapse;
+    border: 0px solid #00bfff;
+    width: 700px;
+    /* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */
+    table-layout: fixed;
+
+    padding-left: 150px;
+    padding-top: 20px;
+}
+
+
+.draft_contract .content {
+    display: flex;
+    flex-direction: column;
+}
+
+.draft_contract .content .single_content {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.draft_contract .content .single_content span{
+    color: red;
+    margin-left: -12px;
+}
+
+.draft_contract .content .single_content input {
+    outline: none;
+    width: 200px;
+    height: 35px;
+    border-radius: 5px;
+    border: 1px solid #312E3D;
+}
+
+.draft_contract .content .single_content textarea {
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #312E3D;
+}
+
+.draft_contract .content .single_content #contract_name {
+    margin-left: 20px;
+}
+
+.draft_contract .content .single_content #customer {
+    margin-left: 68px;
+}
+
+.draft_contract .content .single_content #start_time {
+    margin-left: 20px;
+}
+
+.draft_contract .content .single_content #end_time {
+    margin-left: 20px;
+}
+
+.draft_contract .content .single_content #contract_content {
+    margin-left: 20px;
+    resize: none;
+    width: 400px;
+    height: 150px;
+}
+
+.draft_contract #add_attachment button {
+    margin-top: -50px;
+    width: 150px;
+    height: 30px;
+
+    /*margin-left: 100px;*/
+    outline: none;
+    font-size: 15px;
+    color: white;
+    border: 0px solid #312E3D;
+    border-radius: 10px;
+    background: #676768;
+}
+
+.draft_contract #add_attachment button:hover {
+    color: white;
+    background-color: #2b2b2b;
+    cursor: pointer
+}
+
+.draft_contract .btn {
+    display: flex;
+    margin-top: 15px;
+    margin-left: 125px;
+}

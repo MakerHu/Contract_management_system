@@ -1,13 +1,22 @@
-{#<!DOCTYPE html>#}
-{#<html lang="en">#}
-{#<head>#}
-{#    <meta charset="UTF-8">#}
-{#    <title>Title</title>#}
-{#</head>#}
-{#<body>#}
-{#<h1>起草合同</h1>#}
-{#</body>#}
-{#</html>#}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}"/>
 
-
-<h1>起草合同</h1>
+<h1>起草合同 |</h1>
+<div class="draft_contract">
+    <form action="http://vip.biancheng.net/login.php" method="post" name="formName">
+        <div class="content">
+            <div class="single_content"><span>* </span>合同名称:<input id="contract_name" type="text"></div>
+            <div class="single_content">客户:<input id="customer" type="text"></div>
+            <div class="single_content">开始时间:<input id="start_time" type="text"></div>
+            <div class="single_content">结束时间:<input id="end_time" type="text"></div>
+            <div class="single_content"><span>* </span>合同内容:<textarea id="contract_content"></textarea></div>
+        </div>
+    </form>
+    <div id="add_attachment">
+        <button>添加附件</button>
+    </div>
+    <div class="btn">
+        <button>提交</button>
+        <button>重置</button>
+    </div>
+</div>
