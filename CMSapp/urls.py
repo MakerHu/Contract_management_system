@@ -3,23 +3,26 @@ from CMSapp import views
 from CMSapp import contract_management
 
 urlpatterns = [
-    #主页
+    # 主页
     path('index/', views.index),
 
-    #首页
+    # 首页
     path('home/', views.home),
 
-    #登录
+    # 登录
     path('login/', views.view_login),
     # 登出
     path('logout/', views.logout),
-    #注册
+    # 注册
     path('register/', views.view_register),
-    #起草合同
+    # 起草合同
     path('draftcontract/', views.view_draft),
 
-    #权限管理
+    # 权限管理
     path('right/', contract_management.right),
+
+    # 查询权限表
+    path('searchright/', contract_management.search_right),
 
     # ajax
     path('ajax_login/', views.ajax_login),

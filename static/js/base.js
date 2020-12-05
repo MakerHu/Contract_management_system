@@ -29,8 +29,14 @@ function list() {
 // }
 
 //刷新功能界面
-function reload_function_view(url, titlename) {
-    var xmlhttp;
+var titlename_g = "";
+let url_g="";
+function reload_function_view(url, titlename ,pageNum=1) {
+    url_g=url;
+    let data = new FormData();
+    data.append("pageNum", pageNum);
+    titlename_g = titlename
+    let xmlhttp;
     if (window.XMLHttpRequest) {
         //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
         xmlhttp = new XMLHttpRequest();
@@ -45,8 +51,8 @@ function reload_function_view(url, titlename) {
         }
     }
 
-    xmlhttp.open("GET", url);
-    xmlhttp.send();
+    xmlhttp.open("POST", url);
+    xmlhttp.send(data);
 }
 
 //打开合同起草栏
