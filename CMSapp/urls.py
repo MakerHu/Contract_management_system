@@ -34,7 +34,7 @@ urlpatterns = [
 
     # 已定稿合同
     path('finalized_contract/', contract_management.finalized_contract),
-    path('finalized_contract/', contract_management.search_finalized_contract),
+    path('search_finalized_contract/', contract_management.search_finalized_contract),
 
     # 流程查询
     path('process_query/', contract_management.process_query),
@@ -42,11 +42,11 @@ urlpatterns = [
 
     # 待会签合同
     path('countersigning_contract/', contract_management.countersigning_contract),
-    path('seatch_countersigning_contract/', contract_management.search_countersigning_contract),
+    path('search_countersigning_contract/', contract_management.search_countersigning_contract),
 
     # 已会签合同
     path('countersigned_contract/', contract_management.countersigned_contract),
-    path('seatch_countersigned_contract/', contract_management.search_countersigned_contract),
+    path('search_countersigned_contract/', contract_management.search_countersigned_contract),
 
     # ajax
     path('ajax_login/', views.ajax_login),

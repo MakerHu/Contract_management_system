@@ -338,7 +338,7 @@ def base_process_query_table(request, query_result, is_search='false'):
     # 返回给界面的值
     response = {}
 
-    response['searchURL'] = '/process_query/'     ########################## 这里要根据情况修改
+    response['searchURL'] = '/search_process_query/'     ########################## 这里要根据情况修改
     # 返回搜索框中的值
     if is_search == 'true':
         # 搜索条件
@@ -426,7 +426,7 @@ def base_countersigning_contract_table(request, query_result, is_search='false')
     # 返回给界面的值
     response = {}
 
-    response['searchURL'] = '/countersigning_contract/'     ########################## 这里要根据情况修改
+    response['searchURL'] = '/search_countersigning_contract/'     ########################## 这里要根据情况修改
     # 返回搜索框中的值
     if is_search == 'true':
         # 搜索条件
@@ -514,7 +514,7 @@ def base_countersigned_contract_table(request, query_result, is_search='false'):
     # 返回给界面的值
     response = {}
 
-    response['searchURL'] = '/countersigned_contract/'     ########################## 这里要根据情况修改
+    response['searchURL'] = '/search_countersigned_contract/'     ########################## 这里要根据情况修改
     # 返回搜索框中的值
     if is_search == 'true':
         # 搜索条件
