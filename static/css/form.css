@@ -422,15 +422,15 @@ button:hover {
     margin-bottom: 20px;
 }
 
-.approval_contract .content .approval_select label{
+.approval_contract .content .approval_select label {
     margin-left: 5px;
 }
 
-.approval_contract .content .approval_select #pass{
+.approval_contract .content .approval_select #pass {
 
 }
 
-.approval_contract .content .approval_select #reject{
+.approval_contract .content .approval_select #reject {
     margin-left: 10px;
 }
 
@@ -520,3 +520,95 @@ button:hover {
     margin-top: 15px;
     margin-left: 115px;
 }
+
+/*分配合同*/
+.allocation_contract {
+    position: relative;
+    margin-top: 10px;
+    left: 30%;
+    font-size: 1.5em;
+    font-weight: bolder;
+    background: rgb(241, 243, 243);
+    -webkit-box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    border-collapse: collapse;
+    border: 0px solid #00bfff;
+    width: 600px;
+    /* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */
+    table-layout: fixed;
+
+    padding-left: 80px;
+    /*padding-right: 10px;*/
+    /*padding-top: 20px;*/
+    /*padding-bottom: 40px;*/
+    display: flex;
+    flex-direction: column;
+}
+
+.allocation_contract .countersign_contract_person {
+    display: flex;
+    margin-top: 30px;
+}
+
+.allocation_contract .countersign_contract_person .countersign {
+    width: 200px;
+    height: 100px;
+    outline: none;
+}
+
+.allocation_contract .approve_contract_person {
+    display: flex;
+    margin-top: 10px;
+}
+
+.allocation_contract .approve_contract_person .approve {
+    width: 200px;
+    height: 100px;
+    outline: none;
+}
+
+.allocation_contract .sign_contract_person {
+    display: flex;
+    margin-top: 10px;
+}
+
+.allocation_contract .sign_contract_person .sign {
+    width: 200px;
+    height: 100px;
+    outline: none;
+}
+
+.allocation_contract .distribution {
+    margin-left: 30px;
+    margin-right: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.allocation_contract .distribution .had {
+    margin-top: 21px;
+}
+
+.allocation_contract .distribution div {
+    font-size: 0.7em;
+}
+
+.allocation_contract .btn {
+    display: flex;
+    margin-top: 30px;
+    margin-left: 110px;
+    /*margin-bottom: 5px;*/
+}
+
+.allocation_contract select {
+    border-radius: 4px;
+    border: 1px solid #a9aaaa;
+    margin-top: 2px;
+}
+
+.allocation_contract option:hover {
+    background-color: #d0d1d2;
+}
+
