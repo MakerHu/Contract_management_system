@@ -22,9 +22,16 @@ def view_register(request):
 
 def index(request):
     if request.session.get('is_login', None):
+        response = {}
         username = request.session.get('username')
         rolename = models.right.objects.filter(username=username)[0].rolename.rolename
-        return render(request, 'CMSapp/base.html')
+        functionslist = models.role_function.objects.filter(rolename=rolename)
+
+        response['functionslist'] = functionslist
+        for function in functionslist:
+            print(function.function.funcname)
+            response[function.function.funcname]='true'
+        return render(request, 'CMSapp/base.html',response)
     else:
         return redirect('/login/')
 
