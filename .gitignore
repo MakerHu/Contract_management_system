@@ -1,0 +1,15 @@
+# Created by .ignore support plugin (hsz.mobi)
+.gitignore
+.idea/.gitignore
+.idea/Contract_management_system.iml
+.idea/dataSources.xml
+.idea/inspectionProfiles/
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+CMSapp/__pycache__/
+CMSapp/migrations/0001_initial.py
+CMSapp/migrations/__pycache__/
+Contract_management_system/__pycache__/
+uploadfile/
+venv/
