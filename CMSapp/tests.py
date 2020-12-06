@@ -27,5 +27,7 @@ contractEntity = models.contract.objects.filter(conid=1)[0]
 models.contract_state.objects.get_or_create(type=1,conid=contractEntity)
 print(models.user.objects.all())
 print(models.user.objects.all())
+print("13213521321231321")
+print("冲突测试3")
 
 
