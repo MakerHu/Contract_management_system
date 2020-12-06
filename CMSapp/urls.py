@@ -48,6 +48,22 @@ urlpatterns = [
     path('countersigned_contract/', contract_management.countersigned_contract),
     path('search_countersigned_contract/', contract_management.search_countersigned_contract),
 
+    #待审批合同
+    path('contract_approving/' ,contract_management.contract_approving),
+    path('search_contract_approving/', contract_management.search_contract_approving),
+
+    #已审批合同
+    path('contract_approved/', contract_management.contract_approved),
+    path('search_contract_approved/', contract_management.search_contract_approved),
+
+    #待签订合同
+    path('contract_signing/', contract_management.contract_signing),
+    path('search_contract_signing/', contract_management.search_contract_signing),
+
+    #已签订合同
+    path('contract_signed/', contract_management.contract_signed),
+    path('search_contract_signed/', contract_management.search_contract_signed),
+
     # ajax
     path('ajax_login/', views.ajax_login),
     path('ajax_register/', views.ajax_register),
