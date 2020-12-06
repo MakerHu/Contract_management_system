@@ -45,7 +45,7 @@ def home(request):
 
 def view_draft(request):
     if request.session.get('is_login', None):
-        return render(request, 'CMSapp/contract_allocation.html')
+        return render(request, 'CMSapp/draft_contract.html')
     else:
         return render(request, 'CMSapp/timeout.html')
 

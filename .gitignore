@@ -14,3 +14,8 @@ Contract_management_system/__pycache__/
 uploadfile/
 venv/
 /.idea/cmsproject.iml
+
+.idea
+*.iml
+out
+gen
