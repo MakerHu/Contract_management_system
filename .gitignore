@@ -13,3 +13,4 @@ CMSapp/migrations/__pycache__/
 Contract_management_system/__pycache__/
 uploadfile/
 venv/
+/.idea/cmsproject.iml
