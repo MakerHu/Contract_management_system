@@ -49,7 +49,74 @@ function onNextPageClick() {
 
 }
 
-function onOperateClick(obj) {
-    obj.parentNode.children[1];
-    alert(obj.parentNode.children[1]);
+//
+function data_edit_page_ajax(url,keyword){
+    let data = new FormData();
+    data.append("keyword", keyword);
+
+    let xmltype;
+    if (window.XMLHttpRequest) {
+        //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+        xmltype = new XMLHttpRequest();
+    } else {
+        // IE6, IE5 浏览器执行代码
+        xmltype = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmltype.onreadystatechange = function () {
+        if (xmltype.readyState == 4 && xmltype.status == 200) {
+            document.getElementById("function_view").innerHTML = xmltype.responseText;
+        }
+    }
+
+    xmltype.open("POST", url);
+    xmltype.send(data);
+}
+
+//授权按钮
+function onAuthorizationClick(keyword) {
+    // let node = obj.parentNode.parentNode;
+    // let keyword = node.children[0].innerHTML
+    // alert(keyword);
+
+    data_edit_page_ajax('/data_authorize/',keyword);
+}
+
+//定稿按钮
+function onFinalizeClick(keyword) {
+    // let node = obj.parentNode.parentNode;
+    // let keyword = node.children[0].innerHTML
+    alert(keyword);
+}
+
+//会签按钮
+function onCountersignClick(keyword) {
+    // let node = obj.parentNode.parentNode;
+    // let keyword = node.children[0].innerHTML;
+    alert(keyword)
+}
+
+//审批按钮
+function onApprovalClick(keyword) {
+    // let node = obj.parentNode.parentNode;
+    // let keyword = node.children[0].innerHTML;
+    alert(keyword);
+}
+
+//签订按钮
+function onSignClick(keyword) {
+    // let node = obj.parentNode.parentNode;
+    // let keyword = node.children[0].innerHTML;
+    alert(keyword);
+}
+
+//签订按钮
+function onDistribute(keyword) {
+    // let node = obj.parentNode.parentNode;
+    // let keyword = node.children[0].innerHTML;
+    alert(keyword);
+}
+
+//详情按钮
+function onContractDetail(keyword){
+
 }

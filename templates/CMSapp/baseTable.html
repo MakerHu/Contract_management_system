@@ -14,7 +14,7 @@
         </form>
     </div>
 
-    <table>
+    <table id="tbl">
         <thead>
         <tr>
             {% for field in fieldlist %}
@@ -30,14 +30,14 @@
                 {% if function == 'right' %}
                     <td>{{ result.username.username }}</td>
                     <td>{{ result.rolename.rolename }}</td>
-                    <td><a>编辑</a></td>
+                    <td><a onclick="onAuthorizationClick('{{ result.username.username }}')">编辑</a></td>
                 {% endif %}
 
                 {#新用户权限分配#}
                 {% if function == 'newuser_authorize' %}
                     <td>{{ result.username.username }}</td>
                     <td>{{ result.rolename.rolename }}</td>
-                    <td><a onclick="onOperateClick(this)">授权</a></td>
+                    <td><a onclick="onAuthorizationClick('{{ result.username.username }}')">授权</a></td>
                 {% endif %}
 
                 {#待定稿合同#}
@@ -45,7 +45,7 @@
                     <td>{{ result.conid.conid }}</td>
                     <td>{{ result.conid.conname }}</td>
                     <td>{{ result.modifytime }}</td>
-                    <td><a>定稿</a></td>
+                    <td><a onclick="onFinalizeClick('{{ result.conid.conid }}')">定稿</a></td>
                 {% endif %}
 
                 {#已定稿合同管理#}
@@ -78,7 +78,7 @@
                     <td>{{ result.conid.conid }}</td>
                     <td>{{ result.conid.conname }}</td>
                     <td>{{ result.modifytime }}</td>
-                    <td><a>会签</a></td>
+                    <td><a onclick="onCountersignClick('{{ result.conid.conid }}')">会签</a></td>
                 {% endif %}
 
                 {#已会签合同#}
@@ -93,7 +93,7 @@
                     <td>{{ result.conid.conid }}</td>
                     <td>{{ result.conid.conname }}</td>
                     <td>{{ result.modifytime }}</td>
-                    <td><a>审批</a></td>
+                    <td><a onclick="onApprovalClick('{{ result.conid.conid }}')">审批</a></td>
                 {% endif %}
 
                 {#已审批合同#}
@@ -108,7 +108,7 @@
                     <td>{{ result.conid.conid }}</td>
                     <td>{{ result.conid.conname }}</td>
                     <td>{{ result.modifytime }}</td>
-                    <td><a>签订</a></td>
+                    <td><a onclick="onSignClick('{{ result.conid.conid }}')">签订</a></td>
                 {% endif %}
 
                 {#已签订合同#}
@@ -123,7 +123,7 @@
                     <td>{{ result.conid.conid }}</td>
                     <td>{{ result.conid.conname }}</td>
                     <td>{{ result.modifytime }}</td>
-                    <td><a>分配</a></td>
+                    <td><a onclick="onDistribute('{{ result.conid.conid }}')">分配</a></td>
                 {% endif %}
 
                 {#已分配合同#}
@@ -131,7 +131,7 @@
                     <td>{{ result.conid.conid }}</td>
                     <td>{{ result.conid.conname }}</td>
                     <td>{{ result.modifytime }}</td>
-                    <td><a>详情</a></td>
+                    <td><a onclick="onContractDetail('{{ result.conid.conid }}')">详情</a></td>
                 {% endif %}
             </tr>
         {% endfor %}

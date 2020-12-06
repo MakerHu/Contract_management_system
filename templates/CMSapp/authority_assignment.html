@@ -3,18 +3,24 @@
 
 <h1>权限分配 |</h1>
 <div class="authority_assignment">
-    <div id="username">用户名:</div>
-    <form action="http://vip.biancheng.net/login.php" method="post" name="formName">
+    <div id="username">用户名: &nbsp;&nbsp;{{ authorized_username }}</div>
+    <form >
         配置权限:
         <div class="select">
-            <input type="radio" name="authority" value="manager" id="manager"><label for="manager">管理员(XXXXXX}</label>
-            <br/>
-            <input type="radio" name="authority" value="operator" id="operator" checked><label for="operator">操作员(XXXXXXXX)</label>
+            {% for role in rolelist %}
+                {% if role.rolename == authorized_rolename %}
+                    <input type="radio" name="authority" value="{{ role.rolename }}" id="{{ role.rolename }}" checked><label for="{{ role.rolename }}">{{ role.description }}</label>
+                    <br/>
+                {% else%}
+                    <input type="radio" name="authority" value="{{ role.rolename }}" id="{{ role.rolename }}"><label for="{{ role.rolename }}">{{ role.description }}</label>
+                    <br/>
+                {% endif %}
+            {% endfor %}
         </div>
     </form>
     <div class="btn">
-        <button>提交</button>
-        <button>重置</button>
+        <button onclick="onAuthorityCommit('{{ authorized_username }}')">提交</button>
+        <button onclick="onAuthorityCancel()">取消</button>
     </div>
 </div>
 

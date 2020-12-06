@@ -19,6 +19,9 @@ urlpatterns = [
     # 起草合同
     path('draftcontract/', views.view_draft),
 
+    # 用户授权
+    path('data_authorize/', data_management.data_authorize),
+
     # 权限管理
     path('right/', contract_management.right),
 
@@ -49,19 +52,19 @@ urlpatterns = [
     path('countersigned_contract/', contract_management.countersigned_contract),
     path('search_countersigned_contract/', contract_management.search_countersigned_contract),
 
-    #待审批合同
-    path('contract_approving/' ,contract_management.contract_approving),
+    # 待审批合同
+    path('contract_approving/', contract_management.contract_approving),
     path('search_contract_approving/', contract_management.search_contract_approving),
 
-    #已审批合同
+    # 已审批合同
     path('contract_approved/', contract_management.contract_approved),
     path('search_contract_approved/', contract_management.search_contract_approved),
 
-    #待签订合同
+    # 待签订合同
     path('contract_signing/', contract_management.contract_signing),
     path('search_contract_signing/', contract_management.search_contract_signing),
 
-    #已签订合同
+    # 已签订合同
     path('contract_signed/', contract_management.contract_signed),
     path('search_contract_signed/', contract_management.search_contract_signed),
 
@@ -70,5 +73,6 @@ urlpatterns = [
     path('ajax_register/', views.ajax_register),
     path('ajax_confirm_username/', views.ajax_confirm_username),
     path('ajax_distribution/', data_management.test),
+    path('ajax_updateAuthority/',data_management.data_updateAuthority)
 
 ]

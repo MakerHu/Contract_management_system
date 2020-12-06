@@ -1,38 +1,12 @@
-{#<!DOCTYPE html>#}
-{#<html lang="en">#}
-{#<head>#}
-{#    <meta charset="UTF-8">#}
-{#    <title>Title</title>#}
-{#    {% load static %}#}
-{#    <script src="{% static 'js/login_register.js' %}"></script>#}
-{#</head>#}
-{#<body>#}
-{#<h1>登录超时，请<a onclick="OnLogout()" style="text-decoration:underline;color:blue" >重新登录</a></h1>#}
-{#</body>#}
-{#</html>#}
-
-
-{% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}"/>
-
-<h1>添加角色 |</h1>
-<div class="authority_assignment">
-    <div id="rolename">角色名:</div>
-    <div class="describe">
-        <div id="describe">描述:</div>
-        <textarea rows="8" cols="40" >hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</textarea>
-    </div>
-    <form action="http://vip.biancheng.net/login.php" method="post" name="formName">
-        权限配置:
-        <div class="select">
-            <input type="radio" name="authority" value="manager" id="manager"><label for="manager">管理员(XXXXXX}</label>
-            <br/>
-            <input type="radio" name="authority" value="operator" id="operator" checked><label for="operator">操作员(XXXXXXXX)</label>
-        </div>
-    </form>
-    <div class="btn">
-        <button>提交</button>
-        <button>重置</button>
-    </div>
-</div>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% load static %}
+    <script src="{% static 'js/login_register.js' %}"></script>
+</head>
+<body>
+<h1>登录超时，请<a onclick="OnLogout()" style="text-decoration:underline;color:blue" >重新登录</a></h1>
+</body>
+</html>

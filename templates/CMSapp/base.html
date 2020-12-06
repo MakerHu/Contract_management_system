@@ -12,6 +12,7 @@
     <script src="{% static 'js/data_management.js' %}"></script>
     <script src="{% static 'js/contract_allocation.js' %}"></script>
 
+
 </head>
 
 <body>
@@ -30,7 +31,7 @@
             <a class="logout-a" onclick="OnLogout()">登出</a>
         </li>
         <li>
-            <a class="user-a">欢迎您！{{ request.session.rolename }} {{ request.session.username }}</a>
+            <a class="user-a">欢迎您！{{ request.session.rolename_chinese }} {{ request.session.username }}</a>
         </li>
     </ul>
 </header>
@@ -42,7 +43,7 @@
                 导航栏
             </div>
         </li>
-        {% if request.session.rolename == '新用户' %}
+        {% if request.session.rolename == 'newuser' %}
             <li>
                 <a><span class="listtext">功能未开放</span></a>
             </li>

@@ -73,7 +73,8 @@ def ajax_login(request):
             response['right_password'] = 'success'
             request.session['is_login'] = True
             request.session['username'] = username
-            request.session['rolename'] = models.right.objects.filter(username=username)[0].rolename.description
+            request.session['rolename'] = models.right.objects.filter(username=username)[0].rolename.rolename
+            request.session['rolename_chinese'] = models.right.objects.filter(username=username)[0].rolename.description
         else:
             response['right_password'] = 'fail'
     else:

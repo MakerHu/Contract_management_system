@@ -8,7 +8,7 @@ from CMSapp import models
 # 初始化角色表
 models.role.objects.get_or_create(rolename='root', description='最高管理员')
 models.role.objects.get_or_create(rolename='newuser', description='新用户')
-models.role.objects.get_or_create(rolename='operater', description='操作员')
+models.role.objects.get_or_create(rolename='operator', description='操作员')
 
 # 初始化功能表
 models.function.objects.get_or_create(funcname='contract_draft', url='/contract_draft/', description='合同起草')
@@ -26,7 +26,7 @@ models.function.objects.get_or_create(funcname='right_manage', url='/right_manag
 # 实例化角色
 root = models.role.objects.filter(rolename='root', description='最高管理员')[0]
 newuser = models.role.objects.filter(rolename='newuser', description='新用户')[0]
-operater = models.role.objects.filter(rolename='operater', description='操作员')[0]
+operator = models.role.objects.filter(rolename='operator', description='操作员')[0]
 
 # 实例化功能
 contract_draft = models.function.objects.filter(funcname='contract_draft', url='/contract_draft/', description='合同起草')[0]
@@ -45,7 +45,7 @@ models.role_function.objects.get_or_create(rolename=root, function=contract_dist
 models.role_function.objects.get_or_create(rolename=root, function=customer_manage)
 models.role_function.objects.get_or_create(rolename=root, function=right_manage)
 
-models.role_function.objects.get_or_create(rolename=operater, function=contract_draft)
-models.role_function.objects.get_or_create(rolename=operater, function=contract_countersign)
-models.role_function.objects.get_or_create(rolename=operater, function=contract_approval)
-models.role_function.objects.get_or_create(rolename=operater, function=contract_sign)
+models.role_function.objects.get_or_create(rolename=operator, function=contract_draft)
+models.role_function.objects.get_or_create(rolename=operator, function=contract_countersign)
+models.role_function.objects.get_or_create(rolename=operator, function=contract_approval)
+models.role_function.objects.get_or_create(rolename=operator, function=contract_sign)
