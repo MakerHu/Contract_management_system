@@ -55,6 +55,7 @@ function onAuthorityCommit(username) {
     onCommitData('/ajax_updateAuthority/',url_g, data)
 }
 
-function onAuthorityCancel() {
+//返回上一个界面
+function onReturnPrePage() {
     reload_function_view(url_g, titlename_g ,pageNum=1);
 }

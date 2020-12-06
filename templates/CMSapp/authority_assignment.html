@@ -4,15 +4,17 @@
 <h1>权限分配 |</h1>
 <div class="authority_assignment">
     <div id="username">用户名: &nbsp;&nbsp;{{ authorized_username }}</div>
-    <form >
+    <form>
         配置权限:
         <div class="select">
             {% for role in rolelist %}
                 {% if role.rolename == authorized_rolename %}
-                    <input type="radio" name="authority" value="{{ role.rolename }}" id="{{ role.rolename }}" checked><label for="{{ role.rolename }}">{{ role.description }}</label>
+                    <input type="radio" name="authority" value="{{ role.rolename }}" id="{{ role.rolename }}" checked>
+                    <label for="{{ role.rolename }}">{{ role.description }}</label>
                     <br/>
-                {% else%}
-                    <input type="radio" name="authority" value="{{ role.rolename }}" id="{{ role.rolename }}"><label for="{{ role.rolename }}">{{ role.description }}</label>
+                {% else %}
+                    <input type="radio" name="authority" value="{{ role.rolename }}" id="{{ role.rolename }}">
+                    <label for="{{ role.rolename }}">{{ role.description }}</label>
                     <br/>
                 {% endif %}
             {% endfor %}
@@ -20,7 +22,7 @@
     </form>
     <div class="btn">
         <button onclick="onAuthorityCommit('{{ authorized_username }}')">提交</button>
-        <button onclick="onAuthorityCancel()">取消</button>
+        <button onclick="onReturnPrePage()">取消</button>
     </div>
 </div>
 
