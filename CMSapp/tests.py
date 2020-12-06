@@ -25,5 +25,7 @@ models.contract.objects.get_or_create(conname='合同1',username=userEntity, cus
 print(models.user.objects.all())
 contractEntity = models.contract.objects.filter(conid=1)[0]
 models.contract_state.objects.get_or_create(type=1,conid=contractEntity)
+print(models.user.objects.all())
+print(models.user.objects.all())
 
 
