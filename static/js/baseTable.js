@@ -31,20 +31,25 @@ var current_page_g = 1;
 function onPageClick(obj) {
     current_page_g = obj.innerText;
     // reload_function_view('/right/', titlename_g, pageNum = obj.innerText)
-    onSearchBtn(url_g, pageNum=obj.innerText)
+    onSearchBtn(url_g, pageNum=obj.innerText);
 }
 
 function onPrePageClick() {
     if (current_page_g > 1) {
         current_page_g--;
         // reload_function_view('/right/', titlename_g, pageNum = current_page_g)
-        onSearchBtn(url_g, pageNum=current_page_g)
+        onSearchBtn(url_g, pageNum=current_page_g);
     }
 }
 
 function onNextPageClick() {
     current_page_g++;
     // reload_function_view('/right/', titlename_g, pageNum = current_page_g)
-    onSearchBtn(url_g, pageNum=current_page_g)
+    onSearchBtn(url_g, pageNum=current_page_g);
 
+}
+
+function onOperateClick(obj) {
+    obj.parentNode.children[1];
+    alert(obj.parentNode.children[1]);
 }
