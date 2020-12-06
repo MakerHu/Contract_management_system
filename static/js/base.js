@@ -29,12 +29,13 @@ function list() {
 // }
 
 //刷新功能界面
-var titlename_g = "";
+let titlename_g = "";
 let url_g="";
 function reload_function_view(url, titlename ,pageNum=1) {
     url_g=url;
     let data = new FormData();
     data.append("pageNum", pageNum);
+
     titlename_g = titlename
     let xmlhttp;
     if (window.XMLHttpRequest) {
@@ -153,6 +154,22 @@ function onOpenRightManage() {
         document.getElementById("right_manage").innerHTML="&#9654;";
         document.getElementById("newuser_authorize").style.display = "none";
         document.getElementById("manage_right").style.display = "none";
+    }
+}
+
+//打开合同分配栏
+var state_6 = 1;
+function onOpenContractDistribute() {
+    if (state_6) {
+        state_6 = 0;
+        document.getElementById("contract_distribute").innerHTML="&#9660;";
+        document.getElementById("contract_distributing").style.display = "block";
+        document.getElementById("contract_distributed").style.display = "block";
+    } else {
+        state_6 = 1;
+        document.getElementById("contract_distribute").innerHTML="&#9654;";
+        document.getElementById("contract_distributing").style.display = "none";
+        document.getElementById("contract_distributed").style.display = "none";
     }
 }
 

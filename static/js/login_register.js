@@ -10,6 +10,7 @@ function CheckLoginPasswordInput() {
 function onlogin() {
     var username = document.getElementById("login-username").value;
     var password = document.getElementById("login-password").value;
+
     console.log(username);
     console.log(password);
 

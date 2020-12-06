@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-{#    <title>{% block title %}{% endblock %}</title>#}
+    {#    <title>{% block title %}{% endblock %}</title>#}
     <title>合同管理系统</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}"/>
@@ -21,13 +21,16 @@
             <a class="hide-a" onclick="list()">&#9776;</a>
         </li>
         <li>
-            <a class="home-a" onclick="reload_function_view('/home/','首页')" ></a>
+            <a class="home-a" onclick="reload_function_view('/home/','首页')"></a>
+        </li>
+        <li>
+            <span class="logo">合同管理系统</span>
         </li>
         <li>
             <a class="logout-a" onclick="OnLogout()">登出</a>
         </li>
         <li>
-            <span class="logo">合同管理系统</span>
+            <a class="user-a">欢迎您！{{ request.session.rolename }} {{ request.session.username }}</a>
         </li>
     </ul>
 </header>
@@ -39,82 +42,140 @@
                 导航栏
             </div>
         </li>
-        <li>
-            <a onclick="onOpenContractDraft()"><span class="listtext" ><span id="contract_draft" class="stretch">&#9654;</span>合同起草</span></a>
-        </li>
-        <li>
-            <a onclick="reload_function_view('/draftcontract/','起草合同')"><span class="listtext_2" id="draft_contract"> 起草合同</span></a>
-        </li>
-        <li>
-            <a onclick="reload_function_view('/draftcontract/','待定稿合同')"><span class="listtext_2" id="pending_contract"> 待定稿合同</span></a>
-        </li>
-        <li>
-            <a onclick="reload_function_view('/draftcontract/','已定稿合同')"><span class="listtext_2" id="finalized_contract"> 已定稿合同</span></a>
-        </li>
-        <li>
-            <a onclick="reload_function_view('/draftcontract/','流程查询')"><span class="listtext_2" id="process_query"> 流程查询</span></a>
-        </li>
+        {% if request.session.rolename == '新用户' %}
+            <li>
+                <a><span class="listtext">功能未开放</span></a>
+            </li>
+        {% else %}
+            {% if contract_draft == 'true' %}
+                <li>
+                    <a onclick="onOpenContractDraft()"><span class="listtext"><span id="contract_draft" class="stretch">&#9654;</span>合同起草</span></a>
+                </li>
+                <li>
+                    <a onclick="reload_function_view('/draftcontract/','起草合同')"><span class="listtext_2"
+                                                                                      id="draft_contract"> 起草合同</span></a>
+                </li>
+                <li>
+                    <a onclick="reload_function_view('/pending_contract/','待定稿合同')"><span class="listtext_2"
+                                                                                          id="pending_contract"> 待定稿合同</span></a>
+                </li>
+                <li>
+                    <a onclick="reload_function_view('/finalized_contract/','已定稿合同')"><span class="listtext_2"
+                                                                                            id="finalized_contract"> 已定稿合同</span></a>
+                </li>
+                <li>
+                    <a onclick="reload_function_view('/process_query/','流程查询')"><span class="listtext_2"
+                                                                                      id="process_query"> 流程查询</span></a>
+                </li>
+            {% endif %}
 
 
-        <li>
-            <a onclick="onOpenContractCountersign()"><span class="listtext"><span id="contract_countersign" class="stretch">&#9654;</span>合同会签</span></a>
-        </li>
-        <li>
-            <a onclick="reload_function_view('/draftcontract/','待会签合同')"><span class="listtext_2" id="countersigning_contract"> 待会签合同</span></a>
-        </li>
-        <li>
-            <a onclick="reload_function_view('/draftcontract/','已会签合同')"><span class="listtext_2" id="countersigned_contract"> 已会签合同</span></a>
-        </li>
+            {% if contract_countersign == 'true' %}
+                <li>
+                    <a onclick="onOpenContractCountersign()"><span class="listtext"><span id="contract_countersign"
+                                                                                          class="stretch">&#9654;</span>合同会签</span></a>
+                </li>
+                <li>
+                    <a onclick="reload_function_view('/countersigning_contract/','待会签合同')"><span class="listtext_2"
+                                                                                                 id="countersigning_contract"> 待会签合同</span></a>
+                </li>
+                <li>
+                    <a onclick="reload_function_view('/countersigned_contract/','已会签合同')"><span class="listtext_2"
+                                                                                                id="countersigned_contract"> 已会签合同</span></a>
+                </li>
+            {% endif %}
+
+            {% if contract_approval == 'true' %}
+                <li>
+                    <a onclick="onOpenContractApproval()"><span class="listtext"><span id="contract_approval"
+                                                                                       class="stretch">&#9654;</span>合同审批</span></a>
+                </li>
+                <li>
+                    <a onclick="reload_function_view('/contract_approving/','待审批合同')"><span class="listtext_2"
+                                                                                            id="contract_approving"> 待审批合同</span></a>
+                </li>
+                <li>
+                    <a onclick="reload_function_view('/contract_approved/','已审批合同')"><span class="listtext_2"
+                                                                                           id="contract_approved"> 已审批合同</span></a>
+                </li>
+            {% endif %}
 
 
-        <li>
-            <a onclick="onOpenContractApproval()"><span class="listtext"><span id="contract_approval" class="stretch">&#9654;</span>合同审批</span></a>
-        </li>
-        <li>
-            <a onclick="reload_function_view('/draftcontract/','待审批合同')"><span class="listtext_2" id="contract_approving"> 待审批合同</span></a>
-        </li>
-        <li>
-            <a onclick="reload_function_view('/draftcontract/','已审批合同')"><span class="listtext_2" id="contract_approved"> 已审批合同</span></a>
-        </li>
+            {% if contract_sign == 'true' %}
+                <li>
+                    <a onclick="onOpenContractSign()"><span class="listtext"><span id="contract_sign"
+                                                                                   class="stretch">&#9654;</span>合同签订</span></a>
+                </li>
+                <li>
+                    <a onclick="reload_function_view('/contract_signing/','待签订合同')"><span class="listtext_2"
+                                                                                          id="contract_signing"> 待签订合同</span></a>
+                </li>
+                <li>
+                    <a onclick="reload_function_view('/contract_signed/','已签订合同')"><span class="listtext_2"
+                                                                                         id="contract_signed"> 已签订合同</span></a>
+                </li>
+            {% endif %}
+
+            {% if contract_distribute == 'true' %}
+                <li>
+                    <a onclick="onOpenContractDistribute()"><span class="listtext"><span id="contract_distribute"
+                                                                                         class="stretch">&#9654;</span>合同分配</span></a>
+                </li>
+                <li>
+                    <a onclick="reload_function_view('/contract_distributing/','待分配合同')"><span class="listtext_2"
+                                                                                               id="contract_distributing"> 待分配合同</span></a>
+                </li>
+                <li>
+                    <a onclick="reload_function_view('/contract_distributed/','已分配合同')"><span class="listtext_2"
+                                                                                              id="contract_distributed"> 已分配合同</span></a>
+                </li>
+            {% endif %}
 
 
-        <li>
-            <a onclick="onOpenContractSign()"><span class="listtext"><span id="contract_sign" class="stretch">&#9654;</span>合同签订</span></a>
-        </li>
-        <li>
-            <a onclick="reload_function_view('/draftcontract/','待签订合同')"><span class="listtext_2" id="contract_signing"> 待签订合同</span></a>
-        </li>
-        <li>
-            <a onclick="reload_function_view('/draftcontract/','已签订合同')"><span class="listtext_2" id="contract_signed"> 已签订合同</span></a>
-        </li>
+            {% if customer_manage == 'true' %}
+                <li>
+                    <a onclick="onOpenCustomerManage()"><span class="listtext"><span id="customer_manage"
+                                                                                     class="stretch">&#9654;</span>客户管理</span></a>
+                </li>
+                <li>
+                    <a onclick="reload_function_view('/customer_info/','客户信息')"><span class="listtext_2"
+                                                                                      id="customer_info"> 客户信息</span></a>
+                </li>
+                <li>
+                    <a onclick="reload_function_view('/add_customer/','添加客户')"><span class="listtext_2"
+                                                                                     id="add_customer"> 添加客户</span></a>
+                </li>
+            {% endif %}
 
 
-        <li>
-            <a onclick="onOpenCustomerManage()"><span class="listtext"><span id="customer_manage" class="stretch">&#9654;</span>客户管理</span></a>
-        </li>
-        <li>
-            <a onclick="reload_function_view('/draftcontract/','客户信息')"><span class="listtext_2" id="customer_info"> 客户信息</span></a>
-        </li>
-        <li>
-            <a onclick="reload_function_view('/draftcontract/','添加客户')"><span class="listtext_2" id="add_customer"> 添加客户</span></a>
-        </li>
-
-
-        <li>
-            <a onclick="onOpenRightManage()"><span class="listtext"><span id="right_manage" class="stretch">&#9654;</span>权限管理</span></a>
-        </li>
-        <li>
-            <a onclick="reload_function_view('/newuser_authorize/','新用户授权')"><span class="listtext_2" id="newuser_authorize"> 新用户授权</span></a>
-        </li>
-        <li>
-            <a onclick="reload_function_view('/right/','管理权限')"><span class="listtext_2" id="manage_right"> 管理权限</span></a>
-        </li>
+            {% if customer_manage == 'true' %}
+                <li>
+                    <a onclick="onOpenRightManage()"><span class="listtext"><span id="right_manage"
+                                                                                  class="stretch">&#9654;</span>权限管理</span></a>
+                </li>
+                <li>
+                    <a onclick="reload_function_view('/newuser_authorize/','新用户授权')"><span class="listtext_2"
+                                                                                           id="newuser_authorize"> 新用户授权</span></a>
+                </li>
+                <li>
+                    <a onclick="reload_function_view('/right/','管理权限')"><span class="listtext_2"
+                                                                              id="manage_right"> 管理权限</span></a>
+                </li>
+            {% endif %}
+        {% endif %}
     </ul>
 </aside>
 
 <div class="function_view" id="function_view">
-{#    {% block content %}{% endblock %}#}
-    <h1>首页</h1>
+    {#    {% block content %}{% endblock %}#}
+    <div class="home_view">
+        <h1>首页 |</h1>
+    {% if request.session.rolename == '新用户' %}
+        <h2>欢迎使用本合同管理系统!您目前的角色是<span style="color: #019501">新用户</span>，正在等待管理员分配权限...</h2>
+    {% else %}
+        <h2>欢迎使用本合同管理系统!</h2>
+    {% endif %}
+    </div>
 </div>
 
 <footer>
