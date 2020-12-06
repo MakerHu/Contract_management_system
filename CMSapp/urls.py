@@ -25,15 +25,32 @@ urlpatterns = [
     path('searchright/', contract_management.search_right),
 
     # 新用户权限分配
-    path('newuser_authorize/',contract_management.newuser_authorize),
+    path('newuser_authorize/', contract_management.newuser_authorize),
     path('search_newuser_authorize/', contract_management.search_newuser_authorize),
 
     # 待定稿合同
-    path('pending_contract/',contract_management.pending_contract),
+    path('pending_contract/', contract_management.pending_contract),
     path('search_pending_contract/', contract_management.search_pending_contract),
+
+    # 已定稿合同
+    path('finalized_contract/', contract_management.finalized_contract),
+    path('finalized_contract/', contract_management.search_finalized_contract),
+
+    # 流程查询
+    path('process_query/', contract_management.process_query),
+    path('search_process_query/', contract_management.search_process_query),
+
+    # 待会签合同
+    path('countersigning_contract/', contract_management.countersigning_contract),
+    path('seatch_countersigning_contract/', contract_management.search_countersigning_contract),
+
+    # 已会签合同
+    path('countersigned_contract/', contract_management.countersigned_contract),
+    path('seatch_countersigned_contract/', contract_management.search_countersigned_contract),
 
     # ajax
     path('ajax_login/', views.ajax_login),
     path('ajax_register/', views.ajax_register),
     path('ajax_confirm_username/', views.ajax_confirm_username),
+
 ]

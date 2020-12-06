@@ -18,6 +18,7 @@ from CMSapp import models
 # models.user.objects.all().delete()
 # print(models.user.objects.all()[0].username)
 print(models.user.objects.all())
+models.role.objects.create(rolename='newuser', description='新用户').save()
 
 conidentity = models.contract.objects.get(conid=1)
 models.contract_state.objects.create(type=2,conid=conidentity).save()
