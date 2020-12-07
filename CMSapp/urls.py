@@ -22,6 +22,9 @@ urlpatterns = [
     # 用户授权
     path('data_authorize/', data_management.data_authorize),
 
+    #分配合同
+    path('data_allocation/', data_management.data_allocation),
+
     # 权限管理
     path('right/', contract_management.right),
 
@@ -84,7 +87,7 @@ urlpatterns = [
     path('ajax_login/', views.ajax_login),
     path('ajax_register/', views.ajax_register),
     path('ajax_confirm_username/', views.ajax_confirm_username),
-    path('ajax_distribution/', data_management.test),
+    path('ajax_contract_allocation/', data_management.ajax_contract_allocation),
     path('ajax_updateAuthority/',data_management.data_updateAuthority)
 
 ]

@@ -1,4 +1,7 @@
 function oncommit() {
+    let data_countersign = new Array();
+    let data_approve = new Array();
+    let data_sign = new Array();
     let data = new FormData();
 
     let obj_countersign = document.getElementById("countersign_have")
@@ -11,18 +14,25 @@ function oncommit() {
 
     for(let i= 0;i<count_countersign;i++){
         let text = obj_countersign.options[i].value;
-        data.append('countersign_person', text);
+        data_countersign[i] = text;
     }
+    let data1 = JSON.stringify(data_countersign);
+    data.append("data_countersign", data1);
 
     for(let i= 0;i<count_approve;i++){
         let text = obj_approve.options[i].value;
-        data.append('approve_person', text);
+        data_approve.push(text);
     }
+    let data2 = JSON.stringify(data_countersign);
+    data.append("data_approve", data2);
 
     for(let i= 0;i<count_sign;i++){
         let text = obj_sign.options[i].value;
-        data.append('sign_person', text);
+        data_sign.push(text);
     }
+    let data3 = JSON.stringify(data_countersign);
+    data.append("data_sign", data3);
+
 
     let xmltype;
     if (window.XMLHttpRequest) {
@@ -39,9 +49,11 @@ function oncommit() {
         }
     }
 
-    xmltype.open("POST", /ajax_distribution/);
+    xmltype.open("POST", /ajax_contract_allocation/);
     xmltype.send(data);
 }
+
+
 
 
 

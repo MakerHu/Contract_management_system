@@ -64,7 +64,7 @@ function data_edit_page_ajax(url,keyword){
     }
     xmltype.onreadystatechange = function () {
         if (xmltype.readyState == 4 && xmltype.status == 200) {
-            document.getElementById("function_view").innerHTML = xmltype.responseText;
+            // document.getElementById("function_view").innerHTML = xmltype.responseText;
         }
     }
 
@@ -109,11 +109,11 @@ function onSignClick(keyword) {
     alert(keyword);
 }
 
-//签订按钮
+//待分配合同按钮
 function onDistribute(keyword) {
     // let node = obj.parentNode.parentNode;
     // let keyword = node.children[0].innerHTML;
-    alert(keyword);
+    data_edit_page_ajax('/data_allocation/',keyword);
 }
 
 //详情按钮
