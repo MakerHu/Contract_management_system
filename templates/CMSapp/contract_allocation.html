@@ -1,7 +1,9 @@
 {% load static %}
+{% load set_val %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}"/>
 
-<h1>流程配置:XX合同 |</h1>
+<h1>流程配置:&nbsp;&nbsp;{{ contractname }} |</h1>
+
 <div class="allocation_contract">
     <div class="countersign_contract_person">
         <div class="distribution">
@@ -9,20 +11,27 @@
             <div>待分配人员列表</div>
             <select class="countersign" id="countersign_will" size="5"
                     onChange="onDeleteCountersignWillOption(this.value)">
-                <option value="beijing">beijing</option>
-                <option value="zhengzhou">zhengzhou</option>
-                <option value="longyan">longyan</option>
-                <option value="tianjin">tianjin</option>
-                <option value="fengcheng">fengcheng</option>
-                <option value="xiangyang">xiangyang</option>
-                <option value="hailar">hailar</option>
+{#                {% for userright in userrightlist %}#}
+{#                    {% for rolefunction in rolefunctionlist %}#}
+{#                        {% if rolefunction.rolename.rolename == userright.rolename.rolename %}#}
+{#                            {% if rolefunction.function.funcname == 'contract_countersign' %}#}
+{#                                <option value="{{ userright.username.username }}">{{ userright.username.username }}</option>#}
+{#                            {% endif %}#}
+{#                        {% endif %}#}
+{#                    {% endfor %}#}
+{#                {% endfor %}#}
+                {% for userright in left1_rightlist %}
+                    <option value="{{ userright.username.username }}">{{ userright.username.username }}</option>#}
+                {% endfor %}
             </select>
         </div>
         <div class="distribution">
             <div class="had">已分配人员列表</div>
             <select class="countersign" id="countersign_have" size="5"
                     onChange="onDeleteCountersignHaveOption(this.value)">
-
+                {% for countersignprocess in countersign %}
+                    <option value="{{ countersignprocess.username.username }}">{{ countersignprocess.username.username }}</option>
+                {% endfor %}
             </select>
         </div>
     </div>
@@ -32,19 +41,27 @@
             <div>分配审批人</div>
             <div>待分配人员列表</div>
             <select class="approve" id="approve_will" size="5" onChange="onDeleteApproveWillOption(this.value)">
-                <option value="beijing">beijing</option>
-                <option value="zhengzhou">zhengzhou</option>
-                <option value="longyan">longyan</option>
-                <option value="tianjin">tianjin</option>
-                <option value="fengcheng">fengcheng</option>
-                <option value="xiangyang">xiangyang</option>
-                <option value="hailar">hailar</option>
+{#                {% for userright in userrightlist %}#}
+{#                    {% for rolefunction in rolefunctionlist %}#}
+{#                        {% if rolefunction.rolename.rolename == userright.rolename.rolename %}#}
+{#                            {% if rolefunction.function.funcname == 'contract_approval' %}#}
+{#                                <option value="{{ userright.username.username }}">{{ userright.username.username }}</option>#}
+{#                            {% endif %}#}
+{#                        {% endif %}#}
+{#                    {% endfor %}#}
+{#                {% endfor %}#}
+                {% for userright in left2_rightlist %}
+                    <option value="{{ userright.username.username }}">{{ userright.username.username }}</option>#}
+                {% endfor %}
+
             </select>
         </div>
         <div class="distribution">
             <div class="had">待分配人员列表</div>
             <select class="approve" id="approve_have" size="5" onChange="onDeleteApproveHaveOption(this.value)">
-
+                {% for approveprocess in approve %}
+                    <option value="{{ approveprocess.username.username }}">{{ approveprocess.username.username }}</option>
+                {% endfor %}
             </select>
         </div>
     </div>
@@ -54,24 +71,31 @@
             <div>分配签订人</div>
             <div>待分配人员列表</div>
             <select class="sign" id="sign_will" size="5" onChange="onDeleteSignWillOption(this.value)">
-                <option value="beijing">beijing</option>
-                <option value="zhengzhou">zhengzhou</option>
-                <option value="longyan">longyan</option>
-                <option value="tianjin">tianjin</option>
-                <option value="fengcheng">fengcheng</option>
-                <option value="xiangyang">xiangyang</option>
-                <option value="hailar">hailar</option>
+{#                {% for userright in userrightlist %}#}
+{#                    {% for rolefunction in rolefunctionlist %}#}
+{#                        {% if rolefunction.rolename.rolename == userright.rolename.rolename %}#}
+{#                            {% if rolefunction.function.funcname == 'contract_sign' %}#}
+{#                                <option value="{{ userright.username.username }}">{{ userright.username.username }}</option>#}
+{#                            {% endif %}#}
+{#                        {% endif %}#}
+{#                    {% endfor %}#}
+{#                {% endfor %}#}
+                {% for userright in left3_rightlist %}
+                    <option value="{{ userright.username.username }}">{{ userright.username.username }}</option>#}
+                {% endfor %}
             </select>
         </div>
         <div class="distribution">
             <div class="had">已分配人员列表</div>
             <select class="sign" id="sign_have" size="5" onChange="onDeleteSignHaveOption(this.value)">
-
+                {% for signprocess in sign %}
+                    <option value="{{ signprocess.username.username }}">{{ signprocess.username.username }}</option>
+                {% endfor %}
             </select>
         </div>
     </div>
     <div class="btn">
-        <button onclick="oncommit()">提交</button>
+        <button onclick="onAllocationCommit('{{ conid }}')">提交</button>
         <button>重置</button>
     </div>
 </div>

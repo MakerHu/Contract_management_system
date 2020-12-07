@@ -64,7 +64,7 @@ function data_edit_page_ajax(url,keyword){
     }
     xmltype.onreadystatechange = function () {
         if (xmltype.readyState == 4 && xmltype.status == 200) {
-            // document.getElementById("function_view").innerHTML = xmltype.responseText;
+            document.getElementById("function_view").innerHTML = xmltype.responseText;
         }
     }
 
