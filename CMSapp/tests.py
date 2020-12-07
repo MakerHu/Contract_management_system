@@ -21,7 +21,7 @@ from CMSapp import models
 print(models.user.objects.all())
 models.customer.objects.get_or_create(cusid=1, cusname='客户1', address='福建', tel='13156')
 cusEntity = models.customer.objects.filter(cusid=1)[0]
-userEntity = models.user.objects.filter(username='xzcnb')[0]
+userEntity = models.user.objects.filter(username='ydz')[0]
 models.contract.objects.get_or_create(conname='合同1', username=userEntity, cusid=cusEntity, begintime='2020-05-03',
                                       endtime='2020-10-12')
 contractEntity = models.contract.objects.filter(conid=2)[0]

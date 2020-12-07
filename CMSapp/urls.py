@@ -68,6 +68,18 @@ urlpatterns = [
     path('contract_signed/', contract_management.contract_signed),
     path('search_contract_signed/', contract_management.search_contract_signed),
 
+    #待分配合同
+    path('contract_distributing/', contract_management.contract_distributing),
+    path('search_contract_distributing/', contract_management.search_contract_distributing),
+
+    #已分配合同
+    path('contract_distributed/', contract_management.contract_distributed),
+    path('search_contract_distributed/', contract_management.search_contract_distributed),
+
+    #客户信息
+    path('customer_info/', contract_management.customer_info),
+    path('search_customer_info/', contract_management.search_customer_info),
+
     # ajax
     path('ajax_login/', views.ajax_login),
     path('ajax_register/', views.ajax_register),
