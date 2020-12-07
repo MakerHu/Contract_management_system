@@ -133,6 +133,14 @@
                     <td>{{ result.modifytime }}</td>
                     <td><a onclick="onContractDetail('{{ result.conid.conid }}')">详情</a></td>
                 {% endif %}
+
+                {#客户信息表#}
+                {% if function == 'contract_distributed' %}
+                    <td>{{ result.cosid }}</td>
+                    <td>{{ result.cosname }}</td>
+                    <td>{{ result.tel }}</td>
+                    <td><a onclick="onCostomerDetail('{{ result.cosid }}')">详情</a></td>
+                {% endif %}
             </tr>
         {% endfor %}
 

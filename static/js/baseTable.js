@@ -120,3 +120,8 @@ function onDistribute(keyword) {
 function onContractDetail(keyword){
 
 }
+
+//详情按钮
+function onCostomerDetail(keyword){
+    alert(keyword);
+}
