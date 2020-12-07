@@ -4,7 +4,6 @@ from django.http import JsonResponse
 from django.shortcuts import render, HttpResponse
 from CMSapp import models
 
-
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Contract_management_system.settings")  # project_name 项目名称
 django.setup()
 
@@ -34,6 +33,10 @@ def test(request):
     return JsonResponse(response)
 
 
+################################################################################################################
+################################################################################################################
+################################################################################################################
+# 返回授权信息填写表
 def data_authorize(request):
     if request.session.get('is_login', None):
         authorized_username = request.POST.get('keyword')
@@ -42,15 +45,56 @@ def data_authorize(request):
         response['rolelist'] = rolelist
         response['authorized_username'] = authorized_username
         # 要修改的用户的角色
-        authorized_rolename=models.right.objects.filter(username=authorized_username)[0].rolename.rolename
+        authorized_rolename = models.right.objects.filter(username=authorized_username)[0].rolename.rolename
         response['authorized_rolename'] = authorized_rolename
         return render(request, 'CMSapp/authority_assignment.html', response)
     else:
         return render(request, 'CMSapp/timeout.html')
 
 
+# 更新授权信息
 def data_updateAuthority(request):
     username = request.POST.get('username')
     new_rolename = request.POST.get('new_rolename')
     models.right.objects.filter(username=username).update(rolename=new_rolename)
+    return HttpResponse(request)
+
+
+################################################################################################################
+################################################################################################################
+################################################################################################################
+# 添加客户信息界面
+def data_customermsg(request):
+    if request.session.get('is_login', None):
+        response = {}
+        cusid = request.POST.get('keyword')
+        if cusid:
+            response['type'] = 'detail'
+            customerMsg = models.customer.objects.filter(cusid=cusid)[0]
+            response['customerMsg'] = customerMsg
+        else:
+            response['type'] = 'add'
+        return render(request, 'CMSapp/customer_msg.html', response)
+    else:
+        return render(request, 'CMSapp/timeout.html')
+
+
+# 更新客户信息
+def data_updateCustomermsg(request):
+    cusid = request.POST.get('cusid')
+    cusname = request.POST.get('cusname')
+    address = request.POST.get('address')
+    tel = request.POST.get('tel')
+    code = request.POST.get('code')
+    fax = request.POST.get('fax')
+    bank = request.POST.get('bank')
+    account = request.POST.get('account')
+
+    if cusid:
+        models.customer.objects.filter(cusid=cusid).update(cusname=cusname, address=address, tel=tel, code=code,
+                                                           fax=fax, bank=bank,
+                                                           account=account)
+    else:
+        models.customer.objects.create(cusname=cusname, address=address, tel=tel, code=code, fax=fax, bank=bank,
+                                       account=account).save()
     return HttpResponse(request)

@@ -42,7 +42,7 @@ def home(request):
     else:
         return render(request, 'CMSapp/timeout.html')
 
-
+# 起草合同界面
 def view_draft(request):
     if request.session.get('is_login', None):
         return render(request, 'CMSapp/draft_contract.html')

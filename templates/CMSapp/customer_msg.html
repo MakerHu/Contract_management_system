@@ -1,0 +1,27 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}"/>
+
+<h1>客户信息 |</h1>
+<div class="draft_contract">
+    <form name="formName">
+        <div class="content">
+
+            <div class="single_content">客户编号:{{ customerMsg.cusid }}</div>
+            <div class="single_content"><span>* </span>客户名称:<input id="cusname" type="text" value="{{ customerMsg.cusname }}"></div>
+            <div class="single_content"><span>* </span>电话:<input id="tel" type="text" value="{{ customerMsg.tel }}"></div>
+            <div class="single_content"><span>* </span>地址:<input id="address" type="text" value="{{ customerMsg.address }}"></div>
+            <div class="single_content">传真:<input id="fax" type="text" value="{{ customerMsg.fax }}"></div>
+            <div class="single_content">邮编:<input id="code" type="text" value="{{ customerMsg.code }}"></div>
+            <div class="single_content">银行:<input id="bank" type="text" value="{{ customerMsg.bank }}"></div>
+            <div class="single_content">账户:<input id="account" type="text" value="{{ customerMsg.account }}"></div>
+        </div>
+    </form>
+    <div class="btn">
+        <button onclick="onAddCustomerCommit('{{ customerMsg.cusid }}')">提交</button>
+        {% if type == 'detail' %}
+            <button onclick="onReturnPrePage()">返回</button>
+        {% else %}
+            <button onclick="onReturnPrePage()">重置</button>
+        {% endif %}
+    </div>
+</div>

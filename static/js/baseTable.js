@@ -90,8 +90,7 @@ function onFinalizeClick(keyword) {
 
 //会签按钮
 function onCountersignClick(keyword) {
-    // let node = obj.parentNode.parentNode;
-    // let keyword = node.children[0].innerHTML;
+
     alert(keyword)
 }
 
@@ -116,12 +115,12 @@ function onDistribute(keyword) {
     alert(keyword);
 }
 
-//详情按钮
+//合同详情按钮
 function onContractDetail(keyword){
 
 }
 
-//详情按钮
+//客户详情按钮
 function onCostomerDetail(keyword){
-    alert(keyword);
+    data_edit_page_ajax('/data_customermsg/',keyword);
 }
