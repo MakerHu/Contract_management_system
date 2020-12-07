@@ -74,15 +74,15 @@ urlpatterns = [
     path('contract_signed/', contract_management.contract_signed),
     path('search_contract_signed/', contract_management.search_contract_signed),
 
-    #待分配合同
+    # 待分配合同
     path('contract_distributing/', contract_management.contract_distributing),
     path('search_contract_distributing/', contract_management.search_contract_distributing),
 
-    #已分配合同
+    # 已分配合同
     path('contract_distributed/', contract_management.contract_distributed),
     path('search_contract_distributed/', contract_management.search_contract_distributed),
 
-    #客户信息
+    # 客户信息
     path('customer_info/', contract_management.customer_info),
     path('search_customer_info/', contract_management.search_customer_info),
 
@@ -91,7 +91,7 @@ urlpatterns = [
     path('ajax_register/', views.ajax_register),
     path('ajax_confirm_username/', views.ajax_confirm_username),
     path('ajax_distribution/', data_management.test),
-    path('ajax_updateAuthority/',data_management.data_updateAuthority),
-    path('ajax_updateCustomermsg/',data_management.data_updateCustomermsg),
+    path('ajax_updateAuthority/', data_management.data_updateAuthority),
+    path('ajax_updateCustomermsg/', data_management.data_updateCustomermsg),
 
 ]
