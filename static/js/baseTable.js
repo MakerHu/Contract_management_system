@@ -105,7 +105,9 @@ function onApprovalClick(keyword) {
 function onSignClick(keyword) {
     // let node = obj.parentNode.parentNode;
     // let keyword = node.children[0].innerHTML;
-    alert(keyword);
+     // alert(keyword);
+    data_edit_page_ajax('/data_contract_sign/',keyword);
+
 }
 
 //签订按钮

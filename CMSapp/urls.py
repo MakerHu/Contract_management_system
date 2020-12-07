@@ -25,6 +25,9 @@ urlpatterns = [
     # 客户信息详情
     path('data_customermsg/', data_management.data_customermsg),
 
+    # 待签订合同签订
+    path('data_contract_sign/', data_management.data_contract_sign),
+
     # 用户授权
     path('data_authorize/', data_management.data_authorize),
 
@@ -91,7 +94,8 @@ urlpatterns = [
     path('ajax_register/', views.ajax_register),
     path('ajax_confirm_username/', views.ajax_confirm_username),
     path('ajax_distribution/', data_management.test),
-    path('ajax_updateAuthority/',data_management.data_updateAuthority),
-    path('ajax_updateCustomermsg/',data_management.data_updateCustomermsg),
-
+    path('ajax_updateAuthority/', data_management.data_updateAuthority),
+    path('ajax_updateCustomermsg/', data_management.data_updateCustomermsg),
+    path('ajax_updateContractSignmsg/', data_management.data_updateContractSignmsg),
+    #
 ]
