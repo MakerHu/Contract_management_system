@@ -1216,7 +1216,7 @@ def base_customer_info_table(request, query_result, is_search='false'):
     pageNum = int(request.POST.get('pageNum'))
 
     # 字段列表
-    fieldlist = ['客户编号', '客户姓名', '客户电话']      ########################## 这里要根据情况修改
+    fieldlist = ['客户编号', '客户姓名', '客户电话' , '操作']      ########################## 这里要根据情况修改
 
     response['fieldlist'] = fieldlist
 
