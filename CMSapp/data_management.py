@@ -177,7 +177,40 @@ def data_updateCustomermsg(request):
 ################################################################################################################
 ################################################################################################################
 ################################################################################################################
+#合同审批信息
+def data_contract_approval(request):
+    if request.session.get('is_login', None):
+        response = {}
+        conid = request.POST.get('keyword')
+        contractMsg = models.contract.objects.filter(conid=conid)[0]
+        response['contractMsg'] = contractMsg
+        return render(request, 'CMSapp/contract_approval.html', response)
+    else:
+        return render(request, 'CMSapp/timeout.html')
 
+################################################################################################################
+################################################################################################################
+################################################################################################################
+#更新合同审批信息
+def data_updateContractApprovalmsg(request):
+    conid = request.POST.get('conid')
+    state = request.POST.get('state')
+    information = request.POST.get('information')
+    contractEntity = models.contract.objects.filter(conid=conid)[0]
+    if(state=='pass'):
+        models.contract_state.objects.filter(conid=contractEntity).update(type=4)
+
+
+
+
+
+    models.contract_state.objects.filter(conid=contractEntity).update(type=4)
+    return HttpResponse(request)
+
+
+################################################################################################################
+################################################################################################################
+################################################################################################################
 #合同签订信息
 def data_contract_sign(request):
     if request.session.get('is_login', None):
@@ -198,9 +231,16 @@ def data_contract_sign(request):
 #更新合同签订信息
 def data_updateContractSignmsg(request):
     conid = request.POST.get('conid')
+    username=request.session.get('username')
     information = request.POST.get('information')
-    contractEntity = models.contract.objects.filter(conid=conid)[0]
-    models.contract_state.objects.filter(conid=contractEntity).update(type=5)
+    models.contract_process.objects.filter(conid=conid,username=username,type=3).update(state=1)
+
+    approvalnum = len(models.contract_process.objects.filter(conid_id=conid, type=3)) #合同所有审批人数
+    approvednum = len(models.contract_process.objects.filter(conid_id=conid, type=3, state=1))# 合同所有已审批已完成的人数
+
+    if approvalnum==approvednum:
+        models.contract_state.objects.filter(conid=conid).update(type=5)
+
     return HttpResponse(request)
 
 

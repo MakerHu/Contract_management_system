@@ -51,6 +51,18 @@ function onReturnPrePage() {
     reload_function_view(url_g, titlename_g, pageNum = 1);
 }
 
+//审批合同中的选中单选框
+function onSelected() {
+      if(document.getElementById("pass").checked==true) {
+        alert("选择了通过")
+    }
+      else{
+           alert("选择了拒绝")
+      }
+}
+
+
+
 //重置签订合同中的签订信息
 function onClearText() {
     document.getElementById('approval_comments').value= '';
@@ -102,6 +114,28 @@ function onAddCustomerCommit(cusid) {
     }
 
 }
+
+//审批合同界面中的提交按钮
+function onApprovalcontractCommit(conid){
+     let data = new FormData();
+     let information = document.getElementById('approval_comments').value;
+     let state;
+
+     if(document.getElementById("pass").checked==true){
+         state=document.getElementById('pass').value;
+     }else{
+         state=document.getElementById('reject').value;
+     }
+     print(state)
+     data.append("conid", conid);
+     data.append("state",state);
+     data.append("information", information);
+     onCommitData('/ajax_updateContractApprovalmsg/','/contract_approving/', data);
+}
+
+
+
+
 
 //签订合同界面中的提交按钮
 function onSigncontractCommit(conid) {
@@ -195,6 +229,8 @@ function CheckCusidAjax() {
     xhr.open("POST", "/ajax_check_cusid/");
     xhr.send(data);
 }
+
+
 
 //合同定稿界面中的提交按钮
 function onFinalContractCommit(conid) {
