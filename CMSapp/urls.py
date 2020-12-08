@@ -95,13 +95,12 @@ urlpatterns = [
     path('ajax_login/', views.ajax_login),
     path('ajax_register/', views.ajax_register),
     path('ajax_confirm_username/', views.ajax_confirm_username),
-    path('ajax_distribution/', data_management.test),
     path('ajax_updateAuthority/', data_management.data_updateAuthority),
     path('ajax_updateCustomermsg/', data_management.data_updateCustomermsg),
     path('ajax_addContract/',data_management.data_contractmsg),
     path('ajax_check_cusid/', views.ajax_checkcusid),
     path('ajax_updateAllocation/', data_management.data_updateAllocation),
-    path('ajax_updateAuthority/',data_management.data_updateAuthority)
+    path('ajax_updateAuthority/',data_management.data_updateAuthority),
 
-    path('ajax_updateContractSignmsg/', data_management.data_updateContractSignmsg),
+    # path('ajax_updateContractSignmsg/', data_management.data_updateContractSignmsg),
 ]
