@@ -98,7 +98,8 @@ function onCountersignClick(keyword) {
 function onApprovalClick(keyword) {
     // let node = obj.parentNode.parentNode;
     // let keyword = node.children[0].innerHTML;
-    alert(keyword);
+    //alert(keyword);
+    data_edit_page_ajax('/data_contract_approval/',keyword);
 }
 
 //签订按钮

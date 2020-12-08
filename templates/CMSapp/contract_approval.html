@@ -5,16 +5,19 @@
 <div class="approval_contract">
     <form class="approval_contract_form" action="http://vip.biancheng.net/login.php" method="post" name="formName">
         <div class="content">
-            <div id="contract_name">合同名称:XXX合同</div>
+            <div id="contract_name">合同编号:{{ contractMsg.conid }}</div>
+            <div id="contract_name">合同名称:{{ contractMsg.conname }}</div>
             <div class="approval_select">
-                <input type="radio" name="approve" value="pass" id="pass"><label for="pass">通过</label>
+                <input type="radio" name="approve" value="pass" id="pass" ><label for="pass">通过</label>
                 <input type="radio" name="approve" value="reject" id="reject" checked><label for="reject">拒绝</label>
             </div>
             <div class="single_content"><span>* </span><div>审批意见:</div><textarea id="approval_comments"></textarea></div>
         </div>
     </form>
     <div class="btn">
-        <button>提交</button>
-        <button>重置</button>
+        <!--<button onclick="onApprovalcontractCommit('{{ contractMsg.conid }}')">提交</button>-->
+        <button onclick="onSelected()">提交</button>
+        <button onclick="onClearText()">重置</button>
+        <button onclick="onReturnPrePage()">返回</button>
     </div>
 </div>

@@ -19,14 +19,18 @@ urlpatterns = [
     # 起草合同
     path('draftcontract/', views.view_draft),
 
+    #审批合同
+    path('data_contract_approval/',data_management.data_contract_approval),
+
+    # 签订合同
+    path('data_contract_sign/', data_management.data_contract_sign),
+
     # 添加客户
     path('add_customer/', data_management.data_customermsg),
 
     # 客户信息详情
     path('data_customermsg/', data_management.data_customermsg),
 
-    # 合同签订
-    path('data_contract_sign/', data_management.data_contract_sign),
     # 用户授权
     path('data_authorize/', data_management.data_authorize),
 
@@ -96,4 +100,5 @@ urlpatterns = [
     path('ajax_updateAuthority/', data_management.data_updateAuthority),
     path('ajax_updateCustomermsg/', data_management.data_updateCustomermsg),
     path('ajax_updateContractSignmsg/', data_management.data_updateContractSignmsg),
+    path('ajax_updateContractApprovalmsg/',data_management.data_updateContractApprovalmsg),
 ]
