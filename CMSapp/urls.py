@@ -102,5 +102,5 @@ urlpatterns = [
     path('ajax_updateAllocation/', data_management.data_updateAllocation),
     path('ajax_updateAuthority/',data_management.data_updateAuthority),
 
-    # path('ajax_updateContractSignmsg/', data_management.data_updateContractSignmsg),
+    path('ajax_updateContractSignmsg/', data_management.data_updateContractSignmsg),
 ]
