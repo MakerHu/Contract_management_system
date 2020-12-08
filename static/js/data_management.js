@@ -97,3 +97,87 @@ function onAddCustomerCommit(cusid) {
     }
 
 }
+
+//起草合同界面中的提交按钮
+function onAddContractCommit() {
+    let data = new FormData();
+    let contract_name = document.getElementById('contract_name').value;
+    let cus_id = document.getElementById('customer').value;
+    let start_time = document.getElementById('start_time').value;
+    let end_time = document.getElementById('end_time').value;
+    let contract_content = document.getElementById('contract_content').value;
+
+    var dP = /^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$/;
+    if(dP.test(start_time)&&dP.test(end_time)){
+
+    }
+    else{
+         alert('请输入合法的日期(格式：YYYY-MM-DD)！');
+         return;
+    }
+    if(start_time>end_time){
+        alert('开始时间不能迟于结束时间！');
+        return;
+    }
+    if (contract_name != '' && cus_id != '' && start_time != ''
+       && end_time != '' && contract_content != '') {
+        if (contract_name.length>40) {
+            alert('合同名不能超过40位！');
+            return;
+        }
+        var data1 = new FormData();
+        data1.append("cusid", cus_id);
+
+        var xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+
+        xhr.addEventListener("readystatechange", function () {
+            if (this.readyState === 4) {
+            var json = JSON.parse(this.responseText);
+            console.log(this.responseText);
+            if (json.exists_customer == 'success') {
+                data.append("conname", contract_name);
+                data.append("begintime", start_time);
+                data.append("endtime", end_time);
+                data.append("content", contract_content);
+                data.append("cusid", cus_id);
+                onCommitData('/ajax_addContract/', '/draftcontract/', data);
+            } else {
+                alert('没有该客户！');
+                return;
+            }
+        }
+    });
+        xhr.open("POST", "/ajax_check_cusid/");
+        xhr.send(data1);
+
+    }else{
+        alert('星号处不可为空！');
+    }
+
+}
+
+function CheckCusidAjax() {
+    let cus_id = document.getElementById('customer').value;
+
+    var data = new FormData();
+    data.append("cusid", cus_id);
+    console.log(data);
+
+    var xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+
+    xhr.addEventListener("readystatechange", function () {
+        if (this.readyState === 4) {
+            var json = JSON.parse(this.responseText);
+            console.log(this.responseText);
+            if (json.exists_customer == 'success') {
+                document.getElementById("hide3").style.display = "block";
+            } else {
+                document.getElementById("hide3").style.display = "none";
+            }
+        }
+    });
+    xhr.open("POST", "/ajax_check_cusid/");
+    xhr.send(data);
+}

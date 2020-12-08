@@ -93,5 +93,7 @@ urlpatterns = [
     path('ajax_distribution/', data_management.test),
     path('ajax_updateAuthority/', data_management.data_updateAuthority),
     path('ajax_updateCustomermsg/', data_management.data_updateCustomermsg),
+    path('ajax_addContract/',data_management.data_contractmsg),
+    path('ajax_check_cusid/', views.ajax_checkcusid),
 
 ]

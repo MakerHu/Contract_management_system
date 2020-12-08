@@ -98,3 +98,26 @@ def data_updateCustomermsg(request):
         models.customer.objects.create(cusname=cusname, address=address, tel=tel, code=code, fax=fax, bank=bank,
                                        account=account).save()
     return HttpResponse(request)
+
+
+
+################################################################################################################
+################################################################################################################
+################################################################################################################
+# 添加合同信息界面
+def data_contractmsg(request):
+    if request.session.get('is_login', None):
+        response = {}
+        conname=request.POST.get('conname')
+        begintime = request.POST.get('begintime')
+        endtime = request.POST.get('endtime')
+        content = request.POST.get('content')
+        cusid = models.customer.objects.filter(cusid=request.POST.get('cusid'))[0]
+        username = models.user.objects.filter(username=request.session.get('username'))[0]
+        models.contract.objects.create(conname=conname, begintime=begintime, endtime=endtime, content=content,
+                                       cusid=cusid, username=username).save()
+        return render(request, 'CMSapp/draft_contract.html', response)
+    else:
+        return render(request, 'CMSapp/timeout.html')
+
+

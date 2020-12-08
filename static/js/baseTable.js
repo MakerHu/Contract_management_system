@@ -108,7 +108,7 @@ function onSignClick(keyword) {
     alert(keyword);
 }
 
-//签订按钮
+//分配按钮
 function onDistribute(keyword) {
     // let node = obj.parentNode.parentNode;
     // let keyword = node.children[0].innerHTML;

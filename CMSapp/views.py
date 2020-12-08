@@ -130,3 +130,16 @@ def logout(request):
     request.session['is_login'] = False
     request.session.flush()
     return render(request, 'CMSapp/login.html')
+
+def ajax_checkcusid(request):
+    cusid = request.POST.get('cusid')
+    response = {'same_username': 'false'}
+
+    cusid = models.customer.objects.filter(cusid=cusid)
+
+    if cusid:
+        response['exists_customer'] = 'success'
+    else:
+        response['exists_customer'] = 'fail'
+
+    return JsonResponse(response)
