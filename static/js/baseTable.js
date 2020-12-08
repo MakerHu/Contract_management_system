@@ -85,13 +85,14 @@ function onAuthorizationClick(keyword) {
 function onFinalizeClick(keyword) {
     // let node = obj.parentNode.parentNode;
     // let keyword = node.children[0].innerHTML
-    alert(keyword);
+    data_edit_page_ajax('/contract_finalize/',keyword);
+    //alert(keyword);
 }
 
 //会签按钮
 function onCountersignClick(keyword) {
 
-    alert(keyword)
+    data_edit_page_ajax('/contract_countersign/',keyword);
 }
 
 //审批按钮

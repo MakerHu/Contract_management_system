@@ -195,3 +195,22 @@ function CheckCusidAjax() {
     xhr.open("POST", "/ajax_check_cusid/");
     xhr.send(data);
 }
+
+//合同定稿界面中的提交按钮
+function onFinalContractCommit(conid) {
+    let data = new FormData();
+    let content = document.getElementById('contract_content').value;
+    data.append("conid", conid)
+    data.append("content", content)
+    onCommitData('/ajax_updateContractFinalMsg/','/pending_contract/', data)
+}
+
+//合同会签页面中的提交按钮
+function  onContersignContractCommit(conid){
+    let data = new FormData();
+    let single_content = document.getElementById('countersign_comments').value;
+    data.append("conid", conid)
+    data.append("single_content", single_content)
+    onCommitData('/ajax_updateContractCountersignMsg/','/countersign_contract/', data)
+
+}

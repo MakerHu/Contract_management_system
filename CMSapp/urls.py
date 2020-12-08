@@ -103,4 +103,11 @@ urlpatterns = [
     path('ajax_updateAuthority/',data_management.data_updateAuthority),
 
     path('ajax_updateContractSignmsg/', data_management.data_updateContractSignmsg),
+    path('ajax_updateContractFinalMsg/',data_management.data_updateContractFinalMsg),
+    path('ajax_updateContractCountersignMsg/', data_management.data_updateContractCountersignMsg),
+
+    #定稿
+    path('contract_finalize/',data_management.contract_finalize),
+    #会签
+    path('contract_countersign/',data_management.contract_countersign),
 ]

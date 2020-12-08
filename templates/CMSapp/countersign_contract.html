@@ -5,13 +5,13 @@
 <div class="countersign_contract">
     <form class="countersign_contract_form" action="http://vip.biancheng.net/login.php" method="post" name="formName">
         <div class="content">
-            <div>合同名称:XXX合同</div>
+            <div>合同名称:{{ contractMsg.conname }}</div>
             <div class="single_content"><span>* </span>会签意见:<textarea id="countersign_comments"></textarea></div>
         </div>
     </form>
     <div class="btn">
-        <button>提交</button>
-        <button>重置</button>
+         <button onclick="onContersignContractCommit('{{ contractMsg.conid }}')">提交</button>
+         <button onclick="onReturnPrePage()">重置</button>
     </div>
 </div>
 

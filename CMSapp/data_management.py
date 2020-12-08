@@ -2,6 +2,7 @@ import os
 from datetime import datetime, timezone, timedelta
 
 import django
+from django.db.models import Q
 import pytz
 from django.http import JsonResponse
 from django.shortcuts import render, HttpResponse
@@ -228,3 +229,65 @@ def data_contractmsg(request):
         return render(request, 'CMSapp/timeout.html')
 
 
+################################################################################################################
+################################################################################################################
+################################################################################################################
+# 定稿
+def contract_finalize(request):
+    if request.session.get('is_login', None):
+        response = {}
+        conid = request.POST.get('keyword')
+        contractMsg = models.contract.objects.filter(conid=conid)[0]
+        response['contractMsg'] = contractMsg
+        customerMsg = models.customer.objects.filter(cusid=contractMsg.cusid_id)[0]
+        response['customerMsg'] = customerMsg
+        countersignSuggestList = models.contract_process.objects.filter(conid=conid,type=1,state=1)
+        response['countersignSuggestList']=countersignSuggestList
+        return render(request, 'CMSapp/final_contract.html', response)
+    else:
+        return render(request, 'CMSapp/timeout.html')
+
+################################################################################################################
+################################################################################################################
+################################################################################################################
+
+#更新合同定稿信息
+def data_updateContractFinalMsg(request):
+    conid = request.POST.get('conid')
+    content = request.POST.get('content')
+    contractEntity = models.contract.objects.filter(conid=conid)[0]
+    models.contract_state.objects.filter(conid=contractEntity).update(type=3)
+    models.contract.objects.filter(conid=conid).update(content=content)
+    return HttpResponse(request)
+
+################################################################################################################
+################################################################################################################
+################################################################################################################
+# 会签
+def contract_countersign(request):
+    if request.session.get('is_login', None):
+        response = {}
+        conid = request.POST.get('keyword')
+        contractMsg = models.contract.objects.filter(conid=conid)[0]
+        response['contractMsg'] = contractMsg
+        customerMsg = models.customer.objects.filter(cusid=contractMsg.cusid_id)[0]
+        response['customerMsg'] = customerMsg
+        return render(request, 'CMSapp/countersign_contract.html', response)
+    else:
+        return render(request, 'CMSapp/timeout.html')
+
+################################################################################################################
+################################################################################################################
+################################################################################################################
+
+#更新合同会签信息
+def data_updateContractCountersignMsg(request):
+    conid = request.POST.get('conid')
+    username=request.session.get('username')
+    single_content = request.POST.get('single_content')
+    contractEntity = models.contract.objects.filter(conid=conid)[0]
+    if(~Q(models.contract_process.objects.filter(conid=conid,type=1,state=0).exists())):
+        models.contract_state.objects.filter(conid=contractEntity).update(type=2)
+    models.contract_process.objects.filter(conid=conid,type=1,username=username).update(content=single_content)
+    models.contract_process.objects.filter(conid=conid,type=1,username=username).update(state=1)
+    return HttpResponse(request)
