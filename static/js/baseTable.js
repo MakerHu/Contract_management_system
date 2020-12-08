@@ -120,7 +120,7 @@ function onDistribute(keyword) {
 
 //合同详情按钮
 function onContractDetail(keyword){
-
+    data_edit_page_ajax('/data_allocation/',keyword);
 }
 
 //客户详情按钮

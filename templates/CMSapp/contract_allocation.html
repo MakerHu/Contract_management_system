@@ -30,7 +30,12 @@
             <select class="countersign" id="countersign_have" size="5"
                     onChange="onDeleteCountersignHaveOption(this.value)">
                 {% for countersignprocess in countersign %}
-                    <option value="{{ countersignprocess.username.username }}">{{ countersignprocess.username.username }}</option>
+                    {% if countersignprocess.state == 0 %}
+                        <option value="{{ countersignprocess.username.username }}">{{ countersignprocess.username.username }}</option>
+                    {% else %}
+                        <option value="{{ countersignprocess.username.username }}" disabled="disabled">{{ countersignprocess.username.username }}</option>
+                    {% endif %}
+
                 {% endfor %}
             </select>
         </div>
@@ -60,7 +65,12 @@
             <div class="had">待分配人员列表</div>
             <select class="approve" id="approve_have" size="5" onChange="onDeleteApproveHaveOption(this.value)">
                 {% for approveprocess in approve %}
-                    <option value="{{ approveprocess.username.username }}">{{ approveprocess.username.username }}</option>
+                    {% if approveprocess.state == 0 %}
+                        <option value="{{ approveprocess.username.username }}">{{ approveprocess.username.username }}</option>
+                    {% else %}
+                        <option value="{{ approveprocess.username.username }}" disabled="disabled">{{ approveprocess.username.username }}</option>
+                    {% endif %}
+{#                    <option value="{{ approveprocess.username.username }}">{{ approveprocess.username.username }}</option>#}
                 {% endfor %}
             </select>
         </div>
@@ -89,13 +99,18 @@
             <div class="had">已分配人员列表</div>
             <select class="sign" id="sign_have" size="5" onChange="onDeleteSignHaveOption(this.value)">
                 {% for signprocess in sign %}
-                    <option value="{{ signprocess.username.username }}">{{ signprocess.username.username }}</option>
+                    {% if signprocess.state == 0 %}
+                        <option value="{{ signprocess.username.username }}">{{ signprocess.username.username }}</option>
+                    {% else %}
+                        <option value="{{ signprocess.username.username }}" disabled="disabled">{{ signprocess.username.username }}</option>
+                    {% endif %}
+{#                    <option value="{{ signprocess.username.username }}">{{ signprocess.username.username }}</option>#}
                 {% endfor %}
             </select>
         </div>
     </div>
     <div class="btn">
         <button onclick="onAllocationCommit('{{ conid }}')">提交</button>
-        <button>重置</button>
+        <button onclick="onReturnPrePage()">取消</button>
     </div>
 </div>

@@ -37,7 +37,7 @@ def data_allocation(request):
         response['sign'] = sign
 
         canCountersignRoles = models.role_function.objects.filter(function='contract_countersign')
-        manageTheContractUserlist = models.contract_process.objects.filter(conid=allocation_conid)
+        manageTheContractUserlist = models.contract_process.objects.filter(conid=allocation_conid,type=1)
         noManageTheContractUserlist = models.user.objects.exclude(
             username__in=manageTheContractUserlist.values('username'))
         left1_rightlist = models.right.objects.filter(rolename__rolename__in=canCountersignRoles.values('rolename'),
@@ -45,7 +45,7 @@ def data_allocation(request):
                                                           'username'))
 
         canApprovalRoles = models.role_function.objects.filter(function='contract_approval')
-        manageTheContractUserlist = models.contract_process.objects.filter(conid=allocation_conid)
+        manageTheContractUserlist = models.contract_process.objects.filter(conid=allocation_conid,type=2)
         noManageTheContractUserlist = models.user.objects.exclude(
             username__in=manageTheContractUserlist.values('username'))
         left2_rightlist = models.right.objects.filter(rolename__rolename__in=canApprovalRoles.values('rolename'),
@@ -53,7 +53,7 @@ def data_allocation(request):
                                                           'username'))
 
         canSignRoles = models.role_function.objects.filter(function='contract_sign')
-        manageTheContractUserlist = models.contract_process.objects.filter(conid=allocation_conid)
+        manageTheContractUserlist = models.contract_process.objects.filter(conid=allocation_conid,type=3)
         noManageTheContractUserlist = models.user.objects.exclude(
             username__in=manageTheContractUserlist.values('username'))
         left3_rightlist = models.right.objects.filter(rolename__rolename__in=canSignRoles.values('rolename'),
@@ -81,16 +81,19 @@ def data_updateAllocation(request):
 
     processConidEntity = models.contract.objects.filter(conid=conid)[0]
 
+    models.contract_process.objects.filter(conid=conid, type=1, state=0).delete()
     for countersignusername in countersign:
         processCountersignUsernameEntity = models.user.objects.filter(username=countersignusername)[0]
-        models.contract_process.objects.filter(conid=processConidEntity, username=processCountersignUsernameEntity,
-                                               type=1, state=0, content="").update()
+        models.contract_process.objects.create(conid=processConidEntity, username=processCountersignUsernameEntity,
+                                                   type=1, state=0, content="").save()
 
+    models.contract_process.objects.filter(conid=conid, type=2, state=0).delete()
     for approveusername in approve:
         processApproveUsernameEntity = models.user.objects.filter(username=approveusername)[0]
         models.contract_process.objects.create(conid=processConidEntity, username=processApproveUsernameEntity, type=2,
                                                state=0, content="").save()
 
+    models.contract_process.objects.filter(conid=conid, type=3, state=0).delete()
     for signusername in sign:
         processSignUsernameEntity = models.user.objects.filter(username=signusername)[0]
         models.contract_process.objects.create(conid=processConidEntity, username=processSignUsernameEntity, type=3,
