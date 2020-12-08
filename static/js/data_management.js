@@ -52,12 +52,24 @@ function onReturnPrePage() {
 }
 
 //审批合同中的选中单选框
-function onSelected() {
+function onSelected(conid) {
       if(document.getElementById("pass").checked==true) {
-        alert("选择了通过")
+          let data = new FormData();
+          let content = document.getElementById('approval_comments').value
+          let state = true
+          data.append("conid", conid)
+          data.append("content", content)
+          data.append("state",state)
+          onCommitData('/ajax_updateContractApprovalmsg/',url_g, data)
     }
       else{
-           alert("选择了拒绝")
+           let data = new FormData();
+          let content = document.getElementById('approval_comments').value
+          let state = false
+          data.append("conid", conid)
+          data.append("content", content)
+          data.append("state",state)
+          onCommitData('/ajax_updateContractApprovalmsg/',url_g, data)
       }
 }
 

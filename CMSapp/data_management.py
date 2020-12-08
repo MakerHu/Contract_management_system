@@ -195,16 +195,18 @@ def data_contract_approval(request):
 def data_updateContractApprovalmsg(request):
     conid = request.POST.get('conid')
     state = request.POST.get('state')
-    information = request.POST.get('information')
+    content = request.POST.get('content')
     contractEntity = models.contract.objects.filter(conid=conid)[0]
-    if(state=='pass'):
+    user = models.user.objects.filter(username=request.session.get('username'))[0]
+    if state == 'true':
         models.contract_state.objects.filter(conid=contractEntity).update(type=4)
+        print(contractEntity)
+        print(user)
+        models.contract_process.objects.filter(conid=contractEntity, username=user, type=2).update(state=1, content=content)
+    else:
+        models.contract_state.objects.filter(conid=contractEntity).update(type=4)
+        models.contract_process.objects.filter(conid=contractEntity, username=user, type=2).update(state=2, content=content)
 
-
-
-
-
-    models.contract_state.objects.filter(conid=contractEntity).update(type=4)
     return HttpResponse(request)
 
 
@@ -281,7 +283,7 @@ def contract_finalize(request):
         response['contractMsg'] = contractMsg
         customerMsg = models.customer.objects.filter(cusid=contractMsg.cusid_id)[0]
         response['customerMsg'] = customerMsg
-        countersignSuggestList = models.contract_process.objects.filter(conid=conid,type=1,state=1)
+        countersignSuggestList = models.contract_process.objects.filter(conid=conid, type=1, state=1)
         response['countersignSuggestList']=countersignSuggestList
         return render(request, 'CMSapp/final_contract.html', response)
     else:
