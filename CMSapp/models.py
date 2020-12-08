@@ -74,6 +74,7 @@ class contract_process(models.Model):
         (0, "未完成"),
         (1, "已完成"),
         (2, "已否决"),
+
     )
     type = models.IntegerField(choices=type_choice)
     state = models.IntegerField(choices=state_choice, default=0)

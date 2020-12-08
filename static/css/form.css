@@ -96,6 +96,7 @@ button:hover {
 .draft_contract {
     position: relative;
     margin-top: 20px;
+    margin-bottom: 100px;
     left: 30%;
     font-size: 1.5em;
     font-weight: bolder;

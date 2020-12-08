@@ -90,8 +90,7 @@ function onFinalizeClick(keyword) {
 
 //会签按钮
 function onCountersignClick(keyword) {
-    // let node = obj.parentNode.parentNode;
-    // let keyword = node.children[0].innerHTML;
+
     alert(keyword)
 }
 
@@ -106,9 +105,12 @@ function onApprovalClick(keyword) {
 function onSignClick(keyword) {
     // let node = obj.parentNode.parentNode;
     // let keyword = node.children[0].innerHTML;
-    alert(keyword);
+     // alert(keyword);
+    data_edit_page_ajax('/data_contract_sign/',keyword);
+
 }
 
+//分配按钮
 //待分配合同按钮
 function onDistribute(keyword) {
     // let node = obj.parentNode.parentNode;
@@ -116,12 +118,12 @@ function onDistribute(keyword) {
     data_edit_page_ajax('/data_allocation/',keyword);
 }
 
-//详情按钮
+//合同详情按钮
 function onContractDetail(keyword){
 
 }
 
-//详情按钮
+//客户详情按钮
 function onCostomerDetail(keyword){
-    alert(keyword);
+    data_edit_page_ajax('/data_customermsg/',keyword);
 }

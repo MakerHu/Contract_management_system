@@ -5,6 +5,7 @@ from django.shortcuts import render, HttpResponse
 from CMSapp import models
 import json
 
+
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Contract_management_system.settings")  # project_name 项目名称
 django.setup()
 
@@ -100,6 +101,10 @@ def data_updateAllocation(request):
     return JsonResponse(response)
 
 
+################################################################################################################
+################################################################################################################
+################################################################################################################
+# 返回授权信息填写表
 def data_authorize(request):
     if request.session.get('is_login', None):
         authorized_username = request.POST.get('keyword')
@@ -115,8 +120,100 @@ def data_authorize(request):
         return render(request, 'CMSapp/timeout.html')
 
 
+# 更新授权信息
 def data_updateAuthority(request):
     username = request.POST.get('username')
     new_rolename = request.POST.get('new_rolename')
     models.right.objects.filter(username=username).update(rolename=new_rolename)
     return HttpResponse(request)
+
+
+################################################################################################################
+################################################################################################################
+################################################################################################################
+# 添加客户信息界面
+def data_customermsg(request):
+    if request.session.get('is_login', None):
+        response = {}
+        cusid = request.POST.get('keyword')
+        if cusid:
+            response['type'] = 'detail'
+            customerMsg = models.customer.objects.filter(cusid=cusid)[0]
+            response['customerMsg'] = customerMsg
+        else:
+            response['type'] = 'add'
+        return render(request, 'CMSapp/customer_msg.html', response)
+    else:
+        return render(request, 'CMSapp/timeout.html')
+
+
+# 更新客户信息
+def data_updateCustomermsg(request):
+    cusid = request.POST.get('cusid')
+    cusname = request.POST.get('cusname')
+    address = request.POST.get('address')
+    tel = request.POST.get('tel')
+    code = request.POST.get('code')
+    fax = request.POST.get('fax')
+    bank = request.POST.get('bank')
+    account = request.POST.get('account')
+
+    if cusid:
+        models.customer.objects.filter(cusid=cusid).update(cusname=cusname, address=address, tel=tel, code=code,
+                                                           fax=fax, bank=bank,
+                                                           account=account)
+    else:
+        models.customer.objects.create(cusname=cusname, address=address, tel=tel, code=code, fax=fax, bank=bank,
+                                       account=account).save()
+    return HttpResponse(request)
+
+################################################################################################################
+################################################################################################################
+################################################################################################################
+
+#合同签订信息
+def data_contract_sign(request):
+    if request.session.get('is_login', None):
+        response = {}
+        conid = request.POST.get('keyword')
+        contractMsg = models.contract.objects.filter(conid=conid)[0]
+        response['contractMsg'] = contractMsg
+        customerMsg = models.customer.objects.filter(cusid=contractMsg.cusid_id)[0]
+        response['customerMsg'] = customerMsg
+        return render(request, 'CMSapp/contract_sign.html', response)
+    else:
+        return render(request, 'CMSapp/timeout.html')
+
+################################################################################################################
+################################################################################################################
+################################################################################################################
+
+#更新合同签订信息
+def data_updateContractSignmsg(request):
+    conid = request.POST.get('conid')
+    information = request.POST.get('information')
+    contractEntity = models.contract.objects.filter(conid=conid)[0]
+    models.contract_state.objects.filter(conid=contractEntity).update(type=5)
+    return HttpResponse(request)
+
+
+################################################################################################################
+################################################################################################################
+################################################################################################################
+# 添加合同信息界面
+def data_contractmsg(request):
+    if request.session.get('is_login', None):
+        response = {}
+        conname=request.POST.get('conname')
+        begintime = request.POST.get('begintime')
+        endtime = request.POST.get('endtime')
+        content = request.POST.get('content')
+        cusid = models.customer.objects.filter(cusid=request.POST.get('cusid'))[0]
+        username = models.user.objects.filter(username=request.session.get('username'))[0]
+        models.contract.objects.create(conname=conname, begintime=begintime, endtime=endtime, content=content,
+                                       cusid=cusid, username=username).save()
+        return render(request, 'CMSapp/draft_contract.html', response)
+    else:
+        return render(request, 'CMSapp/timeout.html')
+
+

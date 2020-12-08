@@ -42,7 +42,7 @@ def home(request):
     else:
         return render(request, 'CMSapp/timeout.html')
 
-
+# 起草合同界面
 def view_draft(request):
     if request.session.get('is_login', None):
         return render(request, 'CMSapp/draft_contract.html')
@@ -130,3 +130,16 @@ def logout(request):
     request.session['is_login'] = False
     request.session.flush()
     return render(request, 'CMSapp/login.html')
+
+def ajax_checkcusid(request):
+    cusid = request.POST.get('cusid')
+    response = {'same_username': 'false'}
+
+    cusid = models.customer.objects.filter(cusid=cusid)
+
+    if cusid:
+        response['exists_customer'] = 'success'
+    else:
+        response['exists_customer'] = 'fail'
+
+    return JsonResponse(response)

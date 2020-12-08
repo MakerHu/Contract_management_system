@@ -1091,8 +1091,8 @@ def contract_distributing(request):
         username = request.session.get('username')
         rolename = models.right.objects.filter(username=username)[0].rolename.rolename
         if rolename == 'root':
-            # 查询结果
-            query_result = models.contract_state.objects.exclude(conid__conid__in=models.contract_process.objects.filter())     ########################## 这里要根据情况修改
+            # 查询结果0
+            query_result = models.contract_state.objects.exclude(conid__conid__in=models.contract_process.objects.all().values('conid__conid'))     ########################## 这里要根据情况修改
         return base_contract_distributing_table(request, query_result)       ########################## 这里要根据情况修改
     else:
         return render(request, 'CMSapp/timeout.html')
@@ -1106,11 +1106,11 @@ def search_contract_distributing(request):
         if searchMsg:
             # 查询结果
             if rolename == 'root':
-                query_result = models.contract_state.objects.exclude(conid__conid__in=models.contract_process.objects.filter())########################## 这里要根据情况修改
+                query_result = models.contract_state.objects.exclude(conid__conid__in=models.contract_process.objects.all().values('conid__conid'))########################## 这里要根据情况修改
                 query_result = query_result.filter(conid__conname__icontains=searchMsg)
         else:
             if rolename == 'root':
-                query_result = models.contract_state.objects.exclude(conid__conid__in=models.contract_process.objects.filter())  ########################## 这里要根据情况修改
+                query_result = models.contract_state.objects.exclude(conid__conid__in=models.contract_process.objects.all().values('conid__conid'))  ########################## 这里要根据情况修改
         return base_contract_distributing_table(request, query_result, 'true')           ########################## 这里要根据情况修改
     else:
         return render(request, 'CMSapp/timeout.html')
@@ -1172,7 +1172,7 @@ def contract_distributed(request):
         rolename = models.right.objects.filter(username=username)[0].rolename.rolename
         if rolename == 'root':
             # 查询结果
-            query_result = models.contract_state.objects.filter(conid__conid__in=models.contract_process.objects.filter())     ########################## 这里要根据情况修改
+            query_result = models.contract_state.objects.filter(conid__conid__in=models.contract_process.objects.all().values('conid__conid'))     ########################## 这里要根据情况修改
         return base_contract_distributed_table(request, query_result)       ########################## 这里要根据情况修改
     else:
         return render(request, 'CMSapp/timeout.html')
@@ -1186,11 +1186,11 @@ def search_contract_distributed(request):
         if searchMsg:
             # 查询结果
             if rolename == 'root':
-                query_result = models.contract_state.objects.filter(conid__conid__in=models.contract_process.objects.filter())########################## 这里要根据情况修改
+                query_result = models.contract_state.objects.filter(conid__conid__in=models.contract_process.objects.all().values('conid__conid'))########################## 这里要根据情况修改
                 query_result = query_result.filter(conid__conname__icontains=searchMsg)
         else:
             if rolename == 'root':
-                query_result = models.contract_state.objects.filter(conid__conid__in=models.contract_process.objects.filter())  ########################## 这里要根据情况修改
+                query_result = models.contract_state.objects.filter(conid__conid__in=models.contract_process.objects.all().values('conid__conid'))  ########################## 这里要根据情况修改
         return base_contract_distributed_table(request, query_result, 'true')           ########################## 这里要根据情况修改
     else:
         return render(request, 'CMSapp/timeout.html')
