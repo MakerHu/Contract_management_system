@@ -47,6 +47,7 @@ function reload_function_view(url, titlename ,pageNum=1) {
     }
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                current_page_g=1;
                 document.getElementById("function_view").innerHTML=xmlhttp.responseText;
                 document.title=titlename;
         }

@@ -387,9 +387,9 @@ def process_query(request):
         rolename = models.right.objects.filter(username=username)[0].rolename.rolename
         if rolename == 'root':
             # 查询结果
-            query_result = models.contract_state.objects.filter(type=2)     ########################## 这里要根据情况修改
+            query_result = models.contract_state.objects.all()     ########################## 这里要根据情况修改
         else:
-            query_result = models.contract_state.objects.filter(type=2, conid__username=username)   ########################## 这里要根据情况修改
+            query_result = models.contract_state.objects.filter(conid__username=username)   ########################## 这里要根据情况修改
         return base_process_query_table(request, query_result)       ########################## 这里要根据情况修改
     else:
         return render(request, 'CMSapp/timeout.html')
