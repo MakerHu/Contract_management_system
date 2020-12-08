@@ -85,7 +85,9 @@ def data_updateAllocation(request):
 
     processConidEntity = models.contract.objects.filter(conid=conid)[0]
 
+    # 删除process数据库中还未开始会签的人员数据
     models.contract_process.objects.filter(conid=conid, type=1, state=0).delete()
+    # 重新根据前端返回的会签人员列表进行分配
     for countersignusername in countersign:
         processCountersignUsernameEntity = models.user.objects.filter(username=countersignusername)[0]
         models.contract_process.objects.create(conid=processConidEntity, username=processCountersignUsernameEntity,
@@ -207,6 +209,8 @@ def data_updateContractApprovalmsg(request):
         models.contract_state.objects.filter(conid=contractEntity).update(type=4)
         models.contract_process.objects.filter(conid=contractEntity, username=user, type=2).update(state=2, content=content)
 
+
+    models.contract_state.objects.filter(conid=contractEntity).update(type=4)
     return HttpResponse(request)
 
 
@@ -235,7 +239,7 @@ def data_updateContractSignmsg(request):
     conid = request.POST.get('conid')
     username=request.session.get('username')
     information = request.POST.get('information')
-    models.contract_process.objects.filter(conid=conid,username=username,type=3).update(state=1)
+    models.contract_process.objects.filter(conid=conid,username=username,type=3).update(state=1,content=information)
 
     approvalnum = len(models.contract_process.objects.filter(conid_id=conid, type=3)) #合同所有审批人数
     approvednum = len(models.contract_process.objects.filter(conid_id=conid, type=3, state=1))# 合同所有已审批已完成的人数
@@ -297,8 +301,7 @@ def contract_finalize(request):
 def data_updateContractFinalMsg(request):
     conid = request.POST.get('conid')
     content = request.POST.get('content')
-    contractEntity = models.contract.objects.filter(conid=conid)[0]
-    models.contract_state.objects.filter(conid=contractEntity).update(type=3)
+    models.contract_state.objects.filter(conid=conid).update(type=3)
     models.contract.objects.filter(conid=conid).update(content=content)
     return HttpResponse(request)
 

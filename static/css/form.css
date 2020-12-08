@@ -115,6 +115,16 @@ button:hover {
     padding-top: 20px;
 }
 
+.dorpDownBox{
+    float: left;
+    display: block;
+    outline: none;
+    display: flex;
+    margin-bottom: 20px;
+    width: 200px;
+    height: 40px;
+    border-radius: 5px;
+}
 
 .draft_contract .content {
     display: flex;

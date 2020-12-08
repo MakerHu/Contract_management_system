@@ -6,9 +6,18 @@
     <form name="formName">
         <div class="content">
             <div class="single_content"><span>* </span>合同名称:<input id="contract_name" type="text"></div>
-            <div class="single_content"><span>* </span>客户:<input id="customer" type="text"></div>
-            <div class="single_content"><span>* </span>开始时间:<input id="start_time" type="text"></div>
-            <div class="single_content"><span>* </span>结束时间:<input id="end_time" type="text"></div>
+            <div class="single_content"><span>* </span>
+{#                客户:<input id="customer" type="text">#}
+                客户:
+                <select class="dorpDownBox" id="customer">
+                    {% for customer in customerlist %}
+                        <option value="{{ customer.cusid }}">编号: {{ customer.cusid }} 名称: {{ customer.cusname }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="single_content"><span>* </span>开始时间:<input id="start_time" type="date" pattern="yyyy-mm-dd">
+            </div>
+            <div class="single_content"><span>* </span>结束时间:<input id="end_time" type="date" pattern="yyyy-mm-dd"></div>
             <div class="single_content"><span>* </span>合同内容:<textarea id="contract_content"></textarea></div>
         </div>
     </form>
@@ -16,7 +25,7 @@
         <button>添加附件</button>
     </div>
     <div class="btn">
-        <button onclick="onAddContractCommit('')">提交</button>
+        <button onclick="onAddContractCommit()">提交</button>
         <button onclick="onReturnPrePage()">重置</button>
     </div>
 

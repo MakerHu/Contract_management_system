@@ -77,6 +77,7 @@
                 {% if function == 'countersigning_contract' %}
                     <td>{{ result.conid.conid }}</td>
                     <td>{{ result.conid.conname }}</td>
+                    <td>{{ result.username.username}}</td>
                     <td>{{ result.modifytime }}</td>
                     <td><a onclick="onCountersignClick('{{ result.conid.conid }}')">会签</a></td>
                 {% endif %}
@@ -85,6 +86,7 @@
                 {% if function == 'countersigned_contract' %}
                     <td>{{ result.conid.conid }}</td>
                     <td>{{ result.conid.conname }}</td>
+                    <td>{{ result.username.username}}</td>
                     <td>{{ result.modifytime }}</td>
                 {% endif %}
 
@@ -92,6 +94,7 @@
                 {% if function == 'contract_approving' %}
                     <td>{{ result.conid.conid }}</td>
                     <td>{{ result.conid.conname }}</td>
+                    <td>{{ result.username.username}}</td>
                     <td>{{ result.modifytime }}</td>
                     <td><a onclick="onApprovalClick('{{ result.conid.conid }}')">审批</a></td>
                 {% endif %}
@@ -100,6 +103,7 @@
                 {% if function == 'contract_approved' %}
                     <td>{{ result.conid.conid }}</td>
                     <td>{{ result.conid.conname }}</td>
+                    <td>{{ result.username.username}}</td>
                     <td>{{ result.modifytime }}</td>
                 {% endif %}
 
@@ -107,6 +111,7 @@
                 {% if function == 'contract_signing' %}
                     <td>{{ result.conid.conid }}</td>
                     <td>{{ result.conid.conname }}</td>
+                    <td>{{ result.username.username}}</td>
                     <td>{{ result.modifytime }}</td>
                     <td><a onclick="onSignClick('{{ result.conid.conid }}')">签订</a></td>
                 {% endif %}
@@ -115,6 +120,7 @@
                 {% if function == 'contract_signed' %}
                     <td>{{ result.conid.conid }}</td>
                     <td>{{ result.conid.conname }}</td>
+                    <td>{{ result.username.username}}</td>
                     <td>{{ result.modifytime }}</td>
                 {% endif %}
 

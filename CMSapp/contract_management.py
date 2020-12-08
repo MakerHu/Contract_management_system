@@ -423,7 +423,7 @@ def search_process_query(request):
 #######################################################################################################################
 #######################################################################################################################
 
-# 待会签合同
+# 待会签合同 起草完成
 def base_countersigning_contract_table(request, query_result, is_search='false'):
     # 返回给界面的值
     response = {}
@@ -439,7 +439,7 @@ def base_countersigning_contract_table(request, query_result, is_search='false')
     pageNum = int(request.POST.get('pageNum'))
 
     # 字段列表
-    fieldlist = ['合同编号', '合同名称', '起草时间', '操作']      ########################## 这里要根据情况修改
+    fieldlist = ['合同编号', '合同名称','会签员', '修改时间', '操作']      ########################## 这里要根据情况修改
 
     response['fieldlist'] = fieldlist
 
@@ -473,11 +473,16 @@ def countersigning_contract(request):
     if request.session.get('is_login', None):
         username = request.session.get('username')
         rolename = models.right.objects.filter(username=username)[0].rolename.rolename
+        print('姓名')
+        print(username)
+        print('角色')
+        print(rolename)
         if rolename == 'root':
             # 查询结果
-            query_result = models.contract_state.objects.filter(type=1)     ########################## 这里要根据情况修改
+            query_result = models.contract_process.objects.filter(type=1,state=0)     ########################## 这里要根据情况修改
         else:
-            query_result = models.contract_state.objects.filter(type=1, conid__username=username)   ########################## 这里要根据情况修改
+            query_result = models.contract_process.objects.filter(type=1,state=0, username=username)   ########################## 这里要根据情况修改
+            print(query_result)
         return base_countersigning_contract_table(request, query_result)       ########################## 这里要根据情况修改
     else:
         return render(request, 'CMSapp/timeout.html')
@@ -493,15 +498,15 @@ def search_countersigning_contract(request):
             # 查询结果
             if rolename == 'root':
                 query_result.extend(
-                    models.contract_state.objects.filter(conid__conname__icontains=searchMsg, type=1))  ########################## 这里要根据情况修改
+                    models.contract_process.objects.filter(conid__conname__icontains=searchMsg, type=1,state=0))  ########################## 这里要根据情况修改
             else:
                 query_result.extend(
-                    models.contract_state.objects.filter(conid__conname__icontains=searchMsg, type=1, conid__username=username))    ########################## 这里要根据情况修改
+                    models.contract_process.objects.filter(conid__conname__icontains=searchMsg, type=1,state=0, username=username))    ########################## 这里要根据情况修改
         else:
             if rolename == 'root':
-                query_result = models.contract_state.objects.filter(type=1)  ########################## 这里要根据情况修改
+                query_result = models.contract_process.objects.filter(type=1,state=0)  ########################## 这里要根据情况修改
             else:
-                query_result = models.contract_state.objects.filter(type=1, conid__username=username)  ########################## 这里要根据情况修改
+                query_result = models.contract_process.objects.filter(type=1,state=0, username=username)  ########################## 这里要根据情况修改
         return base_countersigning_contract_table(request, query_result, 'true')           ########################## 这里要根据情况修改
     else:
         return render(request, 'CMSapp/timeout.html')
@@ -511,7 +516,7 @@ def search_countersigning_contract(request):
 #######################################################################################################################
 #######################################################################################################################
 
-# 已会签合同
+# 已会签合同 待定稿
 def base_countersigned_contract_table(request, query_result, is_search='false'):
     # 返回给界面的值
     response = {}
@@ -527,7 +532,7 @@ def base_countersigned_contract_table(request, query_result, is_search='false'):
     pageNum = int(request.POST.get('pageNum'))
 
     # 字段列表
-    fieldlist = ['合同编号', '合同名称', '起草时间']      ########################## 这里要根据情况修改
+    fieldlist = ['合同编号', '合同名称','会签员', '修改时间']      ########################## 这里要根据情况修改
 
     response['fieldlist'] = fieldlist
 
@@ -563,9 +568,9 @@ def countersigned_contract(request):
         rolename = models.right.objects.filter(username=username)[0].rolename.rolename
         if rolename == 'root':
             # 查询结果
-            query_result = models.contract_state.objects.filter(type=2)     ########################## 这里要根据情况修改
+            query_result = models.contract_process.objects.filter(type=1,state=1)     ########################## 这里要根据情况修改
         else:
-            query_result = models.contract_state.objects.filter(type=2, conid__username=username)   ########################## 这里要根据情况修改
+            query_result = models.contract_process.objects.filter(type=1,state=1, username=username)   ########################## 这里要根据情况修改
         return base_countersigned_contract_table(request, query_result)       ########################## 这里要根据情况修改
     else:
         return render(request, 'CMSapp/timeout.html')
@@ -581,15 +586,15 @@ def search_countersigned_contract(request):
             # 查询结果
             if rolename == 'root':
                 query_result.extend(
-                    models.contract_state.objects.filter(conid__conname__icontains=searchMsg, type=2))  ########################## 这里要根据情况修改
+                    models.contract_process.objects.filter(conid__conname__icontains=searchMsg, type=2))  ########################## 这里要根据情况修改
             else:
                 query_result.extend(
-                    models.contract_state.objects.filter(conid__conname__icontains=searchMsg, type=2, conid__username=username))    ########################## 这里要根据情况修改
+                    models.contract_process.objects.filter(conid__conname__icontains=searchMsg, type=2, username=username))    ########################## 这里要根据情况修改
         else:
             if rolename == 'root':
-                query_result = models.contract_state.objects.filter(type=2)  ########################## 这里要根据情况修改
+                query_result = models.contract_process.objects.filter(type=1,state=1)  ########################## 这里要根据情况修改
             else:
-                query_result = models.contract_state.objects.filter(type=2, conid__username=username)  ########################## 这里要根据情况修改
+                query_result = models.contract_process.objects.filter(type=1,state=1, username=username)  ########################## 这里要根据情况修改
         return base_countersigned_contract_table(request, query_result, 'true')           ########################## 这里要根据情况修改
     else:
         return render(request, 'CMSapp/timeout.html')
@@ -599,7 +604,7 @@ def search_countersigned_contract(request):
 #######################################################################################################################
 #######################################################################################################################
 
-# 待审批合同
+# 待审批合同 审批未完成
 def base_contract_approving_table(request, query_result, is_search='false'):
     # 返回给界面的值
     response = {}
@@ -615,7 +620,7 @@ def base_contract_approving_table(request, query_result, is_search='false'):
     pageNum = int(request.POST.get('pageNum'))
 
     # 字段列表
-    fieldlist = ['合同编号', '合同名称', '起草时间', '操作']      ########################## 这里要根据情况修改
+    fieldlist = ['合同编号', '合同名称','审批员', '修改时间', '操作']      ########################## 这里要根据情况修改
 
     response['fieldlist'] = fieldlist
 
@@ -651,9 +656,9 @@ def contract_approving(request):
         rolename = models.right.objects.filter(username=username)[0].rolename.rolename
         if rolename == 'root':
             # 查询结果
-            query_result = models.contract_state.objects.filter(type=3)     ########################## 这里要根据情况修改
+            query_result = models.contract_process.objects.filter(type=2,state=0)     ########################## 这里要根据情况修改
         else:
-            query_result = models.contract_state.objects.filter(type=3, conid__username=username)   ########################## 这里要根据情况修改
+            query_result = models.contract_process.objects.filter(type=2,state=0, username=username)   ########################## 这里要根据情况修改
         return base_contract_approving_table(request, query_result)       ########################## 这里要根据情况修改
     else:
         return render(request, 'CMSapp/timeout.html')
@@ -669,15 +674,15 @@ def search_contract_approving(request):
             # 查询结果
             if rolename == 'root':
                 query_result.extend(
-                    models.contract_state.objects.filter(conid__conname__icontains=searchMsg, type=3))  ########################## 这里要根据情况修改
+                    models.contract_process.objects.filter(conid__conname__icontains=searchMsg, type=2,state=0))  ########################## 这里要根据情况修改
             else:
                 query_result.extend(
-                    models.contract_state.objects.filter(conid__conname__icontains=searchMsg, type=3, conid__username=username))    ########################## 这里要根据情况修改
+                    models.contract_process.objects.filter(conid__conname__icontains=searchMsg, type=2,state=0, username=username))    ########################## 这里要根据情况修改
         else:
             if rolename == 'root':
-                query_result = models.contract_state.objects.filter(type=3)  ########################## 这里要根据情况修改
+                query_result = models.contract_process.objects.filter(type=2,state=0)  ########################## 这里要根据情况修改
             else:
-                query_result = models.contract_state.objects.filter(type=3, conid__username=username)  ########################## 这里要根据情况修改
+                query_result = models.contract_process.objects.filter(type=2,state=0, username=username)  ########################## 这里要根据情况修改
         return base_contract_approving_table(request, query_result, 'true')           ########################## 这里要根据情况修改
     else:
         return render(request, 'CMSapp/timeout.html')
@@ -703,7 +708,7 @@ def base_contract_approved_table(request, query_result, is_search='false'):
     pageNum = int(request.POST.get('pageNum'))
 
     # 字段列表
-    fieldlist = ['合同编号', '合同名称', '起草时间']      ########################## 这里要根据情况修改
+    fieldlist = ['合同编号', '合同名称','审批员', '起草时间']      ########################## 这里要根据情况修改
 
     response['fieldlist'] = fieldlist
 
@@ -739,9 +744,9 @@ def contract_approved(request):
         rolename = models.right.objects.filter(username=username)[0].rolename.rolename
         if rolename == 'root':
             # 查询结果
-            query_result = models.contract_state.objects.filter(type=4)     ########################## 这里要根据情况修改
+            query_result = models.contract_process.objects.filter(type=2,state=1)     ########################## 这里要根据情况修改
         else:
-            query_result = models.contract_state.objects.filter(type=4, conid__username=username)   ########################## 这里要根据情况修改
+            query_result = models.contract_process.objects.filter(type=2,state=1, username=username)   ########################## 这里要根据情况修改
         return base_contract_approved_table(request, query_result)       ########################## 这里要根据情况修改
     else:
         return render(request, 'CMSapp/timeout.html')
@@ -757,15 +762,15 @@ def search_contract_approved(request):
             # 查询结果
             if rolename == 'root':
                 query_result.extend(
-                    models.contract_state.objects.filter(conid__conname__icontains=searchMsg, type=4))  ########################## 这里要根据情况修改
+                    models.contract_process.objects.filter(conid__conname__icontains=searchMsg, type=2,state=1))  ########################## 这里要根据情况修改
             else:
                 query_result.extend(
-                    models.contract_state.objects.filter(conid__conname__icontains=searchMsg, type=4, conid__username=username))    ########################## 这里要根据情况修改
+                    models.contract_process.objects.filter(conid__conname__icontains=searchMsg, type=2,state=1, username=username))    ########################## 这里要根据情况修改
         else:
             if rolename == 'root':
-                query_result = models.contract_state.objects.filter(type=4)  ########################## 这里要根据情况修改
+                query_result = models.contract_process.objects.filter(type=2,state=1)  ########################## 这里要根据情况修改
             else:
-                query_result = models.contract_state.objects.filter(type=4, conid__username=username)  ########################## 这里要根据情况修改
+                query_result = models.contract_process.objects.filter(type=2,state=1, username=username)  ########################## 这里要根据情况修改
         return base_contract_approved_table(request, query_result, 'true')           ########################## 这里要根据情况修改
     else:
         return render(request, 'CMSapp/timeout.html')
@@ -792,7 +797,7 @@ def base_contract_signing_table(request, query_result, is_search='false'):
     pageNum = int(request.POST.get('pageNum'))
 
     # 字段列表
-    fieldlist = ['合同编号', '合同名称', '起草时间', '操作']      ########################## 这里要根据情况修改
+    fieldlist = ['合同编号', '合同名称','签订人', '修改时间', '操作']      ########################## 这里要根据情况修改
 
     response['fieldlist'] = fieldlist
 
@@ -828,9 +833,9 @@ def contract_signing(request):
         rolename = models.right.objects.filter(username=username)[0].rolename.rolename
         if rolename == 'root':
             # 查询结果
-            query_result = models.contract_state.objects.filter(type=4)     ########################## 这里要根据情况修改
+            query_result = models.contract_process.objects.filter(type=3,state=0)     ########################## 这里要根据情况修改
         else:
-            query_result = models.contract_state.objects.filter(type=4, conid__username=username)   ########################## 这里要根据情况修改
+            query_result = models.contract_process.objects.filter(type=3,state=0, username=username)   ########################## 这里要根据情况修改
         return base_contract_signing_table(request, query_result)       ########################## 这里要根据情况修改
     else:
         return render(request, 'CMSapp/timeout.html')
@@ -846,15 +851,15 @@ def search_contract_signing(request):
             # 查询结果
             if rolename == 'root':
                 query_result.extend(
-                    models.contract_state.objects.filter(conid__conname__icontains=searchMsg, type=4))  ########################## 这里要根据情况修改
+                    models.contract_process.objects.filter(conid__conname__icontains=searchMsg, type=3,state=0))  ########################## 这里要根据情况修改
             else:
                 query_result.extend(
-                    models.contract_state.objects.filter(conid__conname__icontains=searchMsg, type=4, conid__username=username))    ########################## 这里要根据情况修改
+                    models.contract_process.objects.filter(conid__conname__icontains=searchMsg, type=3,state=0, username=username))    ########################## 这里要根据情况修改
         else:
             if rolename == 'root':
-                query_result = models.contract_state.objects.filter(type=4)  ########################## 这里要根据情况修改
+                query_result = models.contract_process.objects.filter(type=3,state=0)  ########################## 这里要根据情况修改
             else:
-                query_result = models.contract_state.objects.filter(type=4, conid__username=username)  ########################## 这里要根据情况修改
+                query_result = models.contract_process.objects.filter(type=3,state=0, username=username)  ########################## 这里要根据情况修改
         return base_contract_signing_table(request, query_result, 'true')           ########################## 这里要根据情况修改
     else:
         return render(request, 'CMSapp/timeout.html')
@@ -880,7 +885,7 @@ def base_contract_signed_table(request, query_result, is_search='false'):
     pageNum = int(request.POST.get('pageNum'))
 
     # 字段列表
-    fieldlist = ['合同编号', '合同名称', '起草时间']      ########################## 这里要根据情况修改
+    fieldlist = ['合同编号', '合同名称','签订人', '修改时间']      ########################## 这里要根据情况修改
 
     response['fieldlist'] = fieldlist
 
@@ -916,9 +921,9 @@ def contract_signed(request):
         rolename = models.right.objects.filter(username=username)[0].rolename.rolename
         if rolename == 'root':
             # 查询结果
-            query_result = models.contract_state.objects.filter(type=5)     ########################## 这里要根据情况修改
+            query_result = models.contract_process.objects.filter(type=3,state=1)     ########################## 这里要根据情况修改
         else:
-            query_result = models.contract_state.objects.filter(type=5, conid__username=username)   ########################## 这里要根据情况修改
+            query_result = models.contract_process.objects.filter(type=3,state=1, username=username)   ########################## 这里要根据情况修改
         return base_contract_signed_table(request, query_result)       ########################## 这里要根据情况修改
     else:
         return render(request, 'CMSapp/timeout.html')
@@ -934,15 +939,15 @@ def search_contract_signed(request):
             # 查询结果
             if rolename == 'root':
                 query_result.extend(
-                    models.contract_state.objects.filter(conid__conname__icontains=searchMsg, type=5))  ########################## 这里要根据情况修改
+                    models.contract_process.objects.filter(conid__conname__icontains=searchMsg, type=3,state=1))  ########################## 这里要根据情况修改
             else:
                 query_result.extend(
-                    models.contract_state.objects.filter(conid__conname__icontains=searchMsg, type=5, conid__username=username))    ########################## 这里要根据情况修改
+                    models.contract_process.objects.filter(conid__conname__icontains=searchMsg, type=3,state=1, username=username))    ########################## 这里要根据情况修改
         else:
             if rolename == 'root':
-                query_result = models.contract_state.objects.filter(type=5)  ########################## 这里要根据情况修改
+                query_result = models.contract_process.objects.filter(type=3,state=1)  ########################## 这里要根据情况修改
             else:
-                query_result = models.contract_state.objects.filter(type=5, conid__username=username)  ########################## 这里要根据情况修改
+                query_result = models.contract_process.objects.filter(type=3,state=1, username=username)  ########################## 这里要根据情况修改
         return base_contract_signed_table(request, query_result, 'true')           ########################## 这里要根据情况修改
     else:
         return render(request, 'CMSapp/timeout.html')
@@ -952,88 +957,88 @@ def search_contract_signed(request):
 #######################################################################################################################
 #######################################################################################################################
 
-# 已签订合同
-def base_contract_signed_table(request, query_result, is_search='false'):
-    # 返回给界面的值
-    response = {}
-
-    response['searchURL'] = '/search_contract_signed/'     ########################## 这里要根据情况修改
-    # 返回搜索框中的值
-    if is_search == 'true':
-        # 搜索条件
-        searchMsg = request.POST.get('searchMsg')
-        response['searchMsg'] = searchMsg
-
-    # 获取选择的页数
-    pageNum = int(request.POST.get('pageNum'))
-
-    # 字段列表
-    fieldlist = ['合同编号', '合同名称', '起草时间']      ########################## 这里要根据情况修改
-
-    response['fieldlist'] = fieldlist
-
-    # 功能的中英文名
-    response['function'] = 'contract_signed'   ########################## 这里要根据情况修改        ******名字从base.html里找******
-    response['functionname'] = '已签订合同'      ########################## 这里要根据情况修改
-
-    # 翻页页码
-    if pageNum == 1:
-        pageslist = [str(pageNum), str(pageNum + 1), str(pageNum + 2), str(pageNum + 3), str(pageNum + 4)]
-    elif pageNum == 2:
-        pageslist = [str(pageNum - 1), str(pageNum), str(pageNum + 1), str(pageNum + 2), str(pageNum + 3)]
-    else:
-        pageslist = [str(pageNum - 2), str(pageNum - 1), str(pageNum), str(pageNum + 1), str(pageNum + 2)]
-
-    response['pageslist'] = pageslist
-
-    # 当前页码
-    response['current_page'] = str(pageNum)
-
-    # 返回结果列表，需要的五条记录
-    startindex = (5 * (pageNum - 1))
-    endindex = startindex + 5
-    resultlist = query_result[startindex:endindex]
-
-    response['resultlist'] = resultlist
-    return render(request, 'CMSapp/baseTable.html', response)
-
-
-def contract_signed(request):
-    if request.session.get('is_login', None):
-        username = request.session.get('username')
-        rolename = models.right.objects.filter(username=username)[0].rolename.rolename
-        if rolename == 'root':
-            # 查询结果
-            query_result = models.contract_state.objects.filter(type=5)     ########################## 这里要根据情况修改
-        else:
-            query_result = models.contract_state.objects.filter(type=5, conid__username=username)   ########################## 这里要根据情况修改
-        return base_contract_signed_table(request, query_result)       ########################## 这里要根据情况修改
-    else:
-        return render(request, 'CMSapp/timeout.html')
-
-
-def search_contract_signed(request):
-    if request.session.get('is_login', None):
-        username = request.session.get('username')
-        rolename = models.right.objects.filter(username=username)[0].rolename.rolename
-        searchMsg = request.POST.get('searchMsg')
-        query_result = []
-        if searchMsg:
-            # 查询结果
-            if rolename == 'root':
-                query_result.extend(
-                    models.contract_state.objects.filter(conid__conname__icontains=searchMsg, type=5))  ########################## 这里要根据情况修改
-            else:
-                query_result.extend(
-                    models.contract_state.objects.filter(conid__conname__icontains=searchMsg, type=5, conid__username=username))    ########################## 这里要根据情况修改
-        else:
-            if rolename == 'root':
-                query_result = models.contract_state.objects.filter(type=5)  ########################## 这里要根据情况修改
-            else:
-                query_result = models.contract_state.objects.filter(type=5, conid__username=username)  ########################## 这里要根据情况修改
-        return base_contract_signed_table(request, query_result, 'true')           ########################## 这里要根据情况修改
-    else:
-        return render(request, 'CMSapp/timeout.html')
+# 已签订合同 重复
+# def base_contract_signed_table(request, query_result, is_search='false'):
+#     # 返回给界面的值
+#     response = {}
+#
+#     response['searchURL'] = '/search_contract_signed/'     ########################## 这里要根据情况修改
+#     # 返回搜索框中的值
+#     if is_search == 'true':
+#         # 搜索条件
+#         searchMsg = request.POST.get('searchMsg')
+#         response['searchMsg'] = searchMsg
+#
+#     # 获取选择的页数
+#     pageNum = int(request.POST.get('pageNum'))
+#
+#     # 字段列表
+#     fieldlist = ['合同编号', '合同名称', '起草时间']      ########################## 这里要根据情况修改
+#
+#     response['fieldlist'] = fieldlist
+#
+#     # 功能的中英文名
+#     response['function'] = 'contract_signed'   ########################## 这里要根据情况修改        ******名字从base.html里找******
+#     response['functionname'] = '已签订合同'      ########################## 这里要根据情况修改
+#
+#     # 翻页页码
+#     if pageNum == 1:
+#         pageslist = [str(pageNum), str(pageNum + 1), str(pageNum + 2), str(pageNum + 3), str(pageNum + 4)]
+#     elif pageNum == 2:
+#         pageslist = [str(pageNum - 1), str(pageNum), str(pageNum + 1), str(pageNum + 2), str(pageNum + 3)]
+#     else:
+#         pageslist = [str(pageNum - 2), str(pageNum - 1), str(pageNum), str(pageNum + 1), str(pageNum + 2)]
+#
+#     response['pageslist'] = pageslist
+#
+#     # 当前页码
+#     response['current_page'] = str(pageNum)
+#
+#     # 返回结果列表，需要的五条记录
+#     startindex = (5 * (pageNum - 1))
+#     endindex = startindex + 5
+#     resultlist = query_result[startindex:endindex]
+#
+#     response['resultlist'] = resultlist
+#     return render(request, 'CMSapp/baseTable.html', response)
+#
+#
+# def contract_signed(request):
+#     if request.session.get('is_login', None):
+#         username = request.session.get('username')
+#         rolename = models.right.objects.filter(username=username)[0].rolename.rolename
+#         if rolename == 'root':
+#             # 查询结果
+#             query_result = models.contract_state.objects.filter(type=5)     ########################## 这里要根据情况修改
+#         else:
+#             query_result = models.contract_state.objects.filter(type=5, conid__username=username)   ########################## 这里要根据情况修改
+#         return base_contract_signed_table(request, query_result)       ########################## 这里要根据情况修改
+#     else:
+#         return render(request, 'CMSapp/timeout.html')
+#
+#
+# def search_contract_signed(request):
+#     if request.session.get('is_login', None):
+#         username = request.session.get('username')
+#         rolename = models.right.objects.filter(username=username)[0].rolename.rolename
+#         searchMsg = request.POST.get('searchMsg')
+#         query_result = []
+#         if searchMsg:
+#             # 查询结果
+#             if rolename == 'root':
+#                 query_result.extend(
+#                     models.contract_state.objects.filter(conid__conname__icontains=searchMsg, type=5))  ########################## 这里要根据情况修改
+#             else:
+#                 query_result.extend(
+#                     models.contract_state.objects.filter(conid__conname__icontains=searchMsg, type=5, conid__username=username))    ########################## 这里要根据情况修改
+#         else:
+#             if rolename == 'root':
+#                 query_result = models.contract_state.objects.filter(type=5)  ########################## 这里要根据情况修改
+#             else:
+#                 query_result = models.contract_state.objects.filter(type=5, conid__username=username)  ########################## 这里要根据情况修改
+#         return base_contract_signed_table(request, query_result, 'true')           ########################## 这里要根据情况修改
+#     else:
+#         return render(request, 'CMSapp/timeout.html')
 
 #######################################################################################################################
 #######################################################################################################################
@@ -1056,7 +1061,7 @@ def base_contract_distributing_table(request, query_result, is_search='false'):
     pageNum = int(request.POST.get('pageNum'))
 
     # 字段列表
-    fieldlist = ['合同编号', '合同名称', '起草时间']      ########################## 这里要根据情况修改
+    fieldlist = ['合同编号', '合同名称', '起草时间','操作']      ########################## 这里要根据情况修改
 
     response['fieldlist'] = fieldlist
 
@@ -1136,7 +1141,7 @@ def base_contract_distributed_table(request, query_result, is_search='false'):
     pageNum = int(request.POST.get('pageNum'))
 
     # 字段列表
-    fieldlist = ['合同编号', '合同名称', '起草时间']      ########################## 这里要根据情况修改
+    fieldlist = ['合同编号', '合同名称', '起草时间','操作']      ########################## 这里要根据情况修改
 
     response['fieldlist'] = fieldlist
 
