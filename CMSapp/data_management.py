@@ -1,5 +1,8 @@
 import os
+from datetime import datetime, timezone, timedelta
+
 import django
+import pytz
 from django.http import JsonResponse
 from django.shortcuts import render, HttpResponse
 from CMSapp import models
@@ -213,8 +216,13 @@ def data_contractmsg(request):
         content = request.POST.get('content')
         cusid = models.customer.objects.filter(cusid=request.POST.get('cusid'))[0]
         username = models.user.objects.filter(username=request.session.get('username'))[0]
-        models.contract.objects.create(conname=conname, begintime=begintime, endtime=endtime, content=content,
-                                       cusid=cusid, username=username).save()
+        contract = models.contract.objects.create(conname=conname, begintime=begintime, endtime=endtime, content=content,
+                                       cusid=cusid, username=username)
+        dt = datetime.utcnow()
+        tzutc_8 = timezone(timedelta(hours=8))
+        local_dt = dt.astimezone(tzutc_8)
+        contract_type = 1
+        models.contract_state.objects.create(type=contract_type, modifytime=local_dt, conid=contract).save()
         return render(request, 'CMSapp/draft_contract.html', response)
     else:
         return render(request, 'CMSapp/timeout.html')
