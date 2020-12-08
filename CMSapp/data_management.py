@@ -1,8 +1,13 @@
 import os
+from datetime import datetime, timezone, timedelta
+
 import django
+import pytz
 from django.http import JsonResponse
 from django.shortcuts import render, HttpResponse
 from CMSapp import models
+import json
+
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Contract_management_system.settings")  # project_name 项目名称
 django.setup()
@@ -12,21 +17,90 @@ def data_draft_contract(request):
     pass
 
 
-def test(request):
-    countersign_person = request.POST.get('countersign_person')
-    approve_person = request.POST.get('approve_person')
-    sign_person = request.POST.get('sign_person')
+def data_allocation(request):
+    if request.session.get('is_login', None):
+        allocation_conid = request.POST.get('keyword')
+        response = {}
+        userrightlist = models.right.objects.exclude(rolename='newuser')
+        response['userrightlist'] = userrightlist
+        rolefunctionlist = models.role_function.objects.all()
+        response['rolefunctionlist'] = rolefunctionlist
+        contractname = models.contract.objects.filter(conid=allocation_conid)[0].conname
 
-    # print('000000000000000000000000000000000')
-    #
-    # print('countersign_person')
-    # print(countersign_person)
-    #
-    # print('approve_person')
-    # print(approve_person)
-    #
-    # print('sign_person')
-    # print(sign_person)
+        response['conid'] = allocation_conid
+        response['contractname'] = contractname
+
+        processConidEntity = models.contract.objects.filter(conid=allocation_conid)[0]
+        countersign = models.contract_process.objects.filter(conid=processConidEntity, type=1)
+        approve = models.contract_process.objects.filter(conid=processConidEntity, type=2)
+        sign = models.contract_process.objects.filter(conid=processConidEntity, type=3)
+
+        response['countersign'] = countersign
+        response['approve'] = approve
+        response['sign'] = sign
+
+        canCountersignRoles = models.role_function.objects.filter(function='contract_countersign')
+        manageTheContractUserlist = models.contract_process.objects.filter(conid=allocation_conid,type=1)
+        noManageTheContractUserlist = models.user.objects.exclude(
+            username__in=manageTheContractUserlist.values('username'))
+        left1_rightlist = models.right.objects.filter(rolename__rolename__in=canCountersignRoles.values('rolename'),
+                                                      username__username__in=noManageTheContractUserlist.values(
+                                                          'username'))
+
+        canApprovalRoles = models.role_function.objects.filter(function='contract_approval')
+        manageTheContractUserlist = models.contract_process.objects.filter(conid=allocation_conid,type=2)
+        noManageTheContractUserlist = models.user.objects.exclude(
+            username__in=manageTheContractUserlist.values('username'))
+        left2_rightlist = models.right.objects.filter(rolename__rolename__in=canApprovalRoles.values('rolename'),
+                                                      username__username__in=noManageTheContractUserlist.values(
+                                                          'username'))
+
+        canSignRoles = models.role_function.objects.filter(function='contract_sign')
+        manageTheContractUserlist = models.contract_process.objects.filter(conid=allocation_conid,type=3)
+        noManageTheContractUserlist = models.user.objects.exclude(
+            username__in=manageTheContractUserlist.values('username'))
+        left3_rightlist = models.right.objects.filter(rolename__rolename__in=canSignRoles.values('rolename'),
+                                                      username__username__in=noManageTheContractUserlist.values(
+                                                          'username'))
+
+        response['left1_rightlist'] = left1_rightlist
+        response['left2_rightlist'] = left2_rightlist
+        response['left3_rightlist'] = left3_rightlist
+
+        return render(request, 'CMSapp/contract_allocation.html', response)
+    else:
+        return render(request, 'CMSapp/timeout.html')
+
+
+def data_updateAllocation(request):
+    data_countersign = request.POST.getlist('data_countersign')
+    data_approve = request.POST.getlist('data_approve')
+    data_sign = request.POST.getlist('data_sign')
+    conid = request.POST.get('conid')
+
+    countersign = json.loads(data_countersign[0])
+    approve = json.loads(data_approve[0])
+    sign = json.loads(data_sign[0])
+
+    processConidEntity = models.contract.objects.filter(conid=conid)[0]
+
+    models.contract_process.objects.filter(conid=conid, type=1, state=0).delete()
+    for countersignusername in countersign:
+        processCountersignUsernameEntity = models.user.objects.filter(username=countersignusername)[0]
+        models.contract_process.objects.create(conid=processConidEntity, username=processCountersignUsernameEntity,
+                                                   type=1, state=0, content="").save()
+
+    models.contract_process.objects.filter(conid=conid, type=2, state=0).delete()
+    for approveusername in approve:
+        processApproveUsernameEntity = models.user.objects.filter(username=approveusername)[0]
+        models.contract_process.objects.create(conid=processConidEntity, username=processApproveUsernameEntity, type=2,
+                                               state=0, content="").save()
+
+    models.contract_process.objects.filter(conid=conid, type=3, state=0).delete()
+    for signusername in sign:
+        processSignUsernameEntity = models.user.objects.filter(username=signusername)[0]
+        models.contract_process.objects.create(conid=processConidEntity, username=processSignUsernameEntity, type=3,
+                                               state=0, content="").save()
 
     response = {'is': 'success'}
 
@@ -167,3 +241,30 @@ def data_updateContractSignmsg(request):
         models.contract_state.objects.filter(conid=conid).update(type=5)
 
     return HttpResponse(request)
+
+
+################################################################################################################
+################################################################################################################
+################################################################################################################
+# 添加合同信息界面
+def data_contractmsg(request):
+    if request.session.get('is_login', None):
+        response = {}
+        conname=request.POST.get('conname')
+        begintime = request.POST.get('begintime')
+        endtime = request.POST.get('endtime')
+        content = request.POST.get('content')
+        cusid = models.customer.objects.filter(cusid=request.POST.get('cusid'))[0]
+        username = models.user.objects.filter(username=request.session.get('username'))[0]
+        contract = models.contract.objects.create(conname=conname, begintime=begintime, endtime=endtime, content=content,
+                                       cusid=cusid, username=username)
+        dt = datetime.utcnow()
+        tzutc_8 = timezone(timedelta(hours=8))
+        local_dt = dt.astimezone(tzutc_8)
+        contract_type = 1
+        models.contract_state.objects.create(type=contract_type, modifytime=local_dt, conid=contract).save()
+        return render(request, 'CMSapp/draft_contract.html', response)
+    else:
+        return render(request, 'CMSapp/timeout.html')
+
+

@@ -34,6 +34,9 @@ urlpatterns = [
     # 用户授权
     path('data_authorize/', data_management.data_authorize),
 
+    #分配合同
+    path('data_allocation/', data_management.data_allocation),
+
     # 权限管理
     path('right/', contract_management.right),
 
@@ -80,15 +83,15 @@ urlpatterns = [
     path('contract_signed/', contract_management.contract_signed),
     path('search_contract_signed/', contract_management.search_contract_signed),
 
-    #待分配合同
+    # 待分配合同
     path('contract_distributing/', contract_management.contract_distributing),
     path('search_contract_distributing/', contract_management.search_contract_distributing),
 
-    #已分配合同
+    # 已分配合同
     path('contract_distributed/', contract_management.contract_distributed),
     path('search_contract_distributed/', contract_management.search_contract_distributed),
 
-    #客户信息
+    # 客户信息
     path('customer_info/', contract_management.customer_info),
     path('search_customer_info/', contract_management.search_customer_info),
 
@@ -96,9 +99,13 @@ urlpatterns = [
     path('ajax_login/', views.ajax_login),
     path('ajax_register/', views.ajax_register),
     path('ajax_confirm_username/', views.ajax_confirm_username),
-    path('ajax_distribution/', data_management.test),
     path('ajax_updateAuthority/', data_management.data_updateAuthority),
     path('ajax_updateCustomermsg/', data_management.data_updateCustomermsg),
+    path('ajax_addContract/',data_management.data_contractmsg),
+    path('ajax_check_cusid/', views.ajax_checkcusid),
+    path('ajax_updateAllocation/', data_management.data_updateAllocation),
+    path('ajax_updateAuthority/',data_management.data_updateAuthority),
+
     path('ajax_updateContractSignmsg/', data_management.data_updateContractSignmsg),
     path('ajax_updateContractApprovalmsg/',data_management.data_updateContractApprovalmsg),
 ]

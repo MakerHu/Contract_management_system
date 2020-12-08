@@ -111,16 +111,17 @@ function onSignClick(keyword) {
 
 }
 
-//签订按钮
+//分配按钮
+//待分配合同按钮
 function onDistribute(keyword) {
     // let node = obj.parentNode.parentNode;
     // let keyword = node.children[0].innerHTML;
-    alert(keyword);
+    data_edit_page_ajax('/data_allocation/',keyword);
 }
 
 //合同详情按钮
 function onContractDetail(keyword){
-
+    data_edit_page_ajax('/data_allocation/',keyword);
 }
 
 //客户详情按钮
