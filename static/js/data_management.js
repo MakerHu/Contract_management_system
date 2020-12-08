@@ -51,6 +51,11 @@ function onReturnPrePage() {
     reload_function_view(url_g, titlename_g, pageNum = 1);
 }
 
+//重置签订合同中的签订信息
+function onClearText() {
+    document.getElementById('approval_comments').value= '';
+}
+
 //授权界面中的提交按钮
 function onAuthorityCommit(username) {
     let data = new FormData();
@@ -96,6 +101,15 @@ function onAddCustomerCommit(cusid) {
         alert('星号处不可为空！');
     }
 
+}
+
+//签订合同界面中的提交按钮
+function onSigncontractCommit(conid) {
+    let data = new FormData();
+    let information = document.getElementById('approval_comments').value;
+    data.append("conid", conid)
+    data.append("information", information)
+    onCommitData('/ajax_updateContractSignmsg/','/contract_signing/', data)
 }
 
 //起草合同界面中的提交按钮

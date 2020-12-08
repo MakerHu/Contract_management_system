@@ -99,6 +99,34 @@ def data_updateCustomermsg(request):
                                        account=account).save()
     return HttpResponse(request)
 
+################################################################################################################
+################################################################################################################
+################################################################################################################
+
+#合同签订信息
+def data_contract_sign(request):
+    if request.session.get('is_login', None):
+        response = {}
+        conid = request.POST.get('keyword')
+        contractMsg = models.contract.objects.filter(conid=conid)[0]
+        response['contractMsg'] = contractMsg
+        customerMsg = models.customer.objects.filter(cusid=contractMsg.cusid_id)[0]
+        response['customerMsg'] = customerMsg
+        return render(request, 'CMSapp/contract_sign.html', response)
+    else:
+        return render(request, 'CMSapp/timeout.html')
+
+################################################################################################################
+################################################################################################################
+################################################################################################################
+
+#更新合同签订信息
+def data_updateContractSignmsg(request):
+    conid = request.POST.get('conid')
+    information = request.POST.get('information')
+    contractEntity = models.contract.objects.filter(conid=conid)[0]
+    models.contract_state.objects.filter(conid=contractEntity).update(type=5)
+    return HttpResponse(request)
 
 
 ################################################################################################################
