@@ -40,6 +40,8 @@ def data_allocation(request):
         response['approve'] = approve
         response['sign'] = sign
 
+        response['contractState']=models.contract_state.objects.filter(conid=allocation_conid)[0].type
+
         canCountersignRoles = models.role_function.objects.filter(function='contract_countersign')
         manageTheContractUserlist = models.contract_process.objects.filter(conid=allocation_conid,type=1)
         noManageTheContractUserlist = models.user.objects.exclude(
@@ -85,25 +87,35 @@ def data_updateAllocation(request):
 
     processConidEntity = models.contract.objects.filter(conid=conid)[0]
 
+
+
     # 删除process数据库中还未开始会签的人员数据
-    models.contract_process.objects.filter(conid=conid, type=1, state=0).delete()
+    models.contract_process.objects.filter(conid=conid, type=1, state=0).delete()   #  把还未开始的会签员都删了
     # 重新根据前端返回的会签人员列表进行分配
     for countersignusername in countersign:
-        processCountersignUsernameEntity = models.user.objects.filter(username=countersignusername)[0]
-        models.contract_process.objects.create(conid=processConidEntity, username=processCountersignUsernameEntity,
-                                                   type=1, state=0, content="").save()
+        try:
+            processCountersignUsernameEntity = models.user.objects.filter(username=countersignusername)[0]
+            models.contract_process.objects.create(conid=processConidEntity, username=processCountersignUsernameEntity,
+                                                    type=1, state=0, content="").save()
+        except:
+            pass
 
     models.contract_process.objects.filter(conid=conid, type=2, state=0).delete()
     for approveusername in approve:
-        processApproveUsernameEntity = models.user.objects.filter(username=approveusername)[0]
-        models.contract_process.objects.create(conid=processConidEntity, username=processApproveUsernameEntity, type=2,
-                                               state=0, content="").save()
+        try:
+            processApproveUsernameEntity = models.user.objects.filter(username=approveusername)[0]
+            models.contract_process.objects.create(conid=processConidEntity, username=processApproveUsernameEntity, type=2,state=0, content="").save()
+        except:
+            pass
 
     models.contract_process.objects.filter(conid=conid, type=3, state=0).delete()
     for signusername in sign:
-        processSignUsernameEntity = models.user.objects.filter(username=signusername)[0]
-        models.contract_process.objects.create(conid=processConidEntity, username=processSignUsernameEntity, type=3,
+        try:
+            processSignUsernameEntity = models.user.objects.filter(username=signusername)[0]
+            models.contract_process.objects.create(conid=processConidEntity, username=processSignUsernameEntity, type=3,
                                                state=0, content="").save()
+        except:
+            pass
 
     response = {'is': 'success'}
 
@@ -202,15 +214,11 @@ def data_updateContractApprovalmsg(request):
     user = models.user.objects.filter(username=request.session.get('username'))[0]
     if state == 'true':
         models.contract_state.objects.filter(conid=contractEntity).update(type=4)
-        print(contractEntity)
-        print(user)
         models.contract_process.objects.filter(conid=contractEntity, username=user, type=2).update(state=1, content=content)
-    else:
-        models.contract_state.objects.filter(conid=contractEntity).update(type=4)
+    else:       # 审批未通过
+        models.contract_state.objects.filter(conid=contractEntity).update(type=2)   # 改为会签已完成状态（待定稿）
         models.contract_process.objects.filter(conid=contractEntity, username=user, type=2).update(state=2, content=content)
 
-
-    models.contract_state.objects.filter(conid=contractEntity).update(type=4)
     return HttpResponse(request)
 
 
@@ -241,8 +249,8 @@ def data_updateContractSignmsg(request):
     information = request.POST.get('information')
     models.contract_process.objects.filter(conid=conid,username=username,type=3).update(state=1,content=information)
 
-    approvalnum = len(models.contract_process.objects.filter(conid_id=conid, type=3)) #合同所有审批人数
-    approvednum = len(models.contract_process.objects.filter(conid_id=conid, type=3, state=1))# 合同所有已审批已完成的人数
+    approvalnum = len(models.contract_process.objects.filter(conid_id=conid, type=3)) #合同所有签订人数
+    approvednum = len(models.contract_process.objects.filter(conid_id=conid, type=3, state=1))# 合同所有签订已完成的人数
 
     if approvalnum==approvednum:
         models.contract_state.objects.filter(conid=conid).update(type=5)
@@ -330,9 +338,16 @@ def data_updateContractCountersignMsg(request):
     conid = request.POST.get('conid')
     username=request.session.get('username')
     single_content = request.POST.get('single_content')
+
     contractEntity = models.contract.objects.filter(conid=conid)[0]
-    if(~Q(models.contract_process.objects.filter(conid=conid,type=1,state=0).exists())):
+    models.contract_process.objects.filter(conid=conid, type=1, username=username).update(content=single_content,
+                                                                                          state=1)
+
+    countersignernum = len(models.contract_process.objects.filter(conid_id=conid, type=1))  # 合同所有会签人数
+    countersignernum_finish = len(models.contract_process.objects.filter(conid_id=conid, type=1, state=1))  # 合同所有会签已完成的人数
+
+    if countersignernum == countersignernum_finish:
         models.contract_state.objects.filter(conid=contractEntity).update(type=2)
-    models.contract_process.objects.filter(conid=conid,type=1,username=username).update(content=single_content)
-    models.contract_process.objects.filter(conid=conid,type=1,username=username).update(state=1)
+
+
     return HttpResponse(request)

@@ -11,17 +11,13 @@
             <div>待分配人员列表</div>
             <select class="countersign" id="countersign_will" size="5"
                     onChange="onDeleteCountersignWillOption(this.value)">
-{#                {% for userright in userrightlist %}#}
-{#                    {% for rolefunction in rolefunctionlist %}#}
-{#                        {% if rolefunction.rolename.rolename == userright.rolename.rolename %}#}
-{#                            {% if rolefunction.function.funcname == 'contract_countersign' %}#}
-{#                                <option value="{{ userright.username.username }}">{{ userright.username.username }}</option>#}
-{#                            {% endif %}#}
-{#                        {% endif %}#}
-{#                    {% endfor %}#}
-{#                {% endfor %}#}
                 {% for userright in left1_rightlist %}
-                    <option value="{{ userright.username.username }}">{{ userright.username.username }}</option>#}
+                    {% if contractState < 2 %}
+                        <option value="{{ userright.username.username }}">{{ userright.username.username }}</option>#}
+                    {% else %}
+                        <option value="{{ userright.username.username }}" disabled="disabled">{{ userright.username.username }}</option>#}
+                    {% endif %}
+
                 {% endfor %}
             </select>
         </div>
@@ -46,23 +42,17 @@
             <div>分配审批人</div>
             <div>待分配人员列表</div>
             <select class="approve" id="approve_will" size="5" onChange="onDeleteApproveWillOption(this.value)">
-{#                {% for userright in userrightlist %}#}
-{#                    {% for rolefunction in rolefunctionlist %}#}
-{#                        {% if rolefunction.rolename.rolename == userright.rolename.rolename %}#}
-{#                            {% if rolefunction.function.funcname == 'contract_approval' %}#}
-{#                                <option value="{{ userright.username.username }}">{{ userright.username.username }}</option>#}
-{#                            {% endif %}#}
-{#                        {% endif %}#}
-{#                    {% endfor %}#}
-{#                {% endfor %}#}
                 {% for userright in left2_rightlist %}
-                    <option value="{{ userright.username.username }}">{{ userright.username.username }}</option>#}
+                    {% if contractState < 4 %}
+                        <option value="{{ userright.username.username }}">{{ userright.username.username }}</option>#}
+                    {% else %}
+                        <option value="{{ userright.username.username }}" disabled="disabled">{{ userright.username.username }}</option>#}
+                    {% endif %}
                 {% endfor %}
-
             </select>
         </div>
         <div class="distribution">
-            <div class="had">待分配人员列表</div>
+            <div class="had">已分配人员列表</div>
             <select class="approve" id="approve_have" size="5" onChange="onDeleteApproveHaveOption(this.value)">
                 {% for approveprocess in approve %}
                     {% if approveprocess.state == 0 %}
@@ -81,17 +71,12 @@
             <div>分配签订人</div>
             <div>待分配人员列表</div>
             <select class="sign" id="sign_will" size="5" onChange="onDeleteSignWillOption(this.value)">
-{#                {% for userright in userrightlist %}#}
-{#                    {% for rolefunction in rolefunctionlist %}#}
-{#                        {% if rolefunction.rolename.rolename == userright.rolename.rolename %}#}
-{#                            {% if rolefunction.function.funcname == 'contract_sign' %}#}
-{#                                <option value="{{ userright.username.username }}">{{ userright.username.username }}</option>#}
-{#                            {% endif %}#}
-{#                        {% endif %}#}
-{#                    {% endfor %}#}
-{#                {% endfor %}#}
                 {% for userright in left3_rightlist %}
-                    <option value="{{ userright.username.username }}">{{ userright.username.username }}</option>#}
+                    {% if contractState < 5 %}
+                        <option value="{{ userright.username.username }}">{{ userright.username.username }}</option>#}
+                    {% else %}
+                        <option value="{{ userright.username.username }}" disabled="disabled">{{ userright.username.username }}</option>#}
+                    {% endif %}
                 {% endfor %}
             </select>
         </div>

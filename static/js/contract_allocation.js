@@ -17,6 +17,14 @@ function onAllocationCommit(conid) {
     if (count_countersign == 0 || count_approve==0 || count_sign==0) {
         alert("人员分配不可为空");
     } else {
+        if(count_countersign<2){
+            alert('会签员至少为两人！');
+            return;
+        }
+        if(count_approve!=1){
+            alert('审批员只能为一人！');
+            return;
+        }
         for (let i = 0; i < count_countersign; i++) {
             let text = obj_countersign.options[i].value;
             data_countersign.push(text);

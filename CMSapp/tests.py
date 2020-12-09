@@ -51,5 +51,5 @@ from CMSapp import models
 # models.role_function.objects.get_or_create(function=functionEntity, rolename=roleEntity)
 
 # 删除用户
-# models.user.objects.filter(username='xzcnb').delete()
+models.user.objects.all().delete()
 
