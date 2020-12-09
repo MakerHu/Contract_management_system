@@ -44,6 +44,7 @@
                 {% if function == 'pending_contract' %}
                     <td>{{ result.conid.conid }}</td>
                     <td>{{ result.conid.conname }}</td>
+                    <td>{{ result.conid.username.username}}</td>
                     <td>{{ result.modifytime }}</td>
                     <td><a onclick="onFinalizeClick('{{ result.conid.conid }}')">定稿</a></td>
                 {% endif %}
@@ -52,6 +53,7 @@
                 {% if function == 'finalized_contract' %}
                     <td>{{ result.conid.conid }}</td>
                     <td>{{ result.conid.conname }}</td>
+                    <td>{{ result.conid.username.username}}</td>
                     <td>{{ result.modifytime }}</td>
                 {% endif %}
 
@@ -59,6 +61,7 @@
                 {% if function == 'process_query' %}
                     <td>{{ result.conid.conid }}</td>
                     <td>{{ result.conid.conname }}</td>
+                    <td>{{ result.conid.username.username}}</td>
                     <td>{{ result.modifytime }}</td>
                     {% if result.type == 1 %}
                         <td>起草完成</td>
@@ -128,6 +131,7 @@
                 {% if function == 'contract_distributing' %}
                     <td>{{ result.conid.conid }}</td>
                     <td>{{ result.conid.conname }}</td>
+                    <td>{{ result.conid.username.username }}</td>
                     <td>{{ result.modifytime }}</td>
                     <td><a onclick="onDistribute('{{ result.conid.conid }}')">分配</a></td>
                 {% endif %}
@@ -136,6 +140,7 @@
                 {% if function == 'contract_distributed' %}
                     <td>{{ result.conid.conid }}</td>
                     <td>{{ result.conid.conname }}</td>
+                    <td>{{ result.conid.username.username }}</td>
                     <td>{{ result.modifytime }}</td>
                     <td><a onclick="onContractDetail('{{ result.conid.conid }}')">详情</a></td>
                 {% endif %}

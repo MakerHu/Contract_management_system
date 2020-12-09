@@ -175,7 +175,7 @@ def base_pending_contract_table(request, query_result, is_search='false'):
     pageNum = int(request.POST.get('pageNum'))
 
     # 字段列表
-    fieldlist = ['合同编号', '合同名称', '起草时间', '操作']      ########################## 这里要根据情况修改
+    fieldlist = ['合同编号', '合同名称','定稿人', '起草时间', '操作']      ########################## 这里要根据情况修改
 
     response['fieldlist'] = fieldlist
 
@@ -230,9 +230,14 @@ def search_pending_contract(request):
             if rolename == 'root':
                 query_result.extend(
                     models.contract_state.objects.filter(conid__conname__icontains=searchMsg, type=2))  ########################## 这里要根据情况修改
+                query_result.extend(
+                    models.contract_state.objects.filter(conid__username__username__icontains=searchMsg, type=2))
             else:
                 query_result.extend(
                     models.contract_state.objects.filter(conid__conname__icontains=searchMsg, type=2, conid__username=username))    ########################## 这里要根据情况修改
+                query_result.extend(
+                    models.contract_state.objects.filter(conid__username__username__icontains=searchMsg, type=2,
+                                                         conid__username=username))
         else:
             if rolename == 'root':
                 query_result = models.contract_state.objects.filter(type=2)  ########################## 这里要根据情况修改
@@ -263,7 +268,7 @@ def base_finalized_contract_table(request, query_result, is_search='false'):
     pageNum = int(request.POST.get('pageNum'))
 
     # 字段列表
-    fieldlist = ['合同编号', '合同名称', '起草时间']      ########################## 这里要根据情况修改
+    fieldlist = ['合同编号', '合同名称','定稿人', '定稿时间']      ########################## 这里要根据情况修改
 
     response['fieldlist'] = fieldlist
 
@@ -318,9 +323,13 @@ def search_finalized_contract(request):
             if rolename == 'root':
                 query_result.extend(
                     models.contract_state.objects.filter(conid__conname__icontains=searchMsg, type=3))  ########################## 这里要根据情况修改
+                query_result.extend(
+                    models.contract_state.objects.filter(conid__username__username__icontains=searchMsg, type=3))
             else:
                 query_result.extend(
                     models.contract_state.objects.filter(conid__conname__icontains=searchMsg, type=3, conid__username=username))    ########################## 这里要根据情况修改
+                query_result.extend(
+                    models.contract_state.objects.filter(conid__username__username__icontains=searchMsg, type=3, conid__username=username))
         else:
             if rolename == 'root':
                 query_result = models.contract_state.objects.filter(type=3)  ########################## 这里要根据情况修改
@@ -351,7 +360,7 @@ def base_process_query_table(request, query_result, is_search='false'):
     pageNum = int(request.POST.get('pageNum'))
 
     # 字段列表
-    fieldlist = ['合同编号', '合同名称', '起草时间', '操作']      ########################## 这里要根据情况修改
+    fieldlist = ['合同编号', '合同名称', '起草人', '修改时间', '状态']      ########################## 这里要根据情况修改
 
     response['fieldlist'] = fieldlist
 
@@ -405,15 +414,19 @@ def search_process_query(request):
             # 查询结果
             if rolename == 'root':
                 query_result.extend(
-                    models.contract_state.objects.filter(conid__conname__icontains=searchMsg, type=2))  ########################## 这里要根据情况修改
+                    models.contract_state.objects.filter(conid__conname__icontains=searchMsg))  ########################## 这里要根据情况修改
+                query_result.extend(
+                    models.contract_state.objects.filter(conid__username__username__icontains=searchMsg))
             else:
                 query_result.extend(
-                    models.contract_state.objects.filter(conid__conname__icontains=searchMsg, type=2, conid__username=username))    ########################## 这里要根据情况修改
+                    models.contract_state.objects.filter(conid__conname__icontains=searchMsg, conid__username=username))    ########################## 这里要根据情况修改
+                query_result.extend(
+                    models.contract_state.objects.filter(conid__username__username__icontains=searchMsg, conid__username=username))
         else:
             if rolename == 'root':
-                query_result = models.contract_state.objects.filter(type=2)  ########################## 这里要根据情况修改
+                query_result = models.contract_state.objects.all()  ########################## 这里要根据情况修改
             else:
-                query_result = models.contract_state.objects.filter(type=2, conid__username=username)  ########################## 这里要根据情况修改
+                query_result = models.contract_state.objects.filter(conid__username=username)  ########################## 这里要根据情况修改
         return base_process_query_table(request, query_result, 'true')           ########################## 这里要根据情况修改
     else:
         return render(request, 'CMSapp/timeout.html')
@@ -499,9 +512,14 @@ def search_countersigning_contract(request):
             if rolename == 'root':
                 query_result.extend(
                     models.contract_process.objects.filter(conid__conname__icontains=searchMsg, type=1,state=0))  ########################## 这里要根据情况修改
+                query_result.extend(
+                    models.contract_process.objects.filter(username__username__icontains=searchMsg, type=1, state=0))
             else:
                 query_result.extend(
                     models.contract_process.objects.filter(conid__conname__icontains=searchMsg, type=1,state=0, username=username))    ########################## 这里要根据情况修改
+                query_result.extend(
+                    models.contract_process.objects.filter(username__username__icontains=searchMsg, type=1, state=0,
+                                                           username=username))
         else:
             if rolename == 'root':
                 query_result = models.contract_process.objects.filter(type=1,state=0)  ########################## 这里要根据情况修改
@@ -586,10 +604,15 @@ def search_countersigned_contract(request):
             # 查询结果
             if rolename == 'root':
                 query_result.extend(
-                    models.contract_process.objects.filter(conid__conname__icontains=searchMsg, type=2))  ########################## 这里要根据情况修改
+                    models.contract_process.objects.filter(conid__conname__icontains=searchMsg, type=1,state=1))  ########################## 这里要根据情况修改
+                query_result.extend(
+                    models.contract_process.objects.filter(username__username__icontains=searchMsg, type=1,state=1))
             else:
                 query_result.extend(
-                    models.contract_process.objects.filter(conid__conname__icontains=searchMsg, type=2, username=username))    ########################## 这里要根据情况修改
+                    models.contract_process.objects.filter(conid__conname__icontains=searchMsg, type=1,state=1, username=username))    ########################## 这里要根据情况修改
+                query_result.extend(
+                    models.contract_process.objects.filter(username__username__icontains=searchMsg, type=1,state=1,
+                                                           username=username))
         else:
             if rolename == 'root':
                 query_result = models.contract_process.objects.filter(type=1,state=1)  ########################## 这里要根据情况修改
@@ -675,9 +698,14 @@ def search_contract_approving(request):
             if rolename == 'root':
                 query_result.extend(
                     models.contract_process.objects.filter(conid__conname__icontains=searchMsg, type=2,state=0))  ########################## 这里要根据情况修改
+                query_result.extend(
+                    models.contract_process.objects.filter(username__username__icontains=searchMsg, type=2, state=0))
             else:
                 query_result.extend(
                     models.contract_process.objects.filter(conid__conname__icontains=searchMsg, type=2,state=0, username=username))    ########################## 这里要根据情况修改
+                query_result.extend(
+                    models.contract_process.objects.filter(username__username__icontains=searchMsg, type=2, state=0,
+                                                           username=username))
         else:
             if rolename == 'root':
                 query_result = models.contract_process.objects.filter(type=2,state=0)  ########################## 这里要根据情况修改
@@ -763,9 +791,14 @@ def search_contract_approved(request):
             if rolename == 'root':
                 query_result.extend(
                     models.contract_process.objects.filter(conid__conname__icontains=searchMsg, type=2,state=1))  ########################## 这里要根据情况修改
+                query_result.extend(
+                    models.contract_process.objects.filter(username__username__icontains=searchMsg, type=2, state=1))
             else:
                 query_result.extend(
                     models.contract_process.objects.filter(conid__conname__icontains=searchMsg, type=2,state=1, username=username))    ########################## 这里要根据情况修改
+                query_result.extend(
+                    models.contract_process.objects.filter(username__username__icontains=searchMsg, type=2, state=1,
+                                                           username=username))
         else:
             if rolename == 'root':
                 query_result = models.contract_process.objects.filter(type=2,state=1)  ########################## 这里要根据情况修改
@@ -852,9 +885,14 @@ def search_contract_signing(request):
             if rolename == 'root':
                 query_result.extend(
                     models.contract_process.objects.filter(conid__conname__icontains=searchMsg, type=3,state=0))  ########################## 这里要根据情况修改
+                query_result.extend(
+                    models.contract_process.objects.filter(username__username__icontains=searchMsg, type=3, state=0))
             else:
                 query_result.extend(
                     models.contract_process.objects.filter(conid__conname__icontains=searchMsg, type=3,state=0, username=username))    ########################## 这里要根据情况修改
+                query_result.extend(
+                    models.contract_process.objects.filter(username__username__icontains=searchMsg, type=3, state=0,
+                                                           username=username))
         else:
             if rolename == 'root':
                 query_result = models.contract_process.objects.filter(type=3,state=0)  ########################## 这里要根据情况修改
@@ -940,9 +978,14 @@ def search_contract_signed(request):
             if rolename == 'root':
                 query_result.extend(
                     models.contract_process.objects.filter(conid__conname__icontains=searchMsg, type=3,state=1))  ########################## 这里要根据情况修改
+                query_result.extend(
+                    models.contract_process.objects.filter(username__username__icontains=searchMsg, type=3, state=1))
             else:
                 query_result.extend(
                     models.contract_process.objects.filter(conid__conname__icontains=searchMsg, type=3,state=1, username=username))    ########################## 这里要根据情况修改
+                query_result.extend(
+                    models.contract_process.objects.filter(username__username__icontains=searchMsg, type=3, state=1,
+                                                           username=username))
         else:
             if rolename == 'root':
                 query_result = models.contract_process.objects.filter(type=3,state=1)  ########################## 这里要根据情况修改
@@ -1061,7 +1104,7 @@ def base_contract_distributing_table(request, query_result, is_search='false'):
     pageNum = int(request.POST.get('pageNum'))
 
     # 字段列表
-    fieldlist = ['合同编号', '合同名称', '起草时间','操作']      ########################## 这里要根据情况修改
+    fieldlist = ['合同编号', '合同名称','起草人', '起草时间','操作']      ########################## 这里要根据情况修改
 
     response['fieldlist'] = fieldlist
 
@@ -1141,7 +1184,7 @@ def base_contract_distributed_table(request, query_result, is_search='false'):
     pageNum = int(request.POST.get('pageNum'))
 
     # 字段列表
-    fieldlist = ['合同编号', '合同名称', '起草时间','操作']      ########################## 这里要根据情况修改
+    fieldlist = ['合同编号', '合同名称','起草人', '起草时间','操作']      ########################## 这里要根据情况修改
 
     response['fieldlist'] = fieldlist
 

@@ -18,15 +18,15 @@ from CMSapp import models
 # models.user.objects.all().delete()
 # print(models.user.objects.all()[0].username)
 
-print(models.user.objects.all())
-models.role.objects.create(rolename='newuser',description='新用户').save()
-models.customer.objects.get_or_create(cusid=1, cusname='客户1', address='福建', tel='13156')
-cusEntity = models.customer.objects.filter(cusid=1)[0]
-userEntity = models.user.objects.filter(username='wj')[0]
-models.contract.objects.get_or_create(conname='合同1', username=userEntity, cusid=cusEntity, begintime='2020-05-03',
-                                      endtime='2020-10-12')
-contractEntity = models.contract.objects.filter(conid=2)[0]
-models.contract_state.objects.get_or_create(type=1, conid=contractEntity)
+# print(models.user.objects.all())
+# models.role.objects.create(rolename='newuser',description='新用户').save()
+# models.customer.objects.get_or_create(cusid=1, cusname='客户1', address='福建', tel='13156')
+# cusEntity = models.customer.objects.filter(cusid=1)[0]
+# userEntity = models.user.objects.filter(username='wj')[0]
+# models.contract.objects.get_or_create(conname='合同1', username=userEntity, cusid=cusEntity, begintime='2020-05-03',
+#                                       endtime='2020-10-12')
+# contractEntity = models.contract.objects.filter(conid=2)[0]
+# models.contract_state.objects.get_or_create(type=1, conid=contractEntity)
 # print(models.user.objects.all())
 # models.customer.objects.get_or_create(cusid=1, cusname='客户1', address='福建', tel='13156')
 # cusEntity = models.customer.objects.filter(cusid=1)[0]
@@ -49,4 +49,7 @@ models.contract_state.objects.get_or_create(type=1, conid=contractEntity)
 # functionEntity = models.function.objects.filter(funcname='contract_sign')[0]
 # roleEntity = models.role.objects.filter(rolename='signer')[0]
 # models.role_function.objects.get_or_create(function=functionEntity, rolename=roleEntity)
+
+# 删除用户
+# models.user.objects.filter(username='xzcnb').delete()
 

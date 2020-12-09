@@ -49,3 +49,9 @@ models.role_function.objects.get_or_create(rolename=operator, function=contract_
 models.role_function.objects.get_or_create(rolename=operator, function=contract_countersign)
 models.role_function.objects.get_or_create(rolename=operator, function=contract_approval)
 models.role_function.objects.get_or_create(rolename=operator, function=contract_sign)
+
+# 初始化超级用户
+models.user.objects.get_or_create(username='root',password='123')
+rootEntity = models.user.objects.filter(username='root')[0]
+rootRoleEntity = models.role.objects.filter(rolename='root')[0]
+models.right.objects.get_or_create(username=rootEntity,rolename=rootRoleEntity,description='超级用户')

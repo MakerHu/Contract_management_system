@@ -171,7 +171,7 @@
     {#    {% block content %}{% endblock %}#}
     <div class="home_view">
         <h1>首页 |</h1>
-    {% if request.session.rolename == '新用户' %}
+    {% if request.session.rolename == 'newuser' %}
         <h2>欢迎使用本合同管理系统!您目前的角色是<span style="color: #019501">新用户</span>，正在等待管理员分配权限...</h2>
     {% else %}
         <h2>欢迎使用本合同管理系统!</h2>
