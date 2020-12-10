@@ -1202,7 +1202,7 @@ def base_contract_distributing_table(request, query_result, is_search='false'):
     pageNum = int(request.POST.get('pageNum'))
 
     # 字段列表
-    fieldlist = ['合同编号', '合同名称', '起草人', '起草时间', '操作']  ########################## 这里要根据情况修改
+    fieldlist = ['合同编号', '合同名称', '起草人', '修改时间', '操作']  ########################## 这里要根据情况修改
 
     response['fieldlist'] = fieldlist
 
@@ -1291,7 +1291,7 @@ def base_contract_distributed_table(request, query_result, is_search='false'):
     pageNum = int(request.POST.get('pageNum'))
 
     # 字段列表
-    fieldlist = ['合同编号', '合同名称', '起草人', '起草时间', '操作']  ########################## 这里要根据情况修改
+    fieldlist = ['合同编号', '合同名称', '起草人', '修改时间', '操作']  ########################## 这里要根据情况修改
 
     response['fieldlist'] = fieldlist
 

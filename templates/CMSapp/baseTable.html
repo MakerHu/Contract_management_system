@@ -82,7 +82,7 @@
                     <td>{{ result.conid.conname }}</td>
                     <td>{{ result.username.username}}</td>
                     <td>{{ result.modifytime }}</td>
-                    <td><a onclick="onCountersignClick('{{ result.conid.conid }}')">会签</a></td>
+                    <td><a onclick="onCountersignClick('{{ result.conid.conid }}','{{ result.username.username}}')">会签</a></td>
                 {% endif %}
 
                 {#已会签合同#}
@@ -99,7 +99,7 @@
                     <td>{{ result.conid.conname }}</td>
                     <td>{{ result.username.username}}</td>
                     <td>{{ result.modifytime }}</td>
-                    <td><a onclick="onApprovalClick('{{ result.conid.conid }}')">审批</a></td>
+                    <td><a onclick="onApprovalClick('{{ result.conid.conid }}','{{ result.username.username}}')">审批</a></td>
                 {% endif %}
 
                 {#已审批合同#}
@@ -116,7 +116,7 @@
                     <td>{{ result.conid.conname }}</td>
                     <td>{{ result.username.username}}</td>
                     <td>{{ result.modifytime }}</td>
-                    <td><a onclick="onSignClick('{{ result.conid.conid }}')">签订</a></td>
+                    <td><a onclick="onSignClick('{{ result.conid.conid }}','{{ result.username.username}}')">签订</a></td>
                 {% endif %}
 
                 {#已签订合同#}

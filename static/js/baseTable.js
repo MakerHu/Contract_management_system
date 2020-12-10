@@ -50,9 +50,9 @@ function onNextPageClick() {
 }
 
 //
-function data_edit_page_ajax(url,keyword){
-    let data = new FormData();
-    data.append("keyword", keyword);
+function data_edit_page_ajax(url,data){
+    // let data = new FormData();
+    // data.append("keyword", keyword);
 
     let xmltype;
     if (window.XMLHttpRequest) {
@@ -77,38 +77,49 @@ function onAuthorizationClick(keyword) {
     // let node = obj.parentNode.parentNode;
     // let keyword = node.children[0].innerHTML
     // alert(keyword);
-
-    data_edit_page_ajax('/data_authorize/',keyword);
+    let data = new FormData();
+    data.append("keyword", keyword);
+    data_edit_page_ajax('/data_authorize/',data);
 }
 
 //定稿按钮
 function onFinalizeClick(keyword) {
     // let node = obj.parentNode.parentNode;
     // let keyword = node.children[0].innerHTML
-    data_edit_page_ajax('/contract_finalize/',keyword);
+    let data = new FormData();
+    data.append("keyword", keyword);
+    data_edit_page_ajax('/contract_finalize/',data);
     //alert(keyword);
 }
 
 //会签按钮
-function onCountersignClick(keyword) {
-
-    data_edit_page_ajax('/contract_countersign/',keyword);
+function onCountersignClick(keyword,contersigner) {
+    let data = new FormData();
+    data.append("keyword", keyword);
+    data.append("contersigner", contersigner);
+    data_edit_page_ajax('/contract_countersign/',data);
 }
 
 //审批按钮
-function onApprovalClick(keyword) {
+function onApprovalClick(keyword,approver) {
     // let node = obj.parentNode.parentNode;
     // let keyword = node.children[0].innerHTML;
     //alert(keyword);
-    data_edit_page_ajax('/data_contract_approval/',keyword);
+    let data = new FormData();
+    data.append("keyword", keyword);
+    data.append("approver", approver);
+    data_edit_page_ajax('/data_contract_approval/',data);
 }
 
 //签订按钮
-function onSignClick(keyword) {
+function onSignClick(keyword,signer) {
     // let node = obj.parentNode.parentNode;
     // let keyword = node.children[0].innerHTML;
      // alert(keyword);
-    data_edit_page_ajax('/data_contract_sign/',keyword);
+    let data = new FormData();
+    data.append("keyword", keyword);
+    data.append("signer", signer);
+    data_edit_page_ajax('/data_contract_sign/',data);
 
 }
 
@@ -117,15 +128,21 @@ function onSignClick(keyword) {
 function onDistribute(keyword) {
     // let node = obj.parentNode.parentNode;
     // let keyword = node.children[0].innerHTML;
-    data_edit_page_ajax('/data_allocation/',keyword);
+    let data = new FormData();
+    data.append("keyword", keyword);
+    data_edit_page_ajax('/data_allocation/',data);
 }
 
 //合同详情按钮
 function onContractDetail(keyword){
-    data_edit_page_ajax('/data_allocation/',keyword);
+    let data = new FormData();
+    data.append("keyword", keyword);
+    data_edit_page_ajax('/data_allocation/',data);
 }
 
 //客户详情按钮
 function onCostomerDetail(keyword){
-    data_edit_page_ajax('/data_customermsg/',keyword);
+    let data = new FormData();
+    data.append("keyword", keyword);
+    data_edit_page_ajax('/data_customermsg/',data);
 }

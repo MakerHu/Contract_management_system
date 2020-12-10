@@ -52,7 +52,7 @@ function onReturnPrePage() {
 }
 
 //审批合同中的选中单选框
-function onSelected(conid) {
+function onSelected(conid,approver) {
       if(document.getElementById("pass").checked==true) {
           let data = new FormData();
           let content = document.getElementById('approval_comments').value
@@ -60,6 +60,7 @@ function onSelected(conid) {
           data.append("conid", conid)
           data.append("content", content)
           data.append("state",state)
+          data.append("approver",approver)
           onCommitData('/ajax_updateContractApprovalmsg/',url_g, data)
     }
       else{
@@ -69,6 +70,7 @@ function onSelected(conid) {
           data.append("conid", conid)
           data.append("content", content)
           data.append("state",state)
+          data.append("approver",approver)
           onCommitData('/ajax_updateContractApprovalmsg/',url_g, data)
       }
 }
@@ -128,7 +130,7 @@ function onAddCustomerCommit(cusid) {
 }
 
 //审批合同界面中的提交按钮
-function onApprovalcontractCommit(conid){
+function onApprovalcontractCommit(conid,approver){
      let data = new FormData();
      let information = document.getElementById('approval_comments').value;
      let state;
@@ -142,19 +144,18 @@ function onApprovalcontractCommit(conid){
      data.append("conid", conid);
      data.append("state",state);
      data.append("information", information);
+     data.append("approver", approver);
      onCommitData('/ajax_updateContractApprovalmsg/','/contract_approving/', data);
 }
 
 
-
-
-
 //签订合同界面中的提交按钮
-function onSigncontractCommit(conid) {
+function onSigncontractCommit(conid,signer) {
     let data = new FormData();
     let information = document.getElementById('approval_comments').value;
-    data.append("conid", conid)
-    data.append("information", information)
+    data.append("conid", conid);
+    data.append("information", information);
+    data.append("signer", signer);
     onCommitData('/ajax_updateContractSignmsg/', '/contract_signing/', data)
 }
 
@@ -166,15 +167,6 @@ function onAddContractCommit() {
     let start_time = document.getElementById('start_time').value;
     let end_time = document.getElementById('end_time').value;
     let contract_content = document.getElementById('contract_content').value;
-
-    // var dP = /^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$/;
-    // if(dP.test(start_time)&&dP.test(end_time)){
-    //
-    // }
-    // else{
-    //      alert('请输入合法的日期(格式：YYYY-MM-DD)！');
-    //      return;
-    // }
 
     if (contract_name != '' && cus_id != '' && start_time != ''
         && end_time != '' && contract_content != '') {
@@ -193,31 +185,6 @@ function onAddContractCommit() {
         data.append("content", contract_content);
         data.append("cusid", cus_id);
         onCommitData('/ajax_addContract/', '/draftcontract/', data);
-        // var data1 = new FormData();
-        // data1.append("cusid", cus_id);
-        //
-        // var xhr = new XMLHttpRequest();
-        // xhr.withCredentials = true;
-        //
-        // xhr.addEventListener("readystatechange", function () {
-        //     if (this.readyState === 4) {
-        //         var json = JSON.parse(this.responseText);
-        //         console.log(this.responseText);
-        //         if (json.exists_customer == 'success') {
-        //             data.append("conname", contract_name);
-        //             data.append("begintime", start_time);
-        //             data.append("endtime", end_time);
-        //             data.append("content", contract_content);
-        //             data.append("cusid", cus_id);
-        //             onCommitData('/ajax_addContract/', '/draftcontract/', data);
-        //         } else {
-        //             alert('没有该客户！');
-        //             return;
-        //         }
-        //     }
-        // });
-        // xhr.open("POST", "/ajax_check_cusid/");
-        // xhr.send(data1);
 
     } else {
         alert('星号处不可为空！');
@@ -262,11 +229,12 @@ function onFinalContractCommit(conid) {
 }
 
 //合同会签页面中的提交按钮
-function  onContersignContractCommit(conid){
+function  onContersignContractCommit(conid,contersigner){
     let data = new FormData();
     let single_content = document.getElementById('countersign_comments').value;
     data.append("conid", conid)
     data.append("single_content", single_content)
+    data.append("contersigner", contersigner)
     onCommitData('/ajax_updateContractCountersignMsg/',url_g, data)
 
 }
