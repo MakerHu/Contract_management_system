@@ -175,7 +175,7 @@ def base_pending_contract_table(request, query_result, is_search='false'):
     pageNum = int(request.POST.get('pageNum'))
 
     # 字段列表
-    fieldlist = ['合同编号', '合同名称', '定稿人', '起草时间', '操作']  ########################## 这里要根据情况修改
+    fieldlist = ['合同编号', '合同名称', '定稿人', '修改时间', '操作']  ########################## 这里要根据情况修改
 
     response['fieldlist'] = fieldlist
 

@@ -87,8 +87,6 @@ def data_updateAllocation(request):
 
     processConidEntity = models.contract.objects.filter(conid=conid)[0]
 
-
-
     # 删除process数据库中还未开始会签的人员数据
     models.contract_process.objects.filter(conid=conid, type=1, state=0).delete()   #  把还未开始的会签员都删了
     # 重新根据前端返回的会签人员列表进行分配
@@ -212,12 +210,24 @@ def data_updateContractApprovalmsg(request):
     content = request.POST.get('content')
     contractEntity = models.contract.objects.filter(conid=conid)[0]
     user = models.user.objects.filter(username=request.session.get('username'))[0]
+    updateDataProcess = models.contract_process.objects.filter(conid=contractEntity, username=user, type=2)[0]
+    updateDataState = models.contract_state.objects.filter(conid=contractEntity)[0]
     if state == 'true':
-        models.contract_state.objects.filter(conid=contractEntity).update(type=4)
-        models.contract_process.objects.filter(conid=contractEntity, username=user, type=2).update(state=1, content=content)
+        # models.contract_process.objects.filter(conid=contractEntity, username=user, type=2).update(state=1,content=content)
+        # models.contract_state.objects.filter(conid=contractEntity).update(type=4)
+        updateDataProcess.state = 1
+        updateDataProcess.content = content
+        updateDataProcess.save()
+        updateDataState.type = 4
+        updateDataState.save()
     else:       # 审批未通过
-        models.contract_state.objects.filter(conid=contractEntity).update(type=2)   # 改为会签已完成状态（待定稿）
-        models.contract_process.objects.filter(conid=contractEntity, username=user, type=2).update(state=2, content=content)
+        # models.contract_process.objects.filter(conid=contractEntity, username=user, type=2).update(state=2,content=content)
+        # models.contract_state.objects.filter(conid=contractEntity).update(type=2)   # 改为会签已完成状态（待定稿）
+        updateDataProcess.state=2
+        updateDataProcess.content=content
+        updateDataProcess.save()
+        updateDataState.type=2
+        updateDataProcess.save()
 
     return HttpResponse(request)
 
@@ -247,13 +257,18 @@ def data_updateContractSignmsg(request):
     conid = request.POST.get('conid')
     username=request.session.get('username')
     information = request.POST.get('information')
-    models.contract_process.objects.filter(conid=conid,username=username,type=3).update(state=1,content=information)
+    updateDataProcess = models.contract_process.objects.filter(conid=conid,username=username,type=3)[0] # .update(state=1,content=information)
+    updateDataProcess.state=1
+    updateDataProcess.content=information
+    updateDataProcess.save()
 
     approvalnum = len(models.contract_process.objects.filter(conid_id=conid, type=3)) #合同所有签订人数
     approvednum = len(models.contract_process.objects.filter(conid_id=conid, type=3, state=1))# 合同所有签订已完成的人数
 
     if approvalnum==approvednum:
-        models.contract_state.objects.filter(conid=conid).update(type=5)
+        updateDataState = models.contract_state.objects.filter(conid=conid)[0] #.update(type=5)
+        updateDataState.type=5
+        updateDataState.save()
 
     return HttpResponse(request)
 
@@ -273,11 +288,11 @@ def data_contractmsg(request):
         username = models.user.objects.filter(username=request.session.get('username'))[0]
         contract = models.contract.objects.create(conname=conname, begintime=begintime, endtime=endtime, content=content,
                                        cusid=cusid, username=username)
-        dt = datetime.utcnow()
-        tzutc_8 = timezone(timedelta(hours=8))
-        local_dt = dt.astimezone(tzutc_8)
+        # dt = datetime.utcnow()
+        # tzutc_8 = timezone(timedelta(hours=8))
+        # local_dt = dt.astimezone(tzutc_8)
         contract_type = 1
-        models.contract_state.objects.create(type=contract_type, modifytime=local_dt, conid=contract).save()
+        models.contract_state.objects.create(type=contract_type, conid=contract).save()
         return render(request, 'CMSapp/draft_contract.html', response)
     else:
         return render(request, 'CMSapp/timeout.html')
@@ -309,7 +324,9 @@ def contract_finalize(request):
 def data_updateContractFinalMsg(request):
     conid = request.POST.get('conid')
     content = request.POST.get('content')
-    models.contract_state.objects.filter(conid=conid).update(type=3)
+    constate=models.contract_state.objects.filter(conid=conid)[0]
+    constate.type=3
+    constate.save()
     models.contract.objects.filter(conid=conid).update(content=content)
     return HttpResponse(request)
 
@@ -340,14 +357,18 @@ def data_updateContractCountersignMsg(request):
     single_content = request.POST.get('single_content')
 
     contractEntity = models.contract.objects.filter(conid=conid)[0]
-    models.contract_process.objects.filter(conid=conid, type=1, username=username).update(content=single_content,
-                                                                                          state=1)
+    updateProcessData = models.contract_process.objects.filter(conid=conid, type=1, username=username)[0]#.update(content=single_content,state=1)
+    updateProcessData.content=single_content
+    updateProcessData.state = 1
+    updateProcessData.save()
 
+    # 判断是否所有会签人通过
     countersignernum = len(models.contract_process.objects.filter(conid_id=conid, type=1))  # 合同所有会签人数
     countersignernum_finish = len(models.contract_process.objects.filter(conid_id=conid, type=1, state=1))  # 合同所有会签已完成的人数
 
     if countersignernum == countersignernum_finish:
-        models.contract_state.objects.filter(conid=contractEntity).update(type=2)
-
+        updateStateData = models.contract_state.objects.filter(conid=contractEntity)[0]# .update(type=2)
+        updateStateData.type = 2
+        updateStateData.save()
 
     return HttpResponse(request)
