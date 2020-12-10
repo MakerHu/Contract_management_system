@@ -8,6 +8,7 @@ h2 {
     margin-left: 300px;
 }
 
+
 .authority_assignment {
     position: relative;
     margin-top: 20px;
@@ -336,6 +337,7 @@ button:hover {
 .countersign_contract {
     position: relative;
     margin-top: 20px;
+    margin-bottom: 30px;
     left: 30%;
     font-size: 1.5em;
     font-weight: bolder;
@@ -354,6 +356,9 @@ button:hover {
     padding-top: 20px;
 }
 
+.countersign_contract .titlename{
+    margin-bottom: 5px;
+}
 
 .countersign_contract .content {
     display: flex;
@@ -377,14 +382,14 @@ button:hover {
     border: 1px solid #312E3D;
     min-width: 400px;
     max-width: 400px;
-    min-height: 150px;
+    min-height: 100px;
     margin-left: 10px;
 }
 
 .countersign_contract .btn {
     display: flex;
-    margin-top: 15px;
-    margin-left: 125px;
+    margin-top: 0px;
+    margin-left: 80px;
 }
 
 
@@ -392,6 +397,7 @@ button:hover {
 .approval_contract {
     position: relative;
     margin-top: 20px;
+    margin-bottom: 30px;
     left: 30%;
     font-size: 1.5em;
     font-weight: bolder;
@@ -418,13 +424,13 @@ button:hover {
 
 .approval_contract .content .single_content {
     display: flex;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 15px;
+    /*margin-bottom: 5px;*/
 }
 
-.approval_contract .content #contract_name {
-    margin-bottom: 20px;
-    margin-left: 165px;
+.approval_contract .content .contract_name {
+    margin-bottom: 5px;
+    /*margin-left: 165px;*/
 }
 
 .approval_contract .content .approval_select {
@@ -450,20 +456,21 @@ button:hover {
     margin-left: -12px;
 }
 
-.approval_contract .content .single_content textarea {
+.approval_contract textarea {
     outline: none;
     border-radius: 5px;
     border: 1px solid #312E3D;
     min-width: 400px;
     max-width: 400px;
-    min-height: 150px;
+    min-height: 100px;
     margin-left: 10px;
 }
 
 .approval_contract .btn {
     display: flex;
-    margin-top: 15px;
-    margin-left: 115px;
+    margin-top: 5px;
+    margin:0 auto;
+    width: 500px;
 }
 
 
@@ -471,6 +478,7 @@ button:hover {
 .sign_contract {
     position: relative;
     margin-top: 20px;
+    margin-bottom: 30px;
     left: 30%;
     font-size: 1.5em;
     font-weight: bolder;
@@ -489,6 +497,9 @@ button:hover {
     padding-top: 20px;
 }
 
+.sign_contract .titlename{
+    margin-bottom: 5px;
+}
 
 .sign_contract .content {
     display: flex;
@@ -498,7 +509,7 @@ button:hover {
 .sign_contract .content .single_content {
     display: flex;
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .sign_contract .content #contract_name {
@@ -522,14 +533,14 @@ button:hover {
     border: 1px solid #312E3D;
     min-width: 400px;
     max-width: 400px;
-    min-height: 150px;
+    min-height: 100px;
     margin-left: 10px;
 }
 
 .sign_contract .btn {
     display: flex;
-    margin-top: 15px;
-    margin-left: 115px;
+    margin-top: 0px;
+    margin-left: 80px;
 }
 
 /*分配合同*/

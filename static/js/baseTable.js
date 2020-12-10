@@ -133,8 +133,8 @@ function onDistribute(keyword) {
     data_edit_page_ajax('/data_allocation/',data);
 }
 
-//合同详情按钮
-function onContractDetail(keyword){
+//已分配合同详情按钮
+function onContractDistributeDetail(keyword){
     let data = new FormData();
     data.append("keyword", keyword);
     data_edit_page_ajax('/data_allocation/',data);
@@ -145,4 +145,11 @@ function onCostomerDetail(keyword){
     let data = new FormData();
     data.append("keyword", keyword);
     data_edit_page_ajax('/data_customermsg/',data);
+}
+
+//合同详情按钮
+function onContractDetail(keyword){
+    let data = new FormData();
+    data.append("keyword", keyword);
+    data_edit_page_ajax('/contractDetail/',data);
 }

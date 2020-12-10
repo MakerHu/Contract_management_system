@@ -371,7 +371,7 @@ def base_process_query_table(request, query_result, is_search='false'):
     pageNum = int(request.POST.get('pageNum'))
 
     # 字段列表
-    fieldlist = ['合同编号', '合同名称', '起草人', '修改时间', '状态']  ########################## 这里要根据情况修改
+    fieldlist = ['合同编号', '合同名称', '起草人', '修改时间', '状态','操作']  ########################## 这里要根据情况修改
 
     response['fieldlist'] = fieldlist
 

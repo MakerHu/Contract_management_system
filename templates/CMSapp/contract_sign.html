@@ -5,9 +5,15 @@
 <div class="sign_contract">
     <form class="sign_contract_form" action="http://vip.biancheng.net/login.php" method="post" name="formName">
         <div class="content">
-            <div id="contract_name">合同编号:{{ contractMsg.conid }}</div>
-            <div id="contract_name">合同名称:{{ contractMsg.conname }}</div>
-            <div id="customer">客户:{{ customerMsg.cusname }}</div>
+{#            <div id="contract_name">合同编号:{{ contractMsg.conid }}</div>#}
+{#            <div id="contract_name">合同名称:{{ contractMsg.conname }}</div>#}
+{#            <div id="customer">客户:{{ customerMsg.cusname }}</div>#}
+            <div class="titlename">合同名称:&nbsp;{{ contractMsg.conname }}</div>
+            <div class="titlename">合同编号:&nbsp;{{ contractMsg.conid }}</div>
+            <div class="titlename">合同名称:&nbsp;{{ contractMsg.conname }}</div>
+            <div class="titlename">客户名称:&nbsp;{{ contractMsg.cusid.cusname }}</div>
+            <div class="titlename">起草人:&nbsp;{{ contractMsg.username.username }}</div>
+            <div class="single_content"><div>合同内容:</div><textarea disabled="disabled">{{ contractMsg.content }}</textarea></div>
             <div class="single_content"><span>* </span><div>签订信息:</div><textarea id="approval_comments"></textarea></div>
         </div>
     </form>

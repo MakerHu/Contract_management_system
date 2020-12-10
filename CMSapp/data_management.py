@@ -115,6 +115,29 @@ def data_updateAllocation(request):
         except:
             pass
 
+
+    currentContactState = models.contract_state.objects.get(conid=conid).type
+
+    if currentContactState == 1:
+        # 判断是否会签完成
+        countersignernum = len(models.contract_process.objects.filter(conid_id=conid, type=1))  # 合同所有会签人数
+        countersignernum_finish = len(
+            models.contract_process.objects.filter(conid_id=conid, type=1, state=1))  # 合同所有会签已完成的人数
+        if countersignernum == countersignernum_finish:
+            updateStateData = models.contract_state.objects.filter(conid=conid)[0]  # .update(type=2)
+            updateStateData.type = 2
+            updateStateData.save()
+
+
+    if currentContactState == 4:
+        # 判断是否签订完成
+        approvalnum = len(models.contract_process.objects.filter(conid_id=conid, type=3))  # 合同所有签订人数
+        approvednum = len(models.contract_process.objects.filter(conid_id=conid, type=3, state=1))  # 合同所有签订已完成的人数
+        if approvalnum == approvednum:
+            updateDataState = models.contract_state.objects.filter(conid=conid)[0]  # .update(type=5)
+            updateDataState.type = 5
+            updateDataState.save()
+
     response = {'is': 'success'}
 
     return JsonResponse(response)
@@ -388,3 +411,21 @@ def data_updateContractCountersignMsg(request):
         updateStateData.save()
 
     return HttpResponse(request)
+
+
+################################################################################################################
+################################################################################################################
+################################################################################################################
+
+# 合同详情页
+def contractDetail(request):
+    if request.session.get('is_login', None):
+        response = {}
+        conid = request.POST.get('keyword')
+        contractMsg = models.contract.objects.filter(conid=conid)[0]
+        response['contractMsg'] = contractMsg
+        customerMsg = models.customer.objects.filter(cusid=contractMsg.cusid_id)[0]
+        response['customerMsg'] = customerMsg
+        return render(request, 'CMSapp/contract_detail.html', response)
+    else:
+        return render(request, 'CMSapp/timeout.html')

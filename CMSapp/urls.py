@@ -19,6 +19,9 @@ urlpatterns = [
     # 起草合同
     path('draftcontract/', views.view_draft),
 
+    # 合同详情
+    path('contractDetail/',data_management.contractDetail),
+
     #审批合同
     path('data_contract_approval/',data_management.data_contract_approval),
 
