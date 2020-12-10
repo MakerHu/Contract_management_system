@@ -57,19 +57,16 @@ function onAllocationCommit(conid) {
 
 //会签人
 function onDeleteCountersignWillOption(txt) {
-    console.log(txt);
     var obj = document.getElementById("countersign_will")
     var count = obj.options.length
-    console.log(count);
+
     for (var i = 0; i < count; i++) {
         var text = obj.options[i].value;
         if (txt == text) {
             obj.options.remove(i);
-            console.log("text");
-            console.log(text);
-            console.log(i);
             var selectobj = document.getElementById('countersign_have');
             selectobj.options.add(new Option(txt, txt));
+            break;
         }
     }
 }
@@ -84,25 +81,22 @@ function onDeleteCountersignHaveOption(txt) {
             obj.options.remove(i);
             var selectobj = document.getElementById('countersign_will');
             selectobj.options.add(new Option(txt, txt));
+            break;
         }
     }
 }
 
 //审批人
 function onDeleteApproveWillOption(txt) {
-    console.log(txt);
     var obj = document.getElementById("approve_will")
     var count = obj.options.length
-    console.log(count);
     for (var i = 0; i < count; i++) {
         var text = obj.options[i].value;
         if (txt == text) {
             obj.options.remove(i);
-            console.log("text");
-            console.log(text);
-            console.log(i);
             var selectobj = document.getElementById('approve_have');
             selectobj.options.add(new Option(txt, txt));
+            break;
         }
     }
 }
@@ -117,25 +111,22 @@ function onDeleteApproveHaveOption(txt) {
             obj.options.remove(i);
             var selectobj = document.getElementById('approve_will');
             selectobj.options.add(new Option(txt, txt));
+            break;
         }
     }
 }
 
 //签订人
 function onDeleteSignWillOption(txt) {
-    console.log(txt);
     var obj = document.getElementById("sign_will")
     var count = obj.options.length
-    console.log(count);
     for (var i = 0; i < count; i++) {
         var text = obj.options[i].value;
         if (txt == text) {
             obj.options.remove(i);
-            console.log("text");
-            console.log(text);
-            console.log(i);
             var selectobj = document.getElementById('sign_have');
             selectobj.options.add(new Option(txt, txt));
+            break;
         }
     }
 }
@@ -150,6 +141,7 @@ function onDeleteSignHaveOption(txt) {
             obj.options.remove(i);
             var selectobj = document.getElementById('sign_will');
             selectobj.options.add(new Option(txt, txt));
+            break;
         }
     }
 }
