@@ -166,6 +166,10 @@ def data_authorize(request):
 def data_updateAuthority(request):
     username = request.POST.get('username')
     new_rolename = request.POST.get('new_rolename')
+
+    # 如果该用户起草的合同还有未审批完成的，则提示不能更改
+
+    # 如果该用户参与了其他人起草的合同，则提示先替换
     models.right.objects.filter(username=username).update(rolename=new_rolename)
     return HttpResponse(request)
 

@@ -73,6 +73,8 @@
                         <td>审批完成</td>
                     {% elif result.type == 5 %}
                         <td>签订完成</td>
+                    {% elif result.type == 6 %}
+                        <td>已作废</td>
                     {% endif %}
                     <td><a onclick="onContractDetail('{{ result.conid.conid }}')">详情</a></td>
                 {% endif %}

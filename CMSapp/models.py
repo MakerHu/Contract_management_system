@@ -94,6 +94,7 @@ class contract_state(models.Model):
         (3, "定稿完成"),
         (4, "审批完成"),
         (5, "签订完成"),
+        (6, "已作废"),
     )
     type = models.IntegerField(choices=state_choice)
     modifytime = models.DateTimeField(auto_now=True)

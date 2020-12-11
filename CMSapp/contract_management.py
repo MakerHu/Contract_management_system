@@ -1239,9 +1239,7 @@ def contract_distributing(request):
         rolename = models.right.objects.filter(username=username)[0].rolename.rolename
         if rolename == 'root':
             # 查询结果0
-            query_result = models.contract_state.objects.exclude(
-                conid__conid__in=models.contract_process.objects.all().values(
-                    'conid__conid'))  ########################## 这里要根据情况修改
+            query_result = models.contract_state.objects.exclude(Q(conid__conid__in=models.contract_process.objects.all().values('conid__conid')) | Q(type=6))  ########################## 这里要根据情况修改
         return base_contract_distributing_table(request, query_result)  ########################## 这里要根据情况修改
     else:
         return render(request, 'CMSapp/timeout.html')
