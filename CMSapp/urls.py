@@ -118,4 +118,6 @@ urlpatterns = [
     #会签
     path('contract_countersign/',data_management.contract_countersign),
     path('ajax_updateContractApprovalmsg/',data_management.data_updateContractApprovalmsg),
+
+    path('downloadFile/<conid>/',data_management.downloadFile ,name='download'),
 ]

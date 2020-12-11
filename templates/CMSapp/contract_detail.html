@@ -13,6 +13,10 @@
     <div class="contract_content">
         <div>合同内容:</div>
         <textarea disabled="disabled">{{ contractMsg.content }}</textarea>
+        {% if has_attachment == 'true' %}
+            <div><a href="{% url 'download' conid=contractMsg.conid %}" style="font-weight: normal; font-size: 20px">下载附件</a></div>
+        {% endif %}
+
     </div>
     <div class="btn">
         <button onclick="onReturnPrePage()">返回</button>

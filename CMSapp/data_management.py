@@ -4,10 +4,14 @@ from datetime import datetime, timezone, timedelta
 import django
 from django.db.models import Q
 import pytz
-from django.http import JsonResponse
+from django.http import JsonResponse, FileResponse
 from django.shortcuts import render, HttpResponse
+from django.utils.encoding import escape_uri_path
+
 from CMSapp import models
 import json
+
+from CMSapp.forms import UploadFileForm
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Contract_management_system.settings")  # project_name 项目名称
 django.setup()
@@ -319,17 +323,26 @@ def data_contractmsg(request):
         begintime = request.POST.get('begintime')
         endtime = request.POST.get('endtime')
         content = request.POST.get('content')
-        file_upload = request.FILES.get('file')
+        # file_upload = request.FILES.get('file_upload')
+        # file_name = request.FILES.get('file_name')
+        # file_extname = request.FILES.get('file_extname')
+
         cusid = models.customer.objects.filter(cusid=request.POST.get('cusid'))[0]
         username = models.user.objects.filter(username=request.session.get('username'))[0]
         contract = models.contract.objects.create(conname=conname, begintime=begintime, endtime=endtime,
                                                   content=content,
                                                   cusid=cusid, username=username)
-        # dt = datetime.utcnow()
-        # tzutc_8 = timezone(timedelta(hours=8))
-        # local_dt = dt.astimezone(tzutc_8)
         contract_type = 1
         models.contract_state.objects.create(type=contract_type, conid=contract).save()
+
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            print('进入valid')
+            filename = form.cleaned_data['filename']
+            filetype = form.cleaned_data['filetype']
+            file = form.cleaned_data['file']
+            models.contract_attachment.objects.create(conid= contract,filename=filename, filetype=filetype, file=file).save()
+
         return render(request, 'CMSapp/draft_contract.html', response)
     else:
         return render(request, 'CMSapp/timeout.html')
@@ -431,6 +444,36 @@ def contractDetail(request):
         response['contractMsg'] = contractMsg
         customerMsg = models.customer.objects.filter(cusid=contractMsg.cusid_id)[0]
         response['customerMsg'] = customerMsg
+
+        fileResultlist = models.contract_attachment.objects.filter(conid=conid)
+        if fileResultlist:
+            response['has_attachment']='true'
+        else:
+            response['has_attachment'] = 'false'
         return render(request, 'CMSapp/contract_detail.html', response)
     else:
         return render(request, 'CMSapp/timeout.html')
+
+
+# 下载附件
+def downloadFile(request,conid):
+    if request.session.get('is_login', None):
+        fileResultlist  = models.contract_attachment.objects.filter(conid=conid)
+        if fileResultlist:
+            fileEntity = fileResultlist[0]
+            filepath = 'uploadfile/'+str(fileEntity.file)
+            file = open(filepath, 'rb')
+            response = FileResponse(file)
+            response['Content-Type'] = 'application/octet-stream'
+            response['Content-Disposition'] = 'attachment; filename={0}'.format(escape_uri_path(fileEntity.filename))
+            return response
+        else:
+            return HttpResponse("无附件")
+    else:
+        return render(request, 'CMSapp/timeout.html')
+
+
+################################################################################################################
+################################################################################################################
+################################################################################################################
+

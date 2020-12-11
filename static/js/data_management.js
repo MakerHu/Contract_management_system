@@ -52,29 +52,27 @@ function onReturnPrePage() {
 }
 
 //审批合同中的选中单选框
-function onSelected(conid,approver) {
-      if(document.getElementById("pass").checked==true) {
-          let data = new FormData();
-          let content = document.getElementById('approval_comments').value
-          let state = true
-          data.append("conid", conid)
-          data.append("content", content)
-          data.append("state",state)
-          data.append("approver",approver)
-          onCommitData('/ajax_updateContractApprovalmsg/',url_g, data)
+function onSelected(conid, approver) {
+    if (document.getElementById("pass").checked == true) {
+        let data = new FormData();
+        let content = document.getElementById('approval_comments').value
+        let state = true
+        data.append("conid", conid)
+        data.append("content", content)
+        data.append("state", state)
+        data.append("approver", approver)
+        onCommitData('/ajax_updateContractApprovalmsg/', url_g, data)
+    } else {
+        let data = new FormData();
+        let content = document.getElementById('approval_comments').value
+        let state = false
+        data.append("conid", conid)
+        data.append("content", content)
+        data.append("state", state)
+        data.append("approver", approver)
+        onCommitData('/ajax_updateContractApprovalmsg/', url_g, data)
     }
-      else{
-           let data = new FormData();
-          let content = document.getElementById('approval_comments').value
-          let state = false
-          data.append("conid", conid)
-          data.append("content", content)
-          data.append("state",state)
-          data.append("approver",approver)
-          onCommitData('/ajax_updateContractApprovalmsg/',url_g, data)
-      }
 }
-
 
 
 //重置签订合同中的签订信息
@@ -130,27 +128,27 @@ function onAddCustomerCommit(cusid) {
 }
 
 //审批合同界面中的提交按钮
-function onApprovalcontractCommit(conid,approver){
-     let data = new FormData();
-     let information = document.getElementById('approval_comments').value;
-     let state;
+function onApprovalcontractCommit(conid, approver) {
+    let data = new FormData();
+    let information = document.getElementById('approval_comments').value;
+    let state;
 
-     if(document.getElementById("pass").checked==true){
-         state=document.getElementById('pass').value;
-     }else{
-         state=document.getElementById('reject').value;
-     }
-     print(state)
-     data.append("conid", conid);
-     data.append("state",state);
-     data.append("information", information);
-     data.append("approver", approver);
-     onCommitData('/ajax_updateContractApprovalmsg/','/contract_approving/', data);
+    if (document.getElementById("pass").checked == true) {
+        state = document.getElementById('pass').value;
+    } else {
+        state = document.getElementById('reject').value;
+    }
+    print(state)
+    data.append("conid", conid);
+    data.append("state", state);
+    data.append("information", information);
+    data.append("approver", approver);
+    onCommitData('/ajax_updateContractApprovalmsg/', '/contract_approving/', data);
 }
 
 
 //签订合同界面中的提交按钮
-function onSigncontractCommit(conid,signer) {
+function onSigncontractCommit(conid, signer) {
     let data = new FormData();
     let information = document.getElementById('approval_comments').value;
     data.append("conid", conid);
@@ -168,7 +166,9 @@ function onAddContractCommit() {
     let end_time = document.getElementById('end_time').value;
     let contract_content = document.getElementById('contract_content').value;
 
-    let file_info =$( '#file_upload')[0].files[0];      //获取附件
+    let file_upload = document.getElementById('file_upload').files[0];
+    let extIndex;
+    let extName;
 
 
     if (contract_name != '' && cus_id != '' && start_time != ''
@@ -189,7 +189,14 @@ function onAddContractCommit() {
         data.append("cusid", cus_id);
 
         //添加附件
-        data.append('file',file_info);
+        if (file_upload != undefined) {
+            extIndex = file_upload.name.lastIndexOf('.')
+            extName = file_upload.name.substring(extIndex).toLowerCase();
+            data.append('file', file_upload);
+            data.append('filename', file_upload.name);
+            data.append('filetype', extName);
+        }
+
 
         onCommitData('/ajax_addContract/', '/draftcontract/', data);
 
@@ -225,23 +232,45 @@ function CheckCusidAjax() {
 }
 
 
-
 //合同定稿界面中的提交按钮
 function onFinalContractCommit(conid) {
     let data = new FormData();
     let content = document.getElementById('contract_content').value;
     data.append("conid", conid)
     data.append("content", content)
-    onCommitData('/ajax_updateContractFinalMsg/','/pending_contract/', data)
+    onCommitData('/ajax_updateContractFinalMsg/', '/pending_contract/', data)
 }
 
 //合同会签页面中的提交按钮
-function  onContersignContractCommit(conid,contersigner){
+function onContersignContractCommit(conid, contersigner) {
     let data = new FormData();
     let single_content = document.getElementById('countersign_comments').value;
     data.append("conid", conid)
     data.append("single_content", single_content)
     data.append("contersigner", contersigner)
-    onCommitData('/ajax_updateContractCountersignMsg/',url_g, data)
+    onCommitData('/ajax_updateContractCountersignMsg/', url_g, data)
 
 }
+
+
+// function ondownloadFile(conid) {
+//     let data = new FormData();
+//
+//     data.append('conid',conid);
+//     let xmltype;
+//     if (window.XMLHttpRequest) {
+//         //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+//         xmltype = new XMLHttpRequest();
+//     } else {
+//         // IE6, IE5 浏览器执行代码
+//         xmltype = new ActiveXObject("Microsoft.XMLHTTP");
+//     }
+//     xmltype.onreadystatechange = function () {
+//         if (xmltype.readyState == 4 && xmltype.status == 200) {
+//             // document.getElementById("function_view").innerHTML = xmltype.responseText;
+//         }
+//     }
+//
+//     xmltype.open("POST", '/downloadFile/');
+//     xmltype.send(data);
+// }
