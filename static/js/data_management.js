@@ -168,6 +168,9 @@ function onAddContractCommit() {
     let end_time = document.getElementById('end_time').value;
     let contract_content = document.getElementById('contract_content').value;
 
+    let file_info =$( '#file_upload')[0].files[0];      //获取附件
+
+
     if (contract_name != '' && cus_id != '' && start_time != ''
         && end_time != '' && contract_content != '') {
         if (contract_name.length > 40) {
@@ -184,6 +187,10 @@ function onAddContractCommit() {
         data.append("endtime", end_time);
         data.append("content", contract_content);
         data.append("cusid", cus_id);
+
+        //添加附件
+        data.append('file',file_info);
+
         onCommitData('/ajax_addContract/', '/draftcontract/', data);
 
     } else {

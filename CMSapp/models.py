@@ -103,6 +103,7 @@ class contract_state(models.Model):
 # 日志信息
 class log(models.Model):
     username = models.CharField(max_length=40)
+    operateobject = models.CharField(max_length=40)
     content = models.TextField()
     operatetime = models.DateTimeField(auto_now=True)
 

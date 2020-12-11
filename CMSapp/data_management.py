@@ -319,6 +319,7 @@ def data_contractmsg(request):
         begintime = request.POST.get('begintime')
         endtime = request.POST.get('endtime')
         content = request.POST.get('content')
+        file_upload = request.FILES.get('file')
         cusid = models.customer.objects.filter(cusid=request.POST.get('cusid'))[0]
         username = models.user.objects.filter(username=request.session.get('username'))[0]
         contract = models.contract.objects.create(conname=conname, begintime=begintime, endtime=endtime,
