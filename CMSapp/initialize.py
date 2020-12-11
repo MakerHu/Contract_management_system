@@ -18,6 +18,7 @@ models.function.objects.get_or_create(funcname='contract_sign', url='/contract_s
 models.function.objects.get_or_create(funcname='contract_distribute', url='/contract_distribute/', description='合同分配')
 models.function.objects.get_or_create(funcname='customer_manage', url='/customer_manage/', description='客户管理')
 models.function.objects.get_or_create(funcname='right_manage', url='/right_manage/', description='权限管理')
+models.function.objects.get_or_create(funcname='log_manage', url='/log_manage/', description='日志管理')
 
 
 
@@ -36,6 +37,7 @@ contract_sign = models.function.objects.filter(funcname='contract_sign', url='/c
 contract_distribute = models.function.objects.filter(funcname='contract_distribute', url='/contract_distribute/', description='合同分配')[0]
 customer_manage = models.function.objects.filter(funcname='customer_manage', url='/customer_manage/', description='客户管理')[0]
 right_manage = models.function.objects.filter(funcname='right_manage', url='/right_manage/', description='权限管理')[0]
+log_manage = models.function.objects.get_or_create(funcname='log_manage', url='/log_manage/', description='日志管理')[0]
 
 models.role_function.objects.get_or_create(rolename=root, function=contract_draft)
 models.role_function.objects.get_or_create(rolename=root, function=contract_countersign)
@@ -44,6 +46,7 @@ models.role_function.objects.get_or_create(rolename=root, function=contract_sign
 models.role_function.objects.get_or_create(rolename=root, function=contract_distribute)
 models.role_function.objects.get_or_create(rolename=root, function=customer_manage)
 models.role_function.objects.get_or_create(rolename=root, function=right_manage)
+models.role_function.objects.get_or_create(rolename=root, function=log_manage)
 
 models.role_function.objects.get_or_create(rolename=operator, function=contract_draft)
 models.role_function.objects.get_or_create(rolename=operator, function=contract_countersign)

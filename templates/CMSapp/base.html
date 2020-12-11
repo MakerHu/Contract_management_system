@@ -149,7 +149,7 @@
             {% endif %}
 
 
-            {% if customer_manage == 'true' %}
+            {% if right_manage == 'true' %}
                 <li>
                     <a onclick="onOpenRightManage()"><span class="listtext"><span id="right_manage"
                                                                                   class="stretch">&#9654;</span>权限管理</span></a>
@@ -161,6 +161,18 @@
                 <li>
                     <a onclick="reload_function_view('/right/','管理权限')"><span class="listtext_2"
                                                                               id="manage_right"> 管理权限</span></a>
+                </li>
+            {% endif %}
+
+
+            {% if log_manage == 'true' %}
+                <li>
+                    <a onclick="onOpenLogManage()"><span class="listtext"><span id="log_manage"
+                                                                                  class="stretch">&#9654;</span>日志管理</span></a>
+                </li>
+                <li>
+                    <a onclick="reload_function_view('/view_log/','查看日志')"><span class="listtext_2"
+                                                                                           id="view_log"> 查看日志</span></a>
                 </li>
             {% endif %}
         {% endif %}

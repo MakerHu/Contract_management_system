@@ -12,6 +12,8 @@ function list() {
         state_3 =1;
         state_4 =1;
         state_5 =1;
+        state_6 =1;
+        state_7 =1;
         for (var i = 0; i < stretch.length; i++) {
             stretch[i].innerHTML="&#9654;";
         }
@@ -171,6 +173,20 @@ function onOpenContractDistribute() {
         document.getElementById("contract_distribute").innerHTML="&#9654;";
         document.getElementById("contract_distributing").style.display = "none";
         document.getElementById("contract_distributed").style.display = "none";
+    }
+}
+
+//打开合同分配栏
+var state_7 = 1;
+function onOpenLogManage() {
+    if (state_7) {
+        state_7 = 0;
+        document.getElementById("log_manage").innerHTML="&#9660;";
+        document.getElementById("view_log").style.display = "block";
+    } else {
+        state_7 = 1;
+        document.getElementById("log_manage").innerHTML="&#9654;";
+        document.getElementById("view_log").style.display = "none";
     }
 }
 
