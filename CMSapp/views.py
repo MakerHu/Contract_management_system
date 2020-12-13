@@ -78,6 +78,7 @@ def ajax_login(request):
             request.session['username'] = username
             request.session['rolename'] = models.right.objects.filter(username=username)[0].rolename.rolename
             request.session['rolename_chinese'] = models.right.objects.filter(username=username)[0].rolename.description
+            models.log.objects.create(username=username,operateobject=username,content='登录').save()
         else:
             response['right_password'] = 'fail'
     else:
@@ -120,6 +121,7 @@ def ajax_register(request):
             newusername = models.user.objects.get(username=username)
             role = models.role.objects.get(rolename='newuser')
             models.right.objects.create(username=newusername, rolename=role).save()
+            models.log.objects.create(username=username, operateobject=username, content='注册').save()
         except:
             response['role_execption'] = 'true'
             models.user.objects.filter(username=username).delete()

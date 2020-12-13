@@ -155,6 +155,14 @@
                     <td>{{ result.tel }}</td>
                     <td><a onclick="onCostomerDetail('{{ result.cusid }}')">详情</a></td>
                 {% endif %}
+
+                {#日志信息表#}
+                {% if function == 'view_log' %}
+                    <td>{{ result.username }}</td>
+                    <td>{{ result.operateobject }}</td>
+                    <td>{{ result.content }}</td>
+                    <td>{{ result.operatetime }}</td>
+                {% endif %}
             </tr>
         {% endfor %}
 

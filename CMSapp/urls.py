@@ -98,6 +98,10 @@ urlpatterns = [
     path('customer_info/', contract_management.customer_info),
     path('search_customer_info/', contract_management.search_customer_info),
 
+    # 日志信息
+    path('view_log/', contract_management.view_log),
+    path('search_view_log/', contract_management.search_view_log),
+
     # ajax
     path('ajax_login/', views.ajax_login),
     path('ajax_register/', views.ajax_register),

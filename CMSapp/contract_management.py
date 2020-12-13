@@ -1439,3 +1439,76 @@ def search_customer_info(request):
 #######################################################################################################################
 #######################################################################################################################
 #######################################################################################################################
+
+# 日志信息
+def base_view_log_table(request, query_result, is_search='false'):
+    # 返回给界面的值
+    response = {}
+
+    response['searchURL'] = '/search_view_log/'  ########################## 这里要根据情况修改
+    # 返回搜索框中的值
+    if is_search == 'true':
+        # 搜索条件
+        searchMsg = request.POST.get('searchMsg')
+        response['searchMsg'] = searchMsg
+
+    # 获取选择的页数
+    pageNum = int(request.POST.get('pageNum'))
+
+    # 字段列表
+    fieldlist = ['用户名', '操作对象', '内容', '操作时间']  ########################## 这里要根据情况修改
+
+    response['fieldlist'] = fieldlist
+
+    # 功能的中英文名
+    response['function'] = 'view_log'  ########################## 这里要根据情况修改        ******名字从base.html里找******
+    response['functionname'] = '日志信息'  ########################## 这里要根据情况修改
+
+    # 翻页页码
+    if pageNum == 1:
+        pageslist = [str(pageNum), str(pageNum + 1), str(pageNum + 2), str(pageNum + 3), str(pageNum + 4)]
+    elif pageNum == 2:
+        pageslist = [str(pageNum - 1), str(pageNum), str(pageNum + 1), str(pageNum + 2), str(pageNum + 3)]
+    else:
+        pageslist = [str(pageNum - 2), str(pageNum - 1), str(pageNum), str(pageNum + 1), str(pageNum + 2)]
+
+    response['pageslist'] = pageslist
+
+    # 当前页码
+    response['current_page'] = str(pageNum)
+
+    # 返回结果列表，需要的五条记录
+    startindex = (5 * (pageNum - 1))
+    endindex = startindex + 5
+    resultlist = query_result[startindex:endindex]
+
+    response['resultlist'] = resultlist
+    return render(request, 'CMSapp/baseTable.html', response)
+
+
+def view_log(request):
+    if request.session.get('is_login', None):
+        username = request.session.get('username')
+        # 查询结果
+        query_result = models.log.objects.all()  ########################## 这里要根据情况修改
+        return base_view_log_table(request, query_result)  ########################## 这里要根据情况修改
+    else:
+        return render(request, 'CMSapp/timeout.html')
+
+
+def search_view_log(request):
+    if request.session.get('is_login', None):
+        searchMsg = request.POST.get('searchMsg')
+        if searchMsg:
+            # 查询结果
+            query_result=models.log.objects.filter(Q(username__icontains=searchMsg) | Q(operateobject__icontains=searchMsg))
+        else:
+            query_result = models.log.objects.all()  ########################## 这里要根据情况修改
+        return base_view_log_table(request, query_result, 'true')  ########################## 这里要根据情况修改
+    else:
+        return render(request, 'CMSapp/timeout.html')
+
+#######################################################################################################################
+#######################################################################################################################
+#######################################################################################################################
+#######################################################################################################################
