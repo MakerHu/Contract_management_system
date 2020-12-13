@@ -93,38 +93,50 @@ def data_updateAllocation(request):
     # 删除process数据库中还未开始会签的人员数据
     models.contract_process.objects.filter(conid=conid, type=1, state=0).delete()  # 把还未开始的会签员都删了
     # 重新根据前端返回的会签人员列表进行分配
+    countersigners = ''
     for countersignusername in countersign:
+        countersigners += ' '+countersignusername
         try:
             processCountersignUsernameEntity = models.user.objects.filter(username=countersignusername)[0]
             models.contract_process.objects.create(conid=processConidEntity, username=processCountersignUsernameEntity,
                                                    type=1, state=0, content="").save()
-            models.log.objects.create(username=username, operateobject='合同编号: ' + conid + ' 合同名: ' + conname.conname,
-                                      content=' 分配会签人员: ' + countersignusername).save()
         except:
             pass
+    # 日志
+    models.log.objects.create(username=username, operateobject='合同编号: ' + conid + ' 合同名: ' + conname.conname,
+                              content=' 设置会签人员为: ' + countersigners).save()
+
 
     models.contract_process.objects.filter(conid=conid, type=2, state=0).delete()
+    approvers = ''
     for approveusername in approve:
+        approvers += ' ' + approveusername
         try:
             processApproveUsernameEntity = models.user.objects.filter(username=approveusername)[0]
             models.contract_process.objects.create(conid=processConidEntity, username=processApproveUsernameEntity,
                                                    type=2, state=0, content="").save()
-            models.log.objects.create(username=username, operateobject='合同编号: ' + conid + ' 合同名: ' + conname.conname,
-                                      content=' 分配审批人员: ' + approveusername).save()
-
         except:
             pass
+    # 日志
+    models.log.objects.create(username=username, operateobject='合同编号: ' + conid + ' 合同名: ' + conname.conname,
+                              content=' 设置审批人员为: ' + approvers).save()
+
+
 
     models.contract_process.objects.filter(conid=conid, type=3, state=0).delete()
+    signers = ''
     for signusername in sign:
+        signers += ' ' + signusername
         try:
             processSignUsernameEntity = models.user.objects.filter(username=signusername)[0]
             models.contract_process.objects.create(conid=processConidEntity, username=processSignUsernameEntity, type=3,
                                                    state=0, content="").save()
-            models.log.objects.create(username=username, operateobject='合同编号: ' + conid + ' 合同名: ' + conname.conname,
-                                      content=' 分配签订人员: ' + signusername).save()
         except:
             pass
+
+    # 日志
+    models.log.objects.create(username=username, operateobject='合同编号: ' + conid + ' 合同名: ' + conname.conname,
+                              content=' 设置签订人员为: ' + signers).save()
 
 
     currentContactState = models.contract_state.objects.get(conid=conid).type
@@ -273,7 +285,7 @@ def data_updateContractApprovalmsg(request):
         updateDataState.save()
         models.log.objects.create(username=username,
                                   operateobject='合同编号: ' + str(contractEntity.conid) + " 合同名称: " + contractEntity.conname,
-                                  content=' 审批通过').save()
+                                  content='以'+approver+'身份审批通过').save()
     else:  # 审批未通过
         # models.contract_process.objects.filter(conid=contractEntity, username=user, type=2).update(state=2,content=content)
         # models.contract_state.objects.filter(conid=contractEntity).update(type=2)   # 改为会签已完成状态（待定稿）
@@ -284,7 +296,7 @@ def data_updateContractApprovalmsg(request):
         updateDataState.save()
         models.log.objects.create(username=username,
                                   operateobject='合同编号: ' + str(contractEntity.conid) + " 合同名称: " + contractEntity.conname,
-                                  content=' 审批未通过').save()
+                                  content='以'+approver+'身份审批未通过').save()
 
     return HttpResponse(request)
 
@@ -323,6 +335,9 @@ def data_updateContractSignmsg(request):
     updateDataProcess.state = 1
     updateDataProcess.content = information
     updateDataProcess.save()
+    models.log.objects.create(username=username,
+                              operateobject='合同编号: ' + str(contractEntity.conid) + " 合同名称: " + contractEntity.conname,
+                              content='以'+signer+'身份签订').save()
 
     approvalnum = len(models.contract_process.objects.filter(conid_id=conid, type=3))  # 合同所有签订人数
     approvednum = len(models.contract_process.objects.filter(conid_id=conid, type=3, state=1))  # 合同所有签订已完成的人数
@@ -333,7 +348,7 @@ def data_updateContractSignmsg(request):
         updateDataState.save()
         models.log.objects.create(username=username,
                                   operateobject='合同编号: ' + str(contractEntity.conid) + " 合同名称: " + contractEntity.conname,
-                                  content=' 签订成功').save()
+                                  content=' 签订全体通过').save()
     return HttpResponse(request)
 
 
@@ -370,8 +385,8 @@ def data_contractmsg(request):
             filetype = form.cleaned_data['filetype']
             file = form.cleaned_data['file']
             models.contract_attachment.objects.create(conid= contract,filename=filename, filetype=filetype, file=file).save()
-            models.log.objects.create(username=username,
-                                      operateobject='合同编号: ' + contract.conid + " 合同名称: " + contract.conname,
+            models.log.objects.create(username=username.username,
+                                      operateobject='合同编号: ' + str(contract.conid) + " 合同名称: " + contract.conname,
                                       content=' 附件添加成功').save()
 
         return render(request, 'CMSapp/draft_contract.html', response)
@@ -455,7 +470,7 @@ def data_updateContractCountersignMsg(request):
     updateProcessData.save()
     models.log.objects.create(username=username,
                               operateobject='合同编号: ' + str(contractEntity.conid) + " 合同名称: " + contractEntity.conname,
-                              content=' 会签成功').save()
+                              content='以'+contersigner+'身份会签').save()
 
     # 判断是否所有会签人通过
     countersignernum = len(models.contract_process.objects.filter(conid_id=conid, type=1))  # 合同所有会签人数

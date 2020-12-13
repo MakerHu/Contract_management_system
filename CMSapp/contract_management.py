@@ -70,8 +70,8 @@ def search_right(request):
         if searchMsg:
             # 查询结果
             query_result = []
-            query_result.extend(models.right.objects.filter(username__username__icontains=searchMsg))
-            query_result.extend(models.right.objects.filter(rolename__rolename__icontains=searchMsg))
+            query_result.extend(models.right.objects.filter(Q(username__username__icontains=searchMsg) | Q(rolename__rolename__icontains=searchMsg)))
+
         else:
             query_result = models.right.objects.all()
         return base_right_table(request, query_result, 'true')
@@ -1343,10 +1343,13 @@ def search_contract_distributed(request):
         if searchMsg:
             # 查询结果
             if rolename == 'root':
+                # query_result = models.contract_state.objects.filter(
+                #     conid__conid__in=models.contract_process.objects.all().values(
+                #         'conid__conid'))  ########################## 这里要根据情况修改
+                # query_result = query_result.filter(conid__conname__icontains=searchMsg)
                 query_result = models.contract_state.objects.filter(
-                    conid__conid__in=models.contract_process.objects.all().values(
+                    conid__conid__in=models.contract_process.objects.filter(Q(conid__conname__icontains=searchMsg) | Q(conid__username__username__icontains=searchMsg)).values(
                         'conid__conid'))  ########################## 这里要根据情况修改
-                query_result = query_result.filter(conid__conname__icontains=searchMsg)
         else:
             if rolename == 'root':
                 query_result = models.contract_state.objects.filter(
