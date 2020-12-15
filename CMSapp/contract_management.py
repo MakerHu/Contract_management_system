@@ -8,7 +8,7 @@ from CMSapp import models
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Contract_management_system.settings")  # project_name 项目名称
 django.setup()
 
-
+# 将授权信息表基本信息发送给前端
 def base_right_table(request, query_result, is_search='false'):
     # 返回给界面的值
     response = {}
@@ -53,7 +53,7 @@ def base_right_table(request, query_result, is_search='false'):
     response['resultlist'] = resultlist
     return render(request, 'CMSapp/baseTable.html', response)
 
-
+# 进入权限管理界面
 def right(request):
     if request.session.get('is_login', None):
         # 查询结果
@@ -63,7 +63,7 @@ def right(request):
     else:
         return render(request, 'CMSapp/timeout.html')
 
-
+# 权限管理搜索功能
 def search_right(request):
     if request.session.get('is_login', None):
         searchMsg = request.POST.get('searchMsg')
