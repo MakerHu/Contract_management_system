@@ -1,4 +1,4 @@
-# Contract_management_system
+# Contract_management_system（合同管理系统）
 合同管理系统<br>
 <br>
 拉取本项目后需要先配置数据库<br>
