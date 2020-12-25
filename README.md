@@ -4,7 +4,7 @@
 拉取本项目后需要先配置数据库<br>
 本项目使用MySQL数据库<br>
 <br>
-在MySQL中创建用户cmsmanager
+在MySQL中创建用户cmsmanager<br>
 命令：<br>
 CREATE USER 'cmsmanager'@'%' IDENTIFIED BY '123456';<br>
 <br>
