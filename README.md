@@ -3,6 +3,7 @@
 拉取本项目后需要先配置数据库
 本项目使用MySQL数据库
 在MySQL中创建用户cmsmanager
+\<br>
 命令：
 CREATE USER 'cmsmanager'@'%' IDENTIFIED BY '123456';
 用root用户创建数据库cms并将cms的所有权限授予cmsmanager
